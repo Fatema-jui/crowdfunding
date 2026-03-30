@@ -9,7 +9,8 @@ use App\Models\Crisis;
 class CrisisController extends Controller
 {
     public function crisisindex(){
-        return view ('crisis.crisis');
+        $crises= Crisis::all();
+        return view ('crisis.crisis',compact('crises'));
     }
 
 
@@ -19,13 +20,13 @@ class CrisisController extends Controller
     }
 
     public function crisissubmit(Request $request){
-        
+
        Crisis::create([
         'crisis_title'=>$request->crisis_title,
         'category_id'=>$request->category_id,
         'description'=>$request->description,
-        'target_amount'=>$request->amount,
-        'deadline_date'=>$request->date,
+        'target_amount'=>$request->target_amount,
+        'deadline_date'=>$request->deadline,
         'location'=>$request->location,
         'image'=>$request->image,
         'number'=>$request->number,

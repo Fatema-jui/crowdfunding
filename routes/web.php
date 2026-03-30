@@ -19,6 +19,8 @@ Route::get('/', function () {
 
 //Admin panel
 Route::get('/user',[UserController::class,'userindex'])->name('user');
+Route::get('/user/userform',[UserController::class,'userform'])->name('user.form');
+Route::post('/user/usersubmit',[UserController::class,'usersubmit'])->name('user.submit');
 
 
 Route::get('/crisiscategory',[CrisisCategoryController::class,'categoryindex'])->name('crisis.category');
@@ -35,7 +37,17 @@ Route::post('/crisis/crisissubmit',[CrisisController::class,'crisissubmit'])->na
 
 
 Route::get('/donar',[DonarController::class,'donarindex'])->name('donar');
+Route::get('/donar/donarform',[DonarController::class,'donarform'])->name('donar.form');
+Route::post('/donar/donarsubmit',[DonarController::class,'donarsubmit'])->name('donar.submit');
+
+
+
 Route::get('/donation',[DonationController::class,'donationindex'])->name('donation');
+Route::get('/donation/donationform',[DonationController::class,'donationform'])->name('donation.form');
+Route::post('/donation.donationsubmit',[DonationController::class,'donationsubmit'])->name('donation.submit');
+
+
+
 Route::get('/volunteer',[VolunteerController::class,'volunteerindex'])->name('volunteer');
 Route::get('report',[ReportController::class,'reportindex'])->name('report');
 Route::get('/setting',[BusinessSettingController::class,'settingindex'])->name('business.setting');

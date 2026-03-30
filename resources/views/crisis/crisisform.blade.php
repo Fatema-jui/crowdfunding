@@ -27,12 +27,12 @@
 
     <div class="form-group">
         <label for="amount" class="form-label">Target Amount:</label>
-        <input name="amount" class="form-control" type="number" placeholder="Enter Target Amount..">
+        <input name="target_amount" class="form-control" type="number" placeholder="Enter Target Amount..">
     </div><br>
 
     <div class="form-group">
         <label for="date" class="form-label">Deadline Date:</label>
-        <input name="date" type="date" class="form-control" id="date" placeholder="Enter deadline Date..">
+        <input name="deadline" type="date" class="form-control" id="date" placeholder="Enter deadline Date..">
     </div><br>
 
     <div class="form-group">
