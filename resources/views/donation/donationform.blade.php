@@ -3,14 +3,16 @@
 
 <h2>Create Donation Form</h2>
 
-<form>
+<form action="{{ route('donation.submit') }}" method="post">
+
+@csrf
 
 <div class="form-group">
     <label for="select_crisis" class="form-label">Select crisis:</label>
-    <select name="category_id" class="form-control" id="select_crisis">
+    <select name="crisis_id" class="form-control" id="select_crisis">
         <option value="">--Select Crisis--</option>
-        @foreach($categories as $category)
-        <option value="{{$category->id}}">{{$category->category_name}}</option>
+        @foreach($crises as $crisis)
+        <option value="{{$crisis->id}}">{{$crisis->crisis_title}}</option>
         @endforeach
     </select>
 </div><br>
@@ -46,7 +48,7 @@
     <input name="donation_date" type="date" class="form-control" placeholder="Enter Donation Date..">
 </div><br>
 
-<div class="form=group">
+<div class="form-group">
     <label for="" class="">Transaction ID:</label>
     <input name="transaction_id" type="text" class="form-control" placeholder="Enter Transaction Id..">
 </div><br>

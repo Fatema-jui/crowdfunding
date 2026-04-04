@@ -18,6 +18,7 @@
             <th Scope="col">Location</th>
             <th Scope="col">Image</th>
             <th Scope="col">Contact Number</th>
+            <th Scope="col">Status</th>
         </tr>
 </thead>
 

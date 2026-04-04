@@ -3,24 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Category;
+use App\Models\Crisis;
 use App\Models\Donar;
+use App\Models\Donation;
 
 class DonationController extends Controller
 {
     public function donationindex(){
-        return view ('donation.donation');
+        $donations=Donation::all();
+        return view ('donation.donation',compact('donations'));
     }
 
     public function donationform(){
-        $categories=Category::all();
+        $crises=Crisis::all();
         $donars=Donar::all();
-        return view ('donation.donationform',compact('categories','donars'));
+        return view ('donation.donationform',compact('crises','donars'));
     }
 
     public function donationsubmit(Request $request){
         Donation::create([
-            'category_id'=>$request->category_id,
+            'crisis_id'=>$request->crisis_id,
             'donar_id'=>$request->donar_id,
             'donation_amount'=>$request->donation_amount,
             'payment_method'=>$request->payment_method,
