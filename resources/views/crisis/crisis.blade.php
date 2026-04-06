@@ -3,7 +3,7 @@
 
 <h2>Crisis</h2>
 
-<a href="{{ route('crisis.form')}}" class="btn btn-primary">Add new Campagin</a>
+<a href="{{ route('crisis.form')}}" class="btn btn-primary">Add new Crisis</a>
 
 <div class="table-responsive">
     <table class="table table-striped table-hover">
@@ -37,7 +37,7 @@
         <td>{{$crisis->status}}</td>
         <td>
             <div class="btn-group" role="group" style="gap:5px;">
-                <a href="" class="btn btn-primary btn-sm">View</a>
+                <a href="{{ route('crisis.view', $crisis->id) }}" class="btn btn-primary btn-sm">View</a>
                 <a href="" class="btn btn-warning btn-sm">Edit</a>
                 <a href="" class="btn btn-danger btn-sm">Delete</a>               
             </div>

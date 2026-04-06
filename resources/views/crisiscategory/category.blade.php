@@ -1,6 +1,9 @@
+
 @extends('partials.master')
 @section('content')
+
 <h2>Crisis Category</h2>
+
 <a href="{{ route('crisis.category.form') }}" class="btn btn-primary">Add Category</a>
 
 <div class="table-responsive">
@@ -23,9 +26,9 @@
         <td>{{$category->status}}</td>
         <td>
             <div class="btn-group" role="group" style="gap:5px;">
-                <a href="" class="btn btn-primary btn-sm">View</a>
+                <a href="{{ route('category.view' , $category->id)}}" class="btn btn-primary btn-sm">View</a>
                 <a href="" class="btn btn-warning btn-sm">Edit</a>
-                <a href="" class="btn btn-danger btn-sm">Delete</a>               
+                <a href="{{ route('category.delete',$category->id)}}" class="btn btn-danger btn-sm">Delete</a>               
             </div>
         </td>
     </tr>

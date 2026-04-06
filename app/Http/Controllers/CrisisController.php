@@ -35,4 +35,9 @@ class CrisisController extends Controller
        return redirect()->route('crisis');
 
     }
+
+    public function crisisview ($id){
+        $crisis=Crisis::find($id);
+        return view ('crisis.crisisview',compact('crisis'));
+    }
 }

@@ -25,4 +25,17 @@ class CrisisCategoryController extends Controller
       return redirect()->route('crisis.category');
    }
 
+   public function categoryview($id){
+    $category= Category::find($id);
+    return view('crisiscategory.categoryview',compact('category'));
+
+   }
+
+   public function categorydelete($id){
+
+    $category=Category::find($id);
+    $category->delete();
+    return redirect()->back();
+   }
+
 }

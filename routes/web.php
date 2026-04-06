@@ -26,13 +26,15 @@ Route::post('/user/usersubmit',[UserController::class,'usersubmit'])->name('user
 Route::get('/crisiscategory',[CrisisCategoryController::class,'categoryindex'])->name('crisis.category');
 Route::get('/crisiscategory/categoryform',[CrisisCategoryController::class,'categoryform'])->name('crisis.category.form');
 Route::post('/crisiscategory/submitform',[CrisisCategoryController::class,'categorysubmit'])->name('crisis.category.submit');
+Route::get('/crisiscategory/view/{id}',[CrisisCategoryController::class,'categoryview'])->name('category.view');
+Route::get('/crisiscategory/delete/{id}',[CrisisCategoryController::class,'categorydelete'])->name('category.delete');
 
 
 
 Route::get('/crisis',[CrisisController::class,'crisisindex'])->name('crisis');
 Route::get('/crisis/crisisform',[CrisisController::class,'crisisform'])->name('crisis.form');
 Route::post('/crisis/crisissubmit',[CrisisController::class,'crisissubmit'])->name('crisis.submit');
-
+Route::get('/crisis/view/{id}',[CrisisController::class,'crisisview'])->name('crisis.view');
 
 
 
@@ -49,5 +51,10 @@ Route::post('/donation.donationsubmit',[DonationController::class,'donationsubmi
 
 
 Route::get('/volunteer',[VolunteerController::class,'volunteerindex'])->name('volunteer');
+Route::get('/volunteer/volunteerform',[VolunteerController::class,'volunteerform'])->name('volunteer.form');
+Route::post('volunteer/volunteersubmit',[VolunteerController::class,'volunteersubmit'])->name('volunteer.submit');
+
+
+
 Route::get('report',[ReportController::class,'reportindex'])->name('report');
 Route::get('/setting',[BusinessSettingController::class,'settingindex'])->name('business.setting');
