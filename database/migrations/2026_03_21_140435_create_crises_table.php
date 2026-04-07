@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('crisises', function (Blueprint $table) {
+        Schema::create('crises', function (Blueprint $table) {
             $table->id();
             $table->string('crisis_title')->nullable();
-            $table->foreignId('category_id')->constrained('categories')->nullable();
+            $table->foreignId('category_id')->nullable()->constrained('categories')->nullOnDelete();
             $table->string('description')->nullable();
             $table->decimal('target_amount', 10,2)->nullable();
             $table->date('deadline_date')->nullable();
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('crisises');
+        Schema::dropIfExists('crises');
     }
 };

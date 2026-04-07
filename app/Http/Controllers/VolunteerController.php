@@ -8,7 +8,8 @@ use App\Models\Volunteer;
 class VolunteerController extends Controller
 {
     public function volunteerindex(){
-        return view ('volunteer.volunteer');
+        $volunteers=Volunteer::all();
+        return view ('volunteer.volunteer' , compact('volunteers'));
     }
 
 
@@ -31,6 +32,18 @@ class VolunteerController extends Controller
      return redirect()->route('volunteer');
 
     }  
+
+    public function volunteerview($id){
+        $volunteer=Volunteer::find($id);
+        return view ('volunteer.volunteerview',compact('volunteer'));
+
+    }
+
+    public function volunteerdelete($id){
+        $volunteer=Volunteer::find($id);
+        $volunteer->delete();
+        return redirect()->back();
+    }
     
     
 }

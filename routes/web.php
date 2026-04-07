@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CrisisCategoryController;
 use App\Http\Controllers\CrisisController;
-use App\Http\Controllers\DonarController;
+use App\Http\Controllers\DonorController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\VolunteerController;
 use App\Http\Controllers\ReportController;
@@ -38,11 +38,11 @@ Route::get('/crisis/view/{id}',[CrisisController::class,'crisisview'])->name('cr
 
 
 
-Route::get('/donar',[DonarController::class,'donarindex'])->name('donar');
-Route::get('/donar/donarform',[DonarController::class,'donarform'])->name('donar.form');
-Route::post('/donar/donarsubmit',[DonarController::class,'donarsubmit'])->name('donar.submit');
-
-
+Route::get('/donor',[DonorController::class,'donorindex'])->name('donor');
+Route::get('/donor/donorform',[DonorController::class,'donorform'])->name('donor.form');
+Route::post('/donor/donorsubmit',[DonorController::class,'donorsubmit'])->name('donor.submit');
+Route::get('/donor/view/{id}',[DonorController::class,'donorview'])->name('donor.view');
+Route::get('/donor/delete/{id}',[DonorController::class , 'donordelete'])->name('donor.delete');
 
 Route::get('/donation',[DonationController::class,'donationindex'])->name('donation');
 Route::get('/donation/donationform',[DonationController::class,'donationform'])->name('donation.form');
@@ -53,7 +53,8 @@ Route::post('/donation.donationsubmit',[DonationController::class,'donationsubmi
 Route::get('/volunteer',[VolunteerController::class,'volunteerindex'])->name('volunteer');
 Route::get('/volunteer/volunteerform',[VolunteerController::class,'volunteerform'])->name('volunteer.form');
 Route::post('volunteer/volunteersubmit',[VolunteerController::class,'volunteersubmit'])->name('volunteer.submit');
-
+Route::get('/volunteer/view/{id}',[VolunteerController::class,'volunteerview'])->name('volunteer.view');
+Route::get('/volunteer/delete/{id}',[VolunteerController::class,'volunteerdelete'])->name('volunteer.delete');
 
 
 Route::get('report',[ReportController::class,'reportindex'])->name('report');

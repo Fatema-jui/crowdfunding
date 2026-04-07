@@ -3,9 +3,10 @@
 
 <h2> Create Volunteer Form</h2>
 
-<form>
+<form action="{{ route('volunteer.submit')}}" method="post">
 
 @csrf
+
 <div class="form-group" >
     <label for="name" class="form-label">Name:</label>
     <input name="volunteer_name" type="text" class="form-control" placeholder="Enter Name..">

@@ -11,12 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('donars', function (Blueprint $table) {
+        Schema::create('donors', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->string('email')->nullable();
+            $table->string('email')->unqiue()->nullable();
             $table->string('phone')->nullable();
-            $table->string('address')->nullable();
+            $table->text('address')->nullable();
+            $table->string('donor_type')->nullable();
+            $table->date('donation_date')->nullable();
+            $table->decimal('total_donation',10,2)->default(0)->nullable();
+            $table->enum('status',['pending','approve'])->default('pending')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('donars');
+        Schema::dropIfExists('donors');
     }
 };

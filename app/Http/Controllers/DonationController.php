@@ -16,14 +16,14 @@ class DonationController extends Controller
 
     public function donationform(){
         $crises=Crisis::all();
-        $donars=Donar::all();
-        return view ('donation.donationform',compact('crises','donars'));
+        //$donars=Donar::all();
+        return view ('donation.donationform',compact('crises',));
     }
 
     public function donationsubmit(Request $request){
         Donation::create([
             'crisis_id'=>$request->crisis_id,
-            'donar_id'=>$request->donar_id,
+            //'donar_id'=>$request->donar_id,
             'donation_amount'=>$request->donation_amount,
             'payment_method'=>$request->payment_method,
             'donation_date'=>$request->donation_date,

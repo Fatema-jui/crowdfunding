@@ -17,7 +17,7 @@
     </select>
 </div><br>
 
-<div class="form-group">
+<!--<div class="form-group">
     <label for="donar_name" class="form-label">Donar Name:</label>
     <select name="donar_id" class="form-control" id="donar_name">
         <option value="">--Donar Name--</option>
@@ -25,7 +25,7 @@
         <option value="{{$donar->id}}">{{$donar->name}}</option>
         @endforeach
     </select>   
-</div><br>
+</div><br>-->
 
 <div class="form-group">
     <label for="amount"  class="form-label">Donation Amount:</label>
