@@ -27,7 +27,7 @@
         <td>
             <div class="btn-group" role="group" style="gap:5px;">
                 <a href="{{ route('category.view' , $category->id)}}" class="btn btn-primary btn-sm">View</a>
-                <a href="" class="btn btn-warning btn-sm">Edit</a>
+                <a href="{{ route('category.edit', $category->id) }}" class="btn btn-warning btn-sm">Edit</a>
                 <a href="{{ route('category.delete',$category->id)}}" class="btn btn-danger btn-sm">Delete</a>               
             </div>
         </td>

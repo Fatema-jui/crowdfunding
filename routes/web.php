@@ -27,6 +27,8 @@ Route::get('/crisiscategory',[CrisisCategoryController::class,'categoryindex'])-
 Route::get('/crisiscategory/categoryform',[CrisisCategoryController::class,'categoryform'])->name('crisis.category.form');
 Route::post('/crisiscategory/submitform',[CrisisCategoryController::class,'categorysubmit'])->name('crisis.category.submit');
 Route::get('/crisiscategory/view/{id}',[CrisisCategoryController::class,'categoryview'])->name('category.view');
+Route::get('/crisiscategory/edit/{id}', [CrisisCategoryController::class, 'edit'])->name('category.edit');
+Route::put('/crisiscategory/update/{id}', [CrisisCategoryController::class, 'update'])->name('category.update');
 Route::get('/crisiscategory/delete/{id}',[CrisisCategoryController::class,'categorydelete'])->name('category.delete');
 
 
