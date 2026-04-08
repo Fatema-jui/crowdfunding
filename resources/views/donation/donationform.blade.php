@@ -17,15 +17,15 @@
     </select>
 </div><br>
 
-<!--<div class="form-group">
-    <label for="donar_name" class="form-label">Donar Name:</label>
-    <select name="donar_id" class="form-control" id="donar_name">
-        <option value="">--Donar Name--</option>
-        @foreach($donars as $donar)
-        <option value="{{$donar->id}}">{{$donar->name}}</option>
+<div class="form-group">
+    <label for="donor_name" class="form-label">Donar Name:</label>
+    <select name="donor_id" class="form-control" id="donor_name">
+        <option value="">--Donor Name--</option>
+        @foreach($donors as $donor)
+        <option value="{{$donor->id}}">{{$donor->name}}</option>
         @endforeach
     </select>   
-</div><br>-->
+</div><br>
 
 <div class="form-group">
     <label for="amount"  class="form-label">Donation Amount:</label>
