@@ -9,8 +9,8 @@ use App\Http\Controllers\CrisisController;
 use App\Http\Controllers\DonorController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\VolunteerController;
-use App\Http\Controllers\ReportController;
 use App\Http\Controllers\BusinessSettingController;
+use App\Http\Controllers\ReportController;
 
 
 Route::get('/', function () {
@@ -48,16 +48,16 @@ Route::get('/donor/delete/{id}',[DonorController::class , 'donordelete'])->name(
 
 Route::get('/donation',[DonationController::class,'donationindex'])->name('donation');
 Route::get('/donation/donationform',[DonationController::class,'donationform'])->name('donation.form');
-Route::post('/donation.donationsubmit',[DonationController::class,'donationsubmit'])->name('donation.submit');
+Route::post('/donation/donationsubmit',[DonationController::class,'donationsubmit'])->name('donation.submit');
 
 
 
 Route::get('/volunteer',[VolunteerController::class,'volunteerindex'])->name('volunteer');
 Route::get('/volunteer/volunteerform',[VolunteerController::class,'volunteerform'])->name('volunteer.form');
-Route::post('volunteer/volunteersubmit',[VolunteerController::class,'volunteersubmit'])->name('volunteer.submit');
+Route::post('/volunteer/volunteersubmit',[VolunteerController::class,'volunteersubmit'])->name('volunteer.submit');
 Route::get('/volunteer/view/{id}',[VolunteerController::class,'volunteerview'])->name('volunteer.view');
 Route::get('/volunteer/delete/{id}',[VolunteerController::class,'volunteerdelete'])->name('volunteer.delete');
 
 
-Route::get('report',[ReportController::class,'reportindex'])->name('report');
+Route::get('report',[ReportController::class,'index'])->name('report');
 Route::get('/setting',[BusinessSettingController::class,'settingindex'])->name('business.setting');
