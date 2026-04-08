@@ -1,4 +1,4 @@
-@extends('.partials.master')
+@extends('partials.master')
 @section('content')
 
 <div class="container mt-4">

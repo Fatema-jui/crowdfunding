@@ -38,7 +38,7 @@
         <td>
             <div class="btn-group" role="group" style="gap:5px;">
                 <a href="{{ route('crisis.view', $crisis->id) }}" class="btn btn-primary btn-sm">View</a>
-                <a href="" class="btn btn-warning btn-sm">Edit</a>
+                <a href="{{ route('crisis.edit', $crisis->id) }}" class="btn btn-warning btn-sm">Edit</a>
                 <a href="" class="btn btn-danger btn-sm">Delete</a>               
             </div>
         </td>

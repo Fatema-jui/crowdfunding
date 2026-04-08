@@ -37,6 +37,8 @@ Route::get('/crisis',[CrisisController::class,'crisisindex'])->name('crisis');
 Route::get('/crisis/crisisform',[CrisisController::class,'crisisform'])->name('crisis.form');
 Route::post('/crisis/crisissubmit',[CrisisController::class,'crisissubmit'])->name('crisis.submit');
 Route::get('/crisis/view/{id}',[CrisisController::class,'crisisview'])->name('crisis.view');
+Route::get('/crisis/edit/{id}', [CrisisController::class,'edit'])->name('crisis.edit');
+Route::put('/crisis/update/{id}', [CrisisController::class, 'update'])->name('crisis.update');
 
 
 
