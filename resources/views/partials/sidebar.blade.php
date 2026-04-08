@@ -73,7 +73,7 @@
 
 
                             <li class="nav-item">   
-                             <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href=""> <svg class="bi" aria-hidden="true">
+                             <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{ route('report')}}"> <svg class="bi" aria-hidden="true">
                                         <use xlink:href="#house-fill"></use>
                                     </svg>
                                     Report

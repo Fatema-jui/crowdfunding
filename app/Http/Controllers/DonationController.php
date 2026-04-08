@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Crisis;
 use App\Models\Donar;
 use App\Models\Donation;
+use App\Models\Donor;
 
 class DonationController extends Controller
 {
@@ -16,8 +17,8 @@ class DonationController extends Controller
 
     public function donationform(){
         $crises=Crisis::all();
-        //$donars=Donar::all();
-        return view ('donation.donationform',compact('crises',));
+        $donors=Donor::all();
+        return view ('donation.donationform',compact('crises','donors'));
     }
 
     public function donationsubmit(Request $request){

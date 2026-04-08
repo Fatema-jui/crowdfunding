@@ -20,7 +20,7 @@
         <tr>
             @foreach($donations as $donation)
             <td Scope="row">{{$donation->id}}</td>
-            <td>{{$donation->category_id}}</td>
+            +<td>{{$donation->category_id}}</td>
             <td>{{$donation->donar_id}}</td>
             <td>{{$donation->donation_amount}}</td>
             <td>{{$donation->payment_method}}</td>
