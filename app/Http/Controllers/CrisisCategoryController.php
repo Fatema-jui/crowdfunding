@@ -26,24 +26,30 @@ class CrisisCategoryController extends Controller
    }
 
    public function categoryview($id){
+
     $category= Category::find($id);
+
     return view('crisiscategory.categoryview',compact('category'));
 
    }
   // Show edit form
-    public function edit($id)
-    {
+    public function edit($id) {
+
         $category = Category::findOrFail($id);
+
         return view('crisiscategory.edit', compact('category'));
         
     }
+
     public function update(Request $request, $id)
-{ $request->validate([
+{ 
+    $request->validate([
         'category_name' => 'required',
         'status' => 'required',
     ]);
+
     $category = Category::findOrFail($id);
-    $category->category_name = $request->category_name;
+    $category->category_name = $request->category_name;   
     $category->description = $request->description;
     $category->status = $request->status;
     $category->save();

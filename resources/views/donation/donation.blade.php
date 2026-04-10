@@ -17,12 +17,12 @@
 
     </thead>
     <tbody>
-        <tr>
-            @foreach($donations as $donation)
+        @foreach($donations as $donation)
+        <tr>            
             <td Scope="row">{{$donation->id}}</td>
-            +<td>{{$donation->category_id}}</td>
-            <td>{{$donation->donar_id}}</td>
-            <td>{{$donation->donation_amount}}</td>
+            <td>{{$donation->crisis_id}}</td>
+            <td>{{$donation->donor_id}}</td>
+            <td>{{$donation->amount}}</td>
             <td>{{$donation->payment_method}}</td>
             <td>{{$donation->transaction_id}}</td>
             <td>{{$donation->donation_date}}</td>

@@ -1,8 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route; 
+//website route
+use App\Http\Controllers\Frontend\WebsiteController;
+
 
 //Admin import route
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CrisisCategoryController;
 use App\Http\Controllers\CrisisController;
@@ -17,7 +21,24 @@ Route::get('/', function () {
   return view('welcome');
 });
 
+//website route
+Route::get('/crowdfunding',[WebsiteController::class,'websiteindex'])->name('website');
+
+
+
+
+
+
+
+
+
+
+
 //Admin panel
+Route::get('/dashboard',[AdminController::class,'dashboardindex'])->name('dashboard');
+
+
+
 Route::get('/user',[UserController::class,'userindex'])->name('user');
 Route::get('/user/userform',[UserController::class,'userform'])->name('user.form');
 Route::post('/user/usersubmit',[UserController::class,'usersubmit'])->name('user.submit');

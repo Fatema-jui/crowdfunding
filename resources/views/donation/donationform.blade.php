@@ -18,15 +18,9 @@
 </div><br>
 
 <div class="form-group">
-<<<<<<< HEAD
     <label for="donor_name" class="form-label">Donar Name:</label>
     <select name="donor_id" class="form-control" id="donor_name">
         <option value="">--Donor Name--</option>
-=======
-    <label for="donar_name" class="form-label">Donar Name:</label>
-    <select name="donar_id" class="form-control" id="donar_name">
-        <option value="">--Donar Name--</option>
->>>>>>> 09ecc53696f3edf21212654588e319478fcc88e0
         @foreach($donors as $donor)
         <option value="{{$donor->id}}">{{$donor->name}}</option>
         @endforeach

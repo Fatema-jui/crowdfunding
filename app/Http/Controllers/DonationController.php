@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Crisis;
 use App\Models\Donor;
 use App\Models\Donation;
-use App\Models\Donor;
+
 
 class DonationController extends Controller
 {
@@ -25,7 +25,7 @@ class DonationController extends Controller
         Donation::create([
             'crisis_id'=>$request->crisis_id,
             'donor_id'=>$request->donor_id,
-            'donation_amount'=>$request->donation_amount,
+            'amount'=>$request->amount,
             'payment_method'=>$request->payment_method,
             'donation_date'=>$request->donation_date,
             'transaction_id'=>$request->transaction_id,

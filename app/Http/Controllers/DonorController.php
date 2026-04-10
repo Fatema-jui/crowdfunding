@@ -35,14 +35,20 @@ class DonorController extends Controller
  }
 
  public function donorview($id){
-   $donor=Donor::find($id);
-   return view ('donor.donorview' , compact('donor'));
+      
+  $donor=Donor::find($id);
+        
+  return view ('donor.donorview' , compact('donor'));
  }
 
  public function donordelete($id){
-   $donor=Donor::find($id);
-   $donor->delete();
-   return redirect()->back();
+   
+  $donor=Donor::find($id);
+
+  $donor->delete();
+
+  return redirect()->back();
+
  }
 
 }

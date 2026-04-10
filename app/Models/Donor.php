@@ -8,9 +8,4 @@ class Donor extends Model
 {
     protected $guarded=[];
 
-
-
-
-
-
-    }
+}

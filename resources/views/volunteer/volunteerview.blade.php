@@ -61,3 +61,91 @@
 </div>
 
 @endsection
+
+
+
+
+
+
+
+
+
+
+
+
+@extends('partials.master')
+@section('content')
+
+<h2>Admin Dashboard</h2>
+
+<div class="container-fluid">
+
+    <!-- Dashboard cards -->
+    <div class="row">
+        
+    <div class="col-md-3 mb-3">
+            <div class="card text-white bg-primary">
+                <div class="card-body">
+                    <h5>Total Donar</h5>
+                    <a href="{{ route('donor') }}" class="text-white">View Details</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="col-md-3 mb-3">
+            <div class="card text-white bg-warning">
+                <div class="card-body">
+                    <h5>Total Volunteer</h5>
+                    <a href="{{ route('volunteer') }}" class="text-white">View Details</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="col-md-3 mb-3">
+            <div class="card text-white bg-success">
+                <div class="card-body">
+                    <h5>Total Donation</h5>
+                    <a href="{{ route('donation') }}" class="text-white">View Details</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <div class="col-md-3 mb-3">
+            <div class="card text-white bg-danger">
+                <div class="card-body">
+                    <h5> View Report</h5>
+                    <a href="{{ route('report') }}" class="text-white">View Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+
+        <div class="col-md-3 mb-3">
+            <div class="card text-white bg-info">
+                <div class="card-body">
+                    <h5>Update Profile</h5>
+                    <a href="" class="text-white">View Details</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card text-white bg-danger">
+                <div class="card-body">
+                    <h5>LogOut</h5>
+                    <a href="" class="text-white">View Details</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+</div>   
+@endsection
+

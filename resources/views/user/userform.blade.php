@@ -37,7 +37,7 @@
         <select name="role" class="form-control" id="role" >
             <option value="">--Select Role--</option>
             <option value="admin">Admin</option>
-            <option value="donar">Donar</option>
+            <option value="donor">Donor</option>
             <option value="volunteer">Volunteer</option>
         </select>
     </div><br>
@@ -56,8 +56,8 @@
         <label for="status" class="form-label">Status:</label>
         <select name="status" class="form-control" id="status" >
             <option value="">--Select Status--</option>
-            <option value="active">Active</option>
-            <option value="inactive">Inactive</option>
+            <option value="pending">Pending</option>
+            <option value="approve">Approve</option>
         </select>
     </div><br>
 
