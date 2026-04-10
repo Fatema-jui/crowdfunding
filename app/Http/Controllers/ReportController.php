@@ -13,17 +13,17 @@ class ReportController extends Controller
     {
         $query = Donation::with('donors', 'crises');
 
-        // 🔍 Filter: From Date
+        // Filter: From Date
         if ($request->from_date) {
             $query->whereDate('created_at', '>=', $request->from_date);
         }
 
-        // 🔍 Filter: To Date
+        // Filter: To Date
         if ($request->to_date) {
             $query->whereDate('created_at', '<=', $request->to_date);
         }
 
-        // 🔍 Filter: Crisis
+        // Filter: Crisis
         if ($request->crisis_id) {
             $query->where('crisis_id', $request->crisis_id);
         }

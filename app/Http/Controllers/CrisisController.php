@@ -40,4 +40,35 @@ class CrisisController extends Controller
         $crisis=Crisis::find($id);
         return view ('crisis.crisisview',compact('crisis'));
     }
+
+
+    public function edit($id)
+
+    {
+        $crisis = Crisis::findOrFail($id);
+        return view('crisis.edit', compact('crisis'));
+    }
+   
+    public function update(Request $request, $id)
+    {
+        $crisis = Crisis::findOrFail($id);
+
+        $crisis->update([
+            'crisis_title' => $request->crisis_title,
+            'category_id' => $request->category_id,
+            'description' => $request->description,
+            'target_amount' => $request->target_amount,
+            'deadline_date' => $request->deadline_date,
+            'location' => $request->location,
+            'image' => $request->image,
+            'number' => $request->number,
+
+        ]);
+
+        return redirect()->route('crisis')->with('success', 'Updated successfully');
+    }
+
+
+
+
 }
