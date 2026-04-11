@@ -5,7 +5,7 @@
 
     <h2 class="mb-4">Admin Dashboard</h2>
 
-    {{-- স্ট্যাট কার্ড --}}
+    
     <div class="row">
 
         <div class="col-md-3 mb-3">
