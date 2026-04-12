@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route; 
 //website route
+use App\Http\Controllers\Frontend\AuthController;
 use App\Http\Controllers\Frontend\WebsiteController;
 
 
@@ -22,6 +23,11 @@ Route::get('/', function () {
 });
 
 //website route
+Route::get('/corwdfunding/register',[AuthController::class,'showRegister'])->name('show.register');
+Route::post('/crowdfunding/registersubmit',[AuthController::class,'submitRegister'])->name('submit.register');
+Route::get('/crowdfunding/login',[AuthController::class,'showLogin'])->name('show.login');
+Route::post('/crowdfunding/loginsubmit',[AuthController::class,'loginSubmit'])->name('login.submit');
+
 Route::get('/crowdfunding',[WebsiteController::class,'websiteindex'])->name('website');
 
 

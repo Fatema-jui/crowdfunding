@@ -1,47 +1,36 @@
- <div class="bg-primary py-3 top-bar shadow d-none d-md-block">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-6 text-md-left pl-0">
-              <a href="#" class=" pr-3 pl-0">Home</a>
-              <a href="#" class="p-3">Events</a>
-              <a href="#" class="p-3">Become A Volunteer</a>
-            </div>
-            <div class="col-md-6 text-md-right">
-              <a href="#" class="p-3"><span class="icon-twitter">Login</span></a>
-              <a href="#" class="p-3"><span class="icon-facebook">Register</span></a>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      
-      <header class="site-navbar site-navbar-target bg-secondary shadow" role="banner">
 
-        <div class="container">
-          <div class="row align-items-center position-relative">
-            
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-2"style="background-color: #0f766e;">
+  
+    <div class="container">
 
-            <div class="site-logo">
-              <a href="index.html" class="text-white">CrowdFunding</a>
-            </div>
+        <a class="navbar-brand fw-bold" href="#">CrisisHelp BD</a>
 
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <nav class="site-navigation text-left ml-auto " role="navigation">
-              <ul class="site-menu main-menu js-clone-nav ml-auto d-none d-lg-block">
-                <li class="active"><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="about.html" class="nav-link">About Us</a></li>
-                <li><a href="causes.html" class="nav-link">Our Crisis</a></li>
-                <li><a href="blog.html" class="nav-link">Blog</a></li>
-                <li><a href="contact.html" class="nav-link">Contact</a></li>
-              </ul>
-            </nav>
+        <div class="collapse navbar-collapse" id="mainNav">
 
-
-            <div class="ml-auto toggle-button d-inline-block d-lg-none"><a href="#" class="site-menu-toggle py-5 js-menu-toggle text-white"><span class="icon-menu h3 text-white"></span></a></div>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-3">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Our Crisis</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Volunteer</a>
+                </li>
+            </ul>
 
             
+            <div class="d-flex gap-2">
+                <a href="{{ route('show.login') }}" class="btn btn-outline-light btn-sm">Login</a>
+                <a href="{{ route('show.register') }}" class="btn btn-outline-light btn-sm">Register</a>
+            </div>
 
-          </div>
         </div>
-
-      </header>
+    </div>
+</nav>
