@@ -141,9 +141,7 @@
                 {{-- DYNAMIC: src — asset('storage/' . $crisis->image) --}}
                
                 @if($crisis->image)
-                    <img src="{{ asset('storage/' . $crisis->image) }}"
-                         class="card-img-top" style="height: 180px; object-fit: cover;"
-                         alt="{{ $crisis->crisis_title }}">
+                   <img src="{{ url('/crises/'.$crisis->image) }}" class="img-fluid w-50 rounded-top" alt=""> 
                 @else
                     <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center"
                          style="height: 180px;">

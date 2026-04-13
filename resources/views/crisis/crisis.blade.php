@@ -32,7 +32,9 @@
         <td>{{$crisis->target_amount}}</td>
         <td>{{$crisis->deadline_date}}</td>
         <td>{{$crisis->location}}</td>
-        <td>{{$crisis->image}}</td>
+        <td>
+            <img width = "100px" src "{{url('/crises/'.$crisis->image)}}" alt=" ">
+        </td>
         <td>{{$crisis->number}}</td>
         <td>{{$crisis->status}}</td>
         <td>

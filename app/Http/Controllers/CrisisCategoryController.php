@@ -17,9 +17,19 @@ class CrisisCategoryController extends Controller
     }
 
      public function categorysubmit(Request $request){
+
+        $fileName ='';
+        
+        if($request->hasFile('image')){
+            $file = $request->file('image');
+            $fileName = date('Ymdhis').$file->getClientOriginalName();
+            $file->storeAs('/category', $fileName);
+
+        }
       Category::create([
          'category_name'=>$request->category_name,
          'description'=>$request->description,
+         'image'=>$fileNamr,
          'status'=>$request->status
       ]);
       return redirect()->route('crisis.category');
@@ -51,6 +61,7 @@ class CrisisCategoryController extends Controller
     $category = Category::findOrFail($id);
     $category->category_name = $request->category_name;   
     $category->description = $request->description;
+    $category->image = $request->image;
     $category->status = $request->status;
     $category->save();
      return redirect()->route('crisis.category')->with('success', 'Category updated!');
