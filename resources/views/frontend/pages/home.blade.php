@@ -177,7 +177,7 @@
                         <small class="text-muted">43 donors</small>
 
                         {{-- DYNAMIC: href — route('crises.show', $crisis->id) --}}
-                        <a href="#" class="btn btn-primary btn-sm">Donate</a>
+                        <a href="{{ route('crisis.details',$crisis->id) }}" class="btn btn-primary btn-sm">view</a>
                     </div>
                 </div>
 

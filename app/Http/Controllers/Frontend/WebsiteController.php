@@ -11,7 +11,7 @@ class WebsiteController extends Controller
 {
     public function websiteindex(){
         $categories = Category::get()->take(4);
-        $crises = Crisis::latest()->where('status','active')->take(2)->get();
+        $crises = Crisis::latest()->where('status','active')->take(3)->get();
 
     return view ('frontend.pages.home',compact('categories','crises'));
     }

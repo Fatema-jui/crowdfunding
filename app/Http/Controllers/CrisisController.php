@@ -20,6 +20,7 @@ class CrisisController extends Controller
     }
 
     public function crisissubmit(Request $request){
+        
 
        Crisis::create([
         'crisis_title'=>$request->crisis_title,
