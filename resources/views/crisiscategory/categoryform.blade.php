@@ -16,6 +16,11 @@
     </div><br>
 
     <div class="form-group">
+        <label for="image" class="form-label">Image:</label>
+        <input  name="image" type="file" class="form-control" placeholder="Enter Image..">
+    </div><br>
+
+    <div class="form-group">
         <label for="status" class="form-label">Status:</label>
         <select name="status" class="form-control" id="status">
             <option value="">--Select Status--</option>

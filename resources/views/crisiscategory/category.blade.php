@@ -13,6 +13,7 @@
             <th Scope="col">#</th>
             <th Scope="col">Category Name</th>
             <th Scope="col">Description</th>
+            <th Scope="col">Image</th>
             <th Scope="col">Status</th>
         </tr>
 </thead>
@@ -23,6 +24,8 @@
         <td Scope="row">{{$category->id}}</td>
         <td>{{$category->category_name}}</td>
         <td>{{$category->description}}</td>
+         <td><img width = "100px" src "{{url('/categories/'.$category->image)}}" alt=" "></td>
+
         <td>{{$category->status}}</td>
         <td>
             <div class="btn-group" role="group" style="gap:5px;">

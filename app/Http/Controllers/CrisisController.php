@@ -20,22 +20,30 @@ class CrisisController extends Controller
     }
 
     public function crisissubmit(Request $request){
+         $fileName ='';
+        
+        if($request->hasFile('image')){
+            $file = $request->file('image');
+            $fileName = date('Ymdhis').$file->getClientOriginalName();
+            $file->storeAs('/category', $fileName);
+
         
 
        Crisis::create([
+        
         'crisis_title'=>$request->crisis_title,
         'category_id'=>$request->category_id,
         'description'=>$request->description,
         'target_amount'=>$request->target_amount,
         'deadline_date'=>$request->deadline,
         'location'=>$request->location,
-        'image'=>$request->image,
+        'image'=>$fileName,
         'number'=>$request->number,
         'status'=>$request->status
        ]);
        return redirect()->route('crisis');
 
-    }
+        }}
 
     public function crisisview ($id){
         $crisis=Crisis::find($id);
