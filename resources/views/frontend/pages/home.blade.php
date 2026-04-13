@@ -87,19 +87,32 @@
 </div>
 
 
-{{-- ── CATEGORY BUTTONS ─────────────────────────── --}}
+{{-- ── CATEGORY CARDS ─────────────────────────── --}}
 <div class="container my-4">
     <h5 class="mb-3">Browse by Category</h5>
-    <div class="d-flex flex-wrap gap-2">
-        {{-- DYNAMIC: href — route('crises.index') --}}
-        <a href="#" class="btn btn-primary btn-sm">All</a>
-
-        {{-- DYNAMIC: $categories controller থেকে আসছে --}}
-        @foreach($categories as $cat)
-            {{-- DYNAMIC: href — route('crises.index', ['category' => $cat->id]) --}}
-            <a href="#" class="btn btn-outline-secondary btn-sm">
-                {{ $cat->category_name }}
-            </a>
+    <div class="row row-cols-2 row-cols-md-4 g-3">
+        @foreach($categories as $category)
+            <div class="col">
+                {{-- DYNAMIC: route add korte hobe — route('crises.index', ['category' => $cat->id]) --}}
+                <a href="#" class="text-decoration-none">
+                    <div class="card text-center h-100">
+                        {{-- DYNAMIC: $cat->image — apnar image field name onujayi change korben --}}
+                        @if($category->image)
+                            <img src="{{ asset('uploads/categories/' . $cat->image) }}" 
+                                 class="card-img-top" 
+                                 alt="{{ $category->category_name }}"
+                                 style="height: 150px; object-fit: cover;">
+                        @else
+                            <div style="height: 150px; background: #cccccc; display:flex; align-items:center; justify-content:center;">
+                                <span class="text-muted">No Image</span>
+                            </div>
+                        @endif
+                        <div class="card-body">
+                            <h6 class="card-title mb-0">{{ $category->category_name }}</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
         @endforeach
     </div>
 </div>
@@ -120,14 +133,23 @@
              Controller এ: $crises = Crisis::latest()->take(6)->get();
              তখন $cat এর বদলে $crisis ব্যবহার করবে --}}
 
-        @foreach($categories as $cat)
+        @foreach($crises as $crisis)
         <div class="col-md-4">
             <div class="card h-100 shadow-sm">
 
                 {{-- Image --}}
                 {{-- DYNAMIC: src — asset('storage/' . $crisis->image) --}}
-                <img src="{{ asset('images/img_2.jpg') }}"
-                     class="card-img-top" style="height: 180px; object-fit: cover;" alt="">
+               
+                @if($crisis->image)
+                    <img src="{{ asset('storage/' . $crisis->image) }}"
+                         class="card-img-top" style="height: 180px; object-fit: cover;"
+                         alt="{{ $crisis->crisis_title }}">
+                @else
+                    <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center"
+                         style="height: 180px;">
+                        <span class="text-white">No Image</span>
+                    </div>
+                @endif
 
                 {{-- Progress bar on image bottom --}}
                 <div class="px-3 pt-2">
@@ -145,10 +167,10 @@
 
                 <div class="card-body">
                     {{-- DYNAMIC: $crisis->category->category_name --}}
-                    <span class="badge bg-primary mb-2">{{ $cat->category_name }}</span>
+                    <span class="badge bg-primary mb-2">{{ $crisis->crisis_title }}</span>
 
                     {{-- DYNAMIC: $crisis->title --}}
-                    <h6 class="card-title">{{ $cat->description }}</h6>
+                    <h6 class="card-title">{{ $crisis->description }}</h6>
 
                     <div class="d-flex justify-content-between align-items-center mt-3">
                         {{-- DYNAMIC: $crisis->donations()->count() . ' donors' --}}
