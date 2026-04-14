@@ -25,7 +25,7 @@ class CrisisController extends Controller
         if($request->hasFile('image')){
             $file = $request->file('image');
             $fileName = date('Ymdhis').$file->getClientOriginalName();
-            $file->storeAs('/category', $fileName);
+            $file->storeAs('/crises', $fileName);
 
         
 

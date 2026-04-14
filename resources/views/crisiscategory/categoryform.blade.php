@@ -3,7 +3,7 @@
 
 <h2>Create Category Form</h2>
 
-<form action="{{ route('crisis.category.submit') }}"  method="post">
+<form action="{{ route('crisis.category.submit') }}"  method="post" enctype="multipart/form-data">
 @csrf
     <div class="form-group">
         <label for="category_name" class="form-label">Category Name:</label>

@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 //website route
 use App\Http\Controllers\Frontend\AuthController;
 use App\Http\Controllers\Frontend\WebsiteController;
-use App\Http\Controllers\Frontend\CrisisController as WebCrisisController;
+use App\Http\Controllers\Frontend\WebCrisisController;
+use App\Http\Controllers\Frontend\WebDonationController;
 
 
 //Admin import route
@@ -31,6 +32,9 @@ Route::post('/crowdfunding/loginsubmit',[AuthController::class,'loginSubmit'])->
 
 Route::get('/crowdfunding',[WebsiteController::class,'websiteindex'])->name('website');
 Route::get('/crowdfunding/detailspage/{id}',[WebCrisisController::class,'detailsShow'])->name('crisis.details');
+
+Route::post('/crowdfunding/donate',[WebDonationController::class,'donateStore'])->name('donate.store');
+Route::get('/crowdfunding/donate-success',[WebDonationController::class,'donateSuccess'])->name('donate.success');
 
 
 

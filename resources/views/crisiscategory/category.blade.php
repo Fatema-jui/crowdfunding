@@ -24,7 +24,7 @@
         <td Scope="row">{{$category->id}}</td>
         <td>{{$category->category_name}}</td>
         <td>{{$category->description}}</td>
-         <td><img width = "100px" src "{{url('/categories/'.$category->image)}}" alt=" "></td>
+         <td><img width = "100px" src ="{{url('/category/'.$category->image)}}" alt=" "></td>
 
         <td>{{$category->status}}</td>
         <td>

@@ -1,4 +1,4 @@
-@extends('Frontend.partials.master')
+@extends('frontend.partials.master')
 @section('content')
 
 <div class="container py-5">
@@ -9,10 +9,10 @@
 
             {{-- Image --}}
             @if($crisis->image)
-                <img src="{{ asset('storage/' . $crisis->image) }}"
+                <img src="{{ asset('crises/' . $crisis->image) }}"
                      class="img-fluid rounded w-100 mb-4"
                      style="height: 300px; object-fit: cover;"
-                     alt="{{ $crisis->title }}">
+                     alt="{{ $crisis->crisis_title }}">
             @else
                 <div class="bg-secondary rounded d-flex align-items-center
                             justify-content-center mb-4"
@@ -27,32 +27,31 @@
                 {{ $crisis->category->category_name ?? 'General' }}
             </span>
 
-            {{-- Title --}}
-            <h3 class="fw-bold mt-2">{{ $crisis->title }}</h3>
+            @php
+                $raised = $crisis->donations_sum_amount ?? 0;
+                $goal = $crisis->target_amount ?? 0;
+                $progress = $goal > 0 ? min(100, ($raised / $goal) * 100) : 0;
+            @endphp
+
+            {{-- Crisis Title --}}
+            <h3 class="fw-bold mt-2">{{ $crisis->crisis_title ?? 'Untitled Crisis' }}</h3>
 
             {{-- Description --}}
-            <p class="text-muted mt-3">{{ $crisis->description }}</p>
+            <p class="text-muted mt-3">{{ $crisis->description ?? 'No description available.' }}</p>
 
             {{-- Progress --}}
             <div class="card p-3 mt-4">
                 <div class="d-flex justify-content-between mb-1">
-                    {{-- DYNAMIC: $crisis->raised --}}
-                    <strong>৳{{ number_format($crisis->raised ?? 0) }} raised</strong>
-                    {{-- DYNAMIC: $crisis->goal --}}
-                    <span class="text-muted">Goal: ৳{{ number_format($crisis->goal ?? 0) }}</span>
+                    <strong>৳{{ number_format($raised, 2) }} raised</strong>
+                    <span class="text-muted">Goal: ৳{{ number_format($goal, 2) }}</span>
                 </div>
                 <div class="progress mb-2" style="height: 10px;">
                     <div class="progress-bar bg-success"
-                         style="width: {{
-                             $crisis->goal > 0
-                             ? min(100, ($crisis->raised / $crisis->goal) * 100)
-                             : 0
-                         }}%;">
+                         style="width: {{ $progress }}%;">
                     </div>
                 </div>
                 <small class="text-muted">
-                    {{-- DYNAMIC: donor count --}}
-                    43 donors
+                    {{ $crisis->donations_count ?? 0 }} donors
                 </small>
             </div>
 
@@ -68,12 +67,12 @@
                 @guest
                     <div class="alert alert-warning small">
                         Donate করতে আগে
-                        <a href="">Login</a> করুন
+                        <a href="{{ route('show.login') }}">Login</a> করুন
                     </div>
                 @endguest
 
                 {{-- DYNAMIC: action — route('donate.store') পরে দিবে --}}
-                <form action="#" method="POST">
+                <form action="{{ route('donate.store') }}" method="POST">
                     @csrf
                     <input type="hidden" name="crisis_id" value="{{ $crisis->id }}">
 
@@ -91,7 +90,7 @@
 
                     {{-- Custom amount --}}
                     <div class="mb-3">
-                        <label class="form-label small">অথবা নিজে লিখুন (৳)</label>
+                        <label class="form-label small">Custom Amount:</label>
                         <input type="number"
                                name="amount"
                                id="amount"
