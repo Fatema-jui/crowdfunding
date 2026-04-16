@@ -29,6 +29,29 @@ class WebsiteController extends Controller
         return view('frontend.pages.home', compact('categories','crises', 'totalDonated', 'activeCrises', 'volunteers'));
     }
 
+    
+    // Crisis list page — নতুন add করো
+    public function crisisList(Request $request)
+    {
+        $query = Crisis::with('category');
 
+        // Category filter
+        if ($request->category) {
+            $query->where('category_id', $request->category);
+        }
 
+        // Search filter
+        if ($request->search) {
+            $query->where('title', 'like', '%' . $request->search . '%');
+        }
+
+        $crises     = $query->latest()->get();
+        $categories = Category::all();
+
+        return view('frontend.pages.crises.index', compact('crises', 'categories'));
+    }
 }
+
+
+
+

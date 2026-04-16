@@ -77,6 +77,12 @@ class CrisisController extends Controller
         return redirect()->route('crisis')->with('success', 'Updated successfully');
     }
 
+    public function crisisdelete($id){
+        $crisis=Crisis::find($id);
+        $crisis->delete();
+        return redirect()->route('crisis')->with('success', 'Deleted successfully');
+    }
+
 
 
 

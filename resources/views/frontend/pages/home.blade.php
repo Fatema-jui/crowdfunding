@@ -16,7 +16,7 @@
                     Join thousands of donors helping communities recover from floods, fires, and other emergencies across Bangladesh.
                 </p>
                 <div class="d-flex justify-content-center flex-wrap" style="gap: 1rem; z-index: 1;">
-                    <a href="#" class="btn btn-light btn-lg px-4 fw-semibold">
+                    <a href="{{ route('crisis.list')}}" class="btn btn-light btn-lg px-4 fw-semibold">
                         Donate Now
                     </a>
                     <a href="#" class="btn btn-outline-light btn-lg px-4">
@@ -107,7 +107,7 @@
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h5 class="mb-0">Active Crisis Campaigns</h5>
         {{-- DYNAMIC: href — route('crises.index') --}}
-        <a href="#" class="btn btn-outline-primary btn-sm">See All →</a>
+        <a href="{{ route('crisis.list')}}" class="btn btn-outline-primary btn-sm">See All →</a>
     </div>
 
     <div class="row g-4">

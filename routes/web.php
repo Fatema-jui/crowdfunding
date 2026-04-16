@@ -31,6 +31,7 @@ Route::get('/crowdfunding/login',[AuthController::class,'showLogin'])->name('sho
 Route::post('/crowdfunding/loginsubmit',[AuthController::class,'loginSubmit'])->name('login.submit');
 
 Route::get('/crowdfunding',[WebsiteController::class,'websiteindex'])->name('website');
+Route::get('/crowdfunding/crisislist',[WebCrisisController::class,'crisisList'])->name('crisis.list');
 Route::get('/crowdfunding/detailspage/{id}',[WebCrisisController::class,'detailsShow'])->name('crisis.details');
 
 Route::post('/crowdfunding/donate',[WebDonationController::class,'donateStore'])->name('donate.store');
@@ -72,6 +73,7 @@ Route::post('/crisis/crisissubmit',[CrisisController::class,'crisissubmit'])->na
 Route::get('/crisis/view/{id}',[CrisisController::class,'crisisview'])->name('crisis.view');
 Route::get('/crisis/edit/{id}', [CrisisController::class,'edit'])->name('crisis.edit');
 Route::put('/crisis/update/{id}', [CrisisController::class, 'update'])->name('crisis.update');
+Route::get('/crisis/delete/{id}',[CrisisController::class,'crisisdelete'])->name('crisis.delete');
 
 
 
