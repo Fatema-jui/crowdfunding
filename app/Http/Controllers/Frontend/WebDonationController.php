@@ -19,8 +19,8 @@ class WebDonationController extends Controller
             'payment_method' => 'required|in:bKash,Nagad,Card',
         ],
         [
-            'amount.required' => 'Amount দিন',
-            'amount.min'      => 'কমপক্ষে ১ টাকা দিন',
+            'amount.required' => 'Amount is required',
+            'amount.min'      => 'Minimum 1 taka',
         ]);
 
         $user = auth()->user();

@@ -8,7 +8,7 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h4 class="fw-bold mb-0">All Crisis Campaigns</h4>
-            <small class="text-muted">{{ $crises->count() }} টি crisis পাওয়া গেছে</small>
+            <small class="text-muted">{{ $crises->count() }} crises found</small>
         </div>
         <a href="{{ route('website') }}" class="btn btn-outline-secondary btn-sm">
             ← Back to Home
@@ -21,7 +21,7 @@
             <input type="text"
                    name="search"
                    class="form-control"
-                   placeholder="Crisis search করুন..."
+                   placeholder="Search crises..."
                    value="{{ request('search') }}">
         </div>
         <div class="col-md-4">
@@ -78,7 +78,7 @@
                                 <span class="badge bg-primary">
                                     {{ $crisis->category->category_name ?? 'General' }}
                                 </span>
-                                {{-- DYNAMIC: location field থাকলে --}}
+                                {{-- DYNAMIC: if location field exists --}}
                                 {{-- <small class="text-muted">📍 {{ $crisis->location }}</small> --}}
                             </div>
 
@@ -122,7 +122,7 @@
 
         @empty
         <div class="col-12 text-center py-5">
-            <p class="text-muted">কোনো crisis পাওয়া যায়নি।</p>
+            <p class="text-muted">No crises found.</p>
             <a href="{{ route('crisis.list') }}" class="btn btn-outline-secondary btn-sm">
                 Reset Filter
             </a>

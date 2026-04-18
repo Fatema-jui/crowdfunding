@@ -23,12 +23,12 @@ class AuthController extends Controller
             'phone'    => 'required|string|max:20',
             'password' => 'required|min:6|confirmed',
         ], [
-            'name.required'      => 'নাম দিন',
-            'email.required'     => 'Email দিন',
-            'email.unique'       => 'এই Email আগেই registered',
-            'phone.required'     => 'Phone number দিন',
-            'password.min'       => 'Password কমপক্ষে ৬ অক্ষর',
-            'password.confirmed' => 'Password মিলছে না',
+            'name.required'      => 'Name is required',
+            'email.required'     => 'Email is required',
+            'email.unique'       => 'This email is already registered',
+            'phone.required'     => 'Phone number is required',
+            'password.min'       => 'Password must be at least 6 characters',
+            'password.confirmed' => 'Password confirmation does not match',
         ]);
 
         // User create করো
@@ -44,7 +44,7 @@ class AuthController extends Controller
 
         return redirect()
                ->route('website')
-               ->with('success', 'Registration সফল হয়েছে!');
+               ->with('success', 'Registration successful!');
     }
 
     public function showLogin(){
@@ -58,9 +58,9 @@ class AuthController extends Controller
             'email'    => 'required|email',
             'password' => 'required',
         ], [
-            'email.required'    => 'Email দিন',
-            'email.email'       => 'সঠিক Email দিন',
-            'password.required' => 'Password দিন',
+            'email.required'    => 'Email is required',
+            'email.email'       => 'Provide a valid email',
+            'password.required' => 'Password is required',
         ]);
 
         $credentials = $request->only('email', 'password');
@@ -69,12 +69,12 @@ class AuthController extends Controller
             $request->session()->regenerate();
             return redirect()
                    ->route('crisis.details')
-                   ->with('success', 'Login সফল!');
+                   ->with('success', 'Login successful!');
         }
 
         // Login fail
         return back()
-               ->withErrors(['email' => 'Email বা Password ভুল'])
+               ->withErrors(['email' => 'Email or Password is incorrect'])
                ->withInput($request->only('email'));
     }
 
