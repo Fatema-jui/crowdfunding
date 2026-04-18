@@ -29,7 +29,7 @@ class CrisisCategoryController extends Controller
       Category::create([
          'category_name'=>$request->category_name,
          'description'=>$request->description,
-         'image'=>$fileNamr,
+         'image'=>$fileName,
          'status'=>$request->status
       ]);
       return redirect()->route('crisis.category');
