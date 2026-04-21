@@ -1,5 +1,4 @@
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-2"style="background-color: #0f766e;">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-2" style="background-color: #0f766e;">
   
     <div class="container">
 
@@ -25,10 +24,24 @@
                 </li>
             </ul>
 
-            
             <div class="d-flex gap-2">
-                <a href="{{ route('show.login') }}" class="btn btn-outline-light btn-sm">Login</a>
-                <a href="{{ route('show.register') }}" class="btn btn-outline-light btn-sm">Register</a>
+                @auth
+                    {{-- Login করা আছে → নাম দেখাও --}}
+                    <span class="btn btn-outline-light btn-sm">
+                         {{ auth()->user()->name }}
+                    </span>
+                    <a href="{{ route('login.submit') }}" class="btn btn-outline-light btn-sm"
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        Logout
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                @else
+                    {{-- Login করা নেই → Login/Register দেখাও --}}
+                    <a href="{{ route('show.login') }}" class="btn btn-outline-light btn-sm">Login</a>
+                    <a href="{{ route('show.register') }}" class="btn btn-outline-light btn-sm">Register</a>
+                @endauth
             </div>
 
         </div>

@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 //website route
 use App\Http\Controllers\Frontend\AuthController;
 use App\Http\Controllers\Frontend\WebsiteController;
+use App\Http\Controllers\Frontend\WebCrisisController;
+use App\Http\Controllers\Frontend\WebDonationController;
 
 
 //Admin import route
@@ -16,19 +18,24 @@ use App\Http\Controllers\DonationController;
 use App\Http\Controllers\VolunteerController;
 use App\Http\Controllers\BusinessSettingController;
 use App\Http\Controllers\ReportController;
-
+use App\Http\Controllers\SslCommerzPaymentController;
 
 Route::get('/', function () {
   return view('welcome');
 });
 
 //website route
-Route::get('/corwdfunding/register',[AuthController::class,'showRegister'])->name('show.register');
+Route::get('/crowdfunding/register',[AuthController::class,'showRegister'])->name('show.register');
 Route::post('/crowdfunding/registersubmit',[AuthController::class,'submitRegister'])->name('submit.register');
 Route::get('/crowdfunding/login',[AuthController::class,'showLogin'])->name('show.login');
 Route::post('/crowdfunding/loginsubmit',[AuthController::class,'loginSubmit'])->name('login.submit');
 
 Route::get('/crowdfunding',[WebsiteController::class,'websiteindex'])->name('website');
+Route::get('/crowdfunding/crisislist',[WebCrisisController::class,'crisisList'])->name('crisis.list');
+Route::get('/crowdfunding/detailspage/{id}',[WebCrisisController::class,'detailsShow'])->name('crisis.details');
+
+Route::post('/crowdfunding/donate',[WebDonationController::class,'donateStore'])->name('donate.store');
+Route::get('/crowdfunding/donate-success',[WebDonationController::class,'donateSuccess'])->name('donate.success');
 
 
 
@@ -66,6 +73,7 @@ Route::post('/crisis/crisissubmit',[CrisisController::class,'crisissubmit'])->na
 Route::get('/crisis/view/{id}',[CrisisController::class,'crisisview'])->name('crisis.view');
 Route::get('/crisis/edit/{id}', [CrisisController::class,'edit'])->name('crisis.edit');
 Route::put('/crisis/update/{id}', [CrisisController::class, 'update'])->name('crisis.update');
+Route::get('/crisis/delete/{id}',[CrisisController::class,'crisisdelete'])->name('crisis.delete');
 
 
 
@@ -90,3 +98,22 @@ Route::get('/volunteer/delete/{id}',[VolunteerController::class,'volunteerdelete
 
 Route::get('report',[ReportController::class,'index'])->name('report');
 Route::get('/setting',[BusinessSettingController::class,'settingindex'])->name('business.setting');
+// SSLCOMMERZ Start
+Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
+Route::get('/example2', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
+
+Route::post('/pay', [SslCommerzPaymentController::class, 'index'])->name('donate.pay');
+Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
+
+Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+
+Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+//SSLCOMMERZ END
+
+Route::get('/payment/success', function () {
+    return view('frontend.pages.payment.success');
+})->name('payment.success');
+
+Route::post('/crowdfunding/logout', [AuthController::class, 'logout'])->name('logout');

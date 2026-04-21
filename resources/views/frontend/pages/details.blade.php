@@ -1,0 +1,122 @@
+@extends('frontend.partials.master')
+@section('content')
+
+<div class="container py-5">
+    <div class="row g-4">
+
+        {{-- ── LEFT: Crisis Info ──────────────────── --}}
+        <div class="col-lg-7">
+
+            {{-- Image --}}
+            @if($crisis->image)
+                <img src="{{ asset('crises/' . $crisis->image) }}"
+                     class="img-fluid rounded w-100 mb-4"
+                     style="height: 300px; object-fit: cover;"
+                     alt="{{ $crisis->crisis_title }}">
+            @else
+                <div class="bg-secondary rounded d-flex align-items-center
+                            justify-content-center mb-4"
+                     style="height: 300px;">
+                    <span class="text-white">No Image</span>
+                </div>
+            @endif
+
+            {{-- Category badge --}}
+            {{-- DYNAMIC: $crisis->category->category_name --}}
+            <span class="badge bg-primary mb-2">
+                {{ $crisis->category->category_name ?? 'General' }}
+            </span>
+
+            @php
+                $raised = $crisis->donations_sum_amount ?? 0;
+                $goal = $crisis->target_amount ?? 0;
+                $progress = $goal > 0 ? min(100, ($raised / $goal) * 100) : 0;
+            @endphp
+
+            {{-- Crisis Title --}}
+            <h3 class="fw-bold mt-2">{{ $crisis->crisis_title ?? 'Untitled Crisis' }}</h3>
+
+            {{-- Description --}}
+            <p class="text-muted mt-3">{{ $crisis->description ?? 'No description available.' }}</p>
+
+            {{-- Progress --}}
+            <div class="card p-3 mt-4">
+                <div class="d-flex justify-content-between mb-1">
+                    <strong>৳{{ number_format($raised, 2) }} raised</strong>
+                    <span class="text-muted">Goal: ৳{{ number_format($goal, 2) }}</span>
+                </div>
+                <div class="progress mb-2" style="height: 10px;">
+                    <div class="progress-bar bg-success"
+                         style="width: {{ $progress }}%;">
+                    </div>
+                </div>
+                <small class="text-muted">
+                    {{ $crisis->donations_count ?? 0 }} donors
+                </small>
+            </div>
+
+        </div>
+
+        {{-- ── RIGHT: Donate Form ──────────────────── --}}
+        <div class="col-lg-5">
+            <div class="card shadow-sm p-4" style="position: sticky; top: 80px;">
+
+                <h5 class="fw-bold mb-4">♥ Donate Now</h5>
+
+                {{-- Login না থাকলে warning --}}
+                @guest
+                    <div class="alert alert-warning small">
+                        Donate করতে আগে
+                        <a href="{{ route('show.login') }}">Login</a> করুন
+                    </div>
+                @endguest
+
+                {{-- DYNAMIC: action — route('donate.store') পরে দিবে --}}
+                <form action="{{ route('donate.pay') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="crisis_id" value="{{ $crisis->id }}">
+
+                    {{-- Quick amount buttons --}}
+                    <p class="small text-muted mb-2">Amount select করুন:</p>
+                    <div class="d-flex gap-2 mb-3">
+                        @foreach([100, 500, 1000, 5000] as $amt)
+                            <button type="button"
+                                    class="btn btn-outline-primary btn-sm"
+                                    onclick="document.getElementById('amount').value='{{ $amt }}'">
+                                ৳{{ $amt }}
+                            </button>
+                        @endforeach
+                    </div>
+
+                    {{-- Custom amount --}}
+                    <div class="mb-3">
+                        <label class="form-label small">Custom Amount:</label>
+                        <input type="number"
+                               name="amount"
+                               id="amount"
+                               class="form-control"
+                               placeholder="Amount"
+                               min="1" required>
+                    </div>
+
+                    {{-- Payment method --}}
+                    
+
+                    <button type="submit"
+                            class="btn w-100 py-2 fw-semibold"
+                            style="background-color: #0f766e; color: #fff;"
+                            @guest disabled @endguest>
+                        Confirm Donation
+                    </button>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+@endsection

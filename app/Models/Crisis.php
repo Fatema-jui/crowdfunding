@@ -6,11 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Crisis extends Model
 {
-    protected $guarded=[];
+    protected $guarded = [];
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 
-    public function category(){
-
-    return $this->belongsTo(Category::class, 'category_id');
+    public function donations()
+    {
+        return $this->hasMany(Donation::class, 'crisis_id');
     }
 }

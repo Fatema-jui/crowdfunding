@@ -20,14 +20,14 @@ class CrisisController extends Controller
     }
 
     public function crisissubmit(Request $request){
-          $fileName ='';
+         $fileName ='';
         
         if($request->hasFile('image')){
             $file = $request->file('image');
             $fileName = date('Ymdhis').$file->getClientOriginalName();
             $file->storeAs('/crises', $fileName);
 
-        }
+        
 
        Crisis::create([
         
@@ -43,7 +43,7 @@ class CrisisController extends Controller
        ]);
        return redirect()->route('crisis');
 
-    }
+        }}
 
     public function crisisview ($id){
         $crisis=Crisis::find($id);
@@ -75,6 +75,12 @@ class CrisisController extends Controller
         ]);
 
         return redirect()->route('crisis')->with('success', 'Updated successfully');
+    }
+
+    public function crisisdelete($id){
+        $crisis=Crisis::find($id);
+        $crisis->delete();
+        return redirect()->route('crisis')->with('success', 'Deleted successfully');
     }
 
 

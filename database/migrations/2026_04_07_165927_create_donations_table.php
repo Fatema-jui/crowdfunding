@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('donations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('crisis_id')->nullable()->constrained('crises')->nullOnDelete();
-            $table->foreignId('donor_id')->nullable()->constrained('donors')->nullOnDelete();
+            $table->foreignId('crisis_id')->nullable();
+            $table->foreignId('donor_id')->nullable();
             $table->decimal('amount',10,2)->nullable();
             $table->string('payment_method')->nullable();
             $table->date('donation_date')->nullable();

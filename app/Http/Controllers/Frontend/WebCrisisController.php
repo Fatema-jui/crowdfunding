@@ -4,32 +4,21 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Category;
 use App\Models\Crisis;
-use App\Models\Donation;
-use App\Models\volunteer;
+use App\Models\Category;
 
-class WebsiteController extends Controller
+class WebCrisisController extends Controller
 {
-    public function websiteindex(){
-    
-        $categories = Category::take(4)->get();
-        $crises = Crisis::with('category')
+    public function detailsShow($id)
+    {
+        $crisis = Crisis::with('category')
             ->withCount('donations')
             ->withSum('donations', 'amount')
-            ->latest()
-            ->where('status','active')
-            ->take(3)
-            ->get();
+            ->findOrFail($id);
 
-        $totalDonated = Donation::sum('amount');
-        $activeCrises = Crisis::where('status', 'active')->count();
-        $volunteers = volunteer::count();
-
-        return view('frontend.pages.home', compact('categories','crises', 'totalDonated', 'activeCrises', 'volunteers'));
+        return view('frontend.pages.details', compact('crisis'));
     }
 
-    
     // Crisis list page — নতুন add করো
     public function crisisList(Request $request)
     {
@@ -48,10 +37,7 @@ class WebsiteController extends Controller
         $crises     = $query->latest()->get();
         $categories = Category::all();
 
-        return view('frontend.pages.crises.index', compact('crises', 'categories'));
+        return view('frontend.pages.crisislist', compact('crises', 'categories'));
     }
 }
-
-
-
 

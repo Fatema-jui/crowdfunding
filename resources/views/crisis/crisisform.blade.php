@@ -1,6 +1,6 @@
 @extends('partials.master')
 @section('content')
-<h2>Campagin Create Form</h2>
+<h2> Create Crisis Form</h2>
 <form action="{{ route('crisis.submit' )}}" method="post" enctype="multipart/form-data">
 
 @csrf
