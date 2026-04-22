@@ -13,8 +13,6 @@
                 <th Scope="col">Email</th>
                 <th Scope="col">Phone</th>
                 <th Scope="col">Role</th>
-                <th Scope="col">Address</th>
-                <th Scope="col">Profile Image</th>
                 <th Scope="col">Status</th>
             </tr>
         </thead>
@@ -25,9 +23,17 @@
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
                 <td>{{$user->phone}}</td>
-                <td>{{$user->role}}</td>
-                <td>{{$user->address}}</td>
-                <td>{{$user->image}}</td>
+                <td>
+                
+                    @if($user->role == 'donor')
+                   <span class="badge bg-success">Donor</span>
+                    @elseif($user->role == 'admin')
+                    <span class="badge bg-danger">Admin</span>
+                    @else
+                     <span class="badge bg-secondary">User</span>
+                    @endif
+
+                </td>
                 <td>{{$user->status}}</td>
                 <td>
                     <div class="btn-group" role="group" style="gap:5px;">

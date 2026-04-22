@@ -15,7 +15,7 @@ public function donor()
 
 public function crisis()
 {
-    return $this->belongsTo(Crisis::class);
+    return $this->belongsTo(Crisis::class, 'crisis_id');
 }
 
 

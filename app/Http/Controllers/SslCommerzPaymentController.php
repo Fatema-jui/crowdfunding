@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use DB;
 use Illuminate\Http\Request;
 use App\Library\SslCommerz\SslCommerzNotification;
 use App\Models\Donation;
@@ -23,193 +22,196 @@ class SslCommerzPaymentController extends Controller
 
     public function index(Request $request)
     {
-        # Here you have to receive all the order data to initate the payment.
-        # Let's say, your oder transaction informations are saving in a table called "orders"
-        # In "orders" table, order unique identity is "transaction_id". "status" field contain status of the transaction, "amount" is the order amount to be paid and "currency" is for storing Site Currency which will be checked with paid currency.
-$donarInfo=User::where('id',auth()->user()->id)->first();
+        $donarInfo = User::where('id', auth()->user()->id)->first();
+
+        // Create a unique tran_id (duplicates if crisis_id is given)
+        $uniqueTranId = 'TRX-3940348838-' . uniqid() . '-' . $request->crisis_id;
 
         $post_data = array();
-        $post_data['total_amount'] = $request->amount; # You cant not pay less than 10
-        $post_data['currency'] = "BDT";
-        $post_data['tran_id'] = $request->crisis_id; // tran_id must be unique
+        $post_data['total_amount'] = $request->amount;
+        $post_data['currency']     = "BDT";
+        $post_data['tran_id']      = $uniqueTranId;
 
-        # CUSTOMER INFORMATION
-        $post_data['cus_name'] = $donarInfo->name;
-        $post_data['cus_email'] = $donarInfo->email;
-        $post_data['cus_add1'] = 'Dhaka';
-        $post_data['cus_add2'] = "";
-        $post_data['cus_city'] = "";
-        $post_data['cus_state'] = "";
+        // Customer information
+        $post_data['cus_name']     = $donarInfo->name;
+        $post_data['cus_email']    = $donarInfo->email;
+        $post_data['cus_add1']     = 'Dhaka';
+        $post_data['cus_add2']     = "";
+        $post_data['cus_city']     = "";
+        $post_data['cus_state']    = "";
         $post_data['cus_postcode'] = "";
-        $post_data['cus_country'] = "Bangladesh";
-        $post_data['cus_phone'] = '8801XXXXXXXXX';
-        $post_data['cus_fax'] = "";
+        $post_data['cus_country']  = "Bangladesh";
+        $post_data['cus_phone']    = '8801XXXXXXXXX';
+        $post_data['cus_fax']      = "";
 
-        # SHIPMENT INFORMATION
-        $post_data['ship_name'] = "Store Test";
-        $post_data['ship_add1'] = "Dhaka";
-        $post_data['ship_add2'] = "Dhaka";
-        $post_data['ship_city'] = "Dhaka";
-        $post_data['ship_state'] = "Dhaka";
+        // শিপমেন্ট তথ্য
+        $post_data['ship_name']     = "Store Test";
+        $post_data['ship_add1']     = "Dhaka";
+        $post_data['ship_add2']     = "Dhaka";
+        $post_data['ship_city']     = "Dhaka";
+        $post_data['ship_state']    = "Dhaka";
         $post_data['ship_postcode'] = "1000";
-        $post_data['ship_phone'] = "";
-        $post_data['ship_country'] = "Bangladesh";
+        $post_data['ship_phone']    = "";
+        $post_data['ship_country']  = "Bangladesh";
 
-        $post_data['shipping_method'] = "NO";
-        $post_data['product_name'] = "Computer";
-        $post_data['product_category'] = "Goods";
-        $post_data['product_profile'] = "physical-goods";
+        $post_data['shipping_method']  = "NO";
+        $post_data['product_name']     = "Donation";
+        $post_data['product_category'] = "Crowdfunding";
+        $post_data['product_profile']  = "non-physical-goods";
 
-        # OPTIONAL PARAMETERS
+        // অপশনাল প্যারামিটার
         $post_data['value_a'] = "ref001";
         $post_data['value_b'] = "ref002";
         $post_data['value_c'] = "ref003";
         $post_data['value_d'] = "ref004";
 
-        #Before  going to initiate the payment order status need to insert or update as Pending.
-         Donation::create([
-            'crisis_id'=>$request->crisis_id,
-            'donor_id'=>$donarInfo->id,
-            'amount'=>$request->amount,
-            'payment_method'=>'online',
-            'donation_date'=>today(),
-            'transaction_id' => $request->crisis_id, 
-            'status'=>'pending'
-
+        // পেমেন্টের আগে Donation রেকর্ড তৈরি করুন (pending স্ট্যাটাসে)
+        Donation::create([
+            'crisis_id'      => $request->crisis_id,
+            'donor_id'       => $donarInfo->id,
+            'amount'         => $request->amount,
+            'payment_method' => 'online',
+            'donation_date'  => today(),
+            'transaction_id' => $uniqueTranId,  // ইউনিক tran_id
+            'status'         => 'pending'
         ]);
 
         $sslc = new SslCommerzNotification();
-        # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payement gateway here )
         $payment_options = $sslc->makePayment($post_data, 'hosted');
 
         if (!is_array($payment_options)) {
             print_r($payment_options);
             $payment_options = array();
         }
-
     }
 
     public function payViaAjax(Request $request)
     {
-
-        # Here you have to receive all the order data to initate the payment.
-        # Lets your oder trnsaction informations are saving in a table called "orders"
-        # In orders table order uniq identity is "transaction_id","status" field contain status of the transaction, "amount" is the order amount to be paid and "currency" is for storing Site Currency which will be checked with paid currency.
-
         $post_data = array();
-        $post_data['total_amount'] = '10'; # You cant not pay less than 10
-        $post_data['currency'] = "BDT";
-        $post_data['tran_id'] = uniqid(); // tran_id must be unique
+        $post_data['total_amount'] = '10';
+        $post_data['currency']     = "BDT";
+        $post_data['tran_id']      = uniqid();
 
-        # CUSTOMER INFORMATION
-        $post_data['cus_name'] = 'Customer Name';
-        $post_data['cus_email'] = 'customer@mail.com';
-        $post_data['cus_add1'] = 'Customer Address';
-        $post_data['cus_add2'] = "";
-        $post_data['cus_city'] = "";
-        $post_data['cus_state'] = "";
+        $post_data['cus_name']     = 'Customer Name';
+        $post_data['cus_email']    = 'customer@mail.com';
+        $post_data['cus_add1']     = 'Customer Address';
+        $post_data['cus_add2']     = "";
+        $post_data['cus_city']     = "";
+        $post_data['cus_state']    = "";
         $post_data['cus_postcode'] = "";
-        $post_data['cus_country'] = "Bangladesh";
-        $post_data['cus_phone'] = '8801XXXXXXXXX';
-        $post_data['cus_fax'] = "";
+        $post_data['cus_country']  = "Bangladesh";
+        $post_data['cus_phone']    = '8801XXXXXXXXX';
+        $post_data['cus_fax']      = "";
 
-        # SHIPMENT INFORMATION
-        $post_data['ship_name'] = "Store Test";
-        $post_data['ship_add1'] = "Dhaka";
-        $post_data['ship_add2'] = "Dhaka";
-        $post_data['ship_city'] = "Dhaka";
-        $post_data['ship_state'] = "Dhaka";
+        $post_data['ship_name']     = "Store Test";
+        $post_data['ship_add1']     = "Dhaka";
+        $post_data['ship_add2']     = "Dhaka";
+        $post_data['ship_city']     = "Dhaka";
+        $post_data['ship_state']    = "Dhaka";
         $post_data['ship_postcode'] = "1000";
-        $post_data['ship_phone'] = "";
-        $post_data['ship_country'] = "Bangladesh";
+        $post_data['ship_phone']    = "";
+        $post_data['ship_country']  = "Bangladesh";
 
-        $post_data['shipping_method'] = "NO";
-        $post_data['product_name'] = "Computer";
-        $post_data['product_category'] = "Goods";
-        $post_data['product_profile'] = "physical-goods";
+        $post_data['shipping_method']  = "NO";
+        $post_data['product_name']     = "Donation";
+        $post_data['product_category'] = "Crowdfunding";
+        $post_data['product_profile']  = "non-physical-goods";
 
-        # OPTIONAL PARAMETERS
         $post_data['value_a'] = "ref001";
         $post_data['value_b'] = "ref002";
         $post_data['value_c'] = "ref003";
         $post_data['value_d'] = "ref004";
 
-
-        #Before  going to initiate the payment order status need to update as Pending.
-        $update_product = Donation::table()
-            ->where('transaction_id', $post_data['tran_id'])
-            ->updateOrInsert([
-                'name' => $post_data['cus_name'],
-                'email' => $post_data['cus_email'],
-                'phone' => $post_data['cus_phone'],
-                'amount' => $post_data['total_amount'],
-                'status' => 'Pending',
-                'address' => $post_data['cus_add1'],
-                
+        // Donation::table() ভুল ছিল — সঠিক হলো Donation::where()
+        Donation::updateOrInsert(
+            ['transaction_id' => $post_data['tran_id']],
+            [
+                'amount'         => $post_data['total_amount'],
+                'status'         => 'pending',
                 'transaction_id' => $post_data['tran_id'],
-                'currency' => $post_data['currency']
-            ]);
+            ]
+        );
 
         $sslc = new SslCommerzNotification();
-        # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payement gateway here )
         $payment_options = $sslc->makePayment($post_data, 'checkout', 'json');
 
         if (!is_array($payment_options)) {
             print_r($payment_options);
             $payment_options = array();
         }
-
     }
 
-   public function success(Request $request)
-{
-    $tran_id  = $request->input('tran_id');
-    $amount   = $request->input('amount');
-    $currency = $request->input('currency');
+    public function success(Request $request)
+    {
+        $tran_id  = $request->input('tran_id');
+        $amount   = $request->input('amount');
+        $currency = $request->input('currency');
 
-    $sslc = new SslCommerzNotification();
+        $sslc = new SslCommerzNotification();
 
-    $order_details = Donation::where('transaction_id', $tran_id)
-        ->select('transaction_id', 'status', 'amount')
-        ->first();
+        $order_details = Donation::where('transaction_id', $tran_id)
+            ->select('transaction_id', 'status', 'amount')
+            ->first();
 
-    if ($order_details->status == 'pending') {
-        $validation = $sslc->orderValidate(
-            $request->all(), $tran_id, $amount, $currency
-        );
-        if ($validation) {
-            Donation::where('transaction_id', $tran_id)
-                ->update(['status' => 'completed']);
-
-            return redirect()->route('payment.success')
-                ->with('amount', $amount)
-                ->with('tran_id', $tran_id);
+        // রেকর্ড না পেলে crisis list এ ফেরত
+        if (!$order_details) {
+            return redirect()->route('crisis.list')
+                ->with('error', 'ট্রানজেকশন পাওয়া যায়নি।');
         }
-    } else if ($order_details->status == 'completed') {
-        return redirect()->route('payment.success');
-    } else {
-        return redirect()->route('crisis.list');
+
+        if ($order_details->status == 'pending') {
+            $validation = $sslc->orderValidate(
+                $request->all(), $tran_id, $amount, $currency
+            );
+
+            if ($validation) {
+                Donation::where('transaction_id', $tran_id)
+                    ->update(['status' => 'completed']);
+
+                // session এ tran_id রাখুন — payment.success রুটে পাবেন
+                session(['tran_id' => $tran_id]);
+
+                return redirect()->route('payment.success');
+            }
+
+            // ভ্যালিডেশন ব্যর্থ হলে
+            return redirect()->route('crisis.list')
+                ->with('error', 'পেমেন্ট যাচাই করা সম্ভব হয়নি।');
+
+        } elseif ($order_details->status == 'completed') {
+            return redirect()->route('payment.success');
+        } else {
+            return redirect()->route('crisis.list')
+                ->with('error', 'অবৈধ ট্রানজেকশন।');
+        }
     }
-}
 
     public function fail(Request $request)
     {
         $tran_id = $request->input('tran_id');
 
         $order_details = Donation::where('transaction_id', $tran_id)
-            ->select('transaction_id', 'status', 'amount')->first();
+            ->select('transaction_id', 'status', 'amount')
+            ->first();
 
-        if ($order_details->status == 'pending') {
-            $update_product = Donation::where('transaction_id', $tran_id)
-                ->where('transaction_id', $tran_id)
-                ->update(['status' => 'failed']);
-            echo "Transaction is Falied";
-        } else if ($order_details->status == 'Processing' || $order_details->status == 'Complete') {
-            echo "Transaction is already Successful";
-        } else {
-            echo "Transaction is Invalid";
+        if (!$order_details) {
+            return redirect()->route('crisis.list')
+                ->with('error', 'ট্রানজেকশন পাওয়া যায়নি।');
         }
 
+        if ($order_details->status == 'pending') {
+            Donation::where('transaction_id', $tran_id)
+                ->update(['status' => 'failed']);
+
+            return redirect()->route('crisis.list')
+                ->with('error', 'পেমেন্ট ব্যর্থ হয়েছে। আবার চেষ্টা করুন।');
+
+        } elseif ($order_details->status == 'completed') {
+            return redirect()->route('payment.success');
+        } else {
+            return redirect()->route('crisis.list')
+                ->with('error', 'অবৈধ ট্রানজেকশন।');
+        }
     }
 
     public function cancel(Request $request)
@@ -217,62 +219,66 @@ $donarInfo=User::where('id',auth()->user()->id)->first();
         $tran_id = $request->input('tran_id');
 
         $order_details = Donation::where('transaction_id', $tran_id)
-            ->where('transaction_id', $tran_id)
-            ->select('transaction_id', 'status', 'amount')->first();
+            ->select('transaction_id', 'status', 'amount')
+            ->first();
 
-        if ($order_details->status == 'pending') {
-            $update_product = Donation::where('transaction_id', $tran_id)
-                ->where('transaction_id', $tran_id)
-                ->update(['status' => 'Canceled']);
-            echo "Transaction is Cancel";
-        } else if ($order_details->status == 'completed' || $order_details->status == 'complete') {
-            echo "Transaction is already Successful";
-        } else {
-            echo "Transaction is Invalid";
+        if (!$order_details) {
+            return redirect()->route('crisis.list')
+                ->with('error', 'ট্রানজেকশন পাওয়া যায়নি।');
         }
 
+        if ($order_details->status == 'pending') {
+            Donation::where('transaction_id', $tran_id)
+                ->update(['status' => 'cancelled']);
 
+            return redirect()->route('crisis.list')
+                ->with('error', 'পেমেন্ট বাতিল করা হয়েছে।');
+
+        } elseif ($order_details->status == 'completed') {
+            return redirect()->route('payment.success');
+        } else {
+            return redirect()->route('crisis.list')
+                ->with('error', 'অবৈধ ট্রানজেকশন।');
+        }
     }
 
     public function ipn(Request $request)
     {
-        #Received all the payement information from the gateway
-        if ($request->input('tran_id')) #Check transation id is posted or not.
-        {
-
+        if ($request->input('tran_id')) {
             $tran_id = $request->input('tran_id');
 
-            #Check order status in order tabel against the transaction id or order id.
             $order_details = Donation::where('transaction_id', $tran_id)
-                ->select('transaction_id', 'status', 'amount')->first();
+                ->select('transaction_id', 'status', 'amount')
+                ->first();
+
+            if (!$order_details) {
+                echo "Invalid Transaction";
+                return;
+            }
 
             if ($order_details->status == 'pending') {
-                $sslc = new SslCommerzNotification();
-                $validation = $sslc->orderValidate($request->all(), $tran_id, $order_details->amount, $order_details->currency);
-                if ($validation == TRUE) {
-                    /*
-                    That means IPN worked. Here you need to update order status
-                    in order table as Processing or Complete.
-                    Here you can also sent sms or email for successful transaction to customer
-                    */
-                    $update_product = Donation::where('transaction_id', $tran_id)
+                $sslc       = new SslCommerzNotification();
+                $validation = $sslc->orderValidate(
+                    $request->all(), $tran_id,
+                    $order_details->amount, 'BDT'
+                );
+
+                if ($validation == true) {
+                    Donation::where('transaction_id', $tran_id)
                         ->update(['status' => 'completed']);
 
                     echo "Transaction is successfully Completed";
+                } else {
+                    echo "Validation Failed";
                 }
-            } else if ($order_details->status == 'completed' || $order_details->status == 'completed') {
 
-                #That means Order status already updated. No need to udate database.
-
+            } elseif ($order_details->status == 'completed') {
                 echo "Transaction is already successfully Completed";
             } else {
-                #That means something wrong happened. You can redirect customer to your product page.
-
                 echo "Invalid Transaction";
             }
         } else {
             echo "Invalid Data";
         }
     }
-
 }

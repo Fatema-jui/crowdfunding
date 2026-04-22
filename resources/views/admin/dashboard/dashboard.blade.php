@@ -50,6 +50,40 @@
 
     </div>
 
+    <div class="row">
+
+        <div class="col-md-4 mb-3">
+            <div class="card text-white bg-info">
+                <div class="card-body">
+                    <h6>Total Crises</h6>
+                    <h2>{{ $totalCrisis ?? 0 }}</h2>
+                    <a href="{{ route('crisis') }}" class="text-white">View Details →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card text-white bg-secondary">
+                <div class="card-body">
+                    <h6>Total Users</h6>
+                    <h2>{{ $totalUser ?? 0 }}</h2>
+                    <a href="{{ route('user') }}" class="text-white">View Details →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card text-white bg-dark">
+                <div class="card-body">
+                    <h6>Total Categories</h6>
+                    <h2>{{ $totalCategory ?? 0 }}</h2>
+                    <a href="{{ route('crisis.category') }}" class="text-white">View Details →</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
     
     <div class="row mt-4">
         <div class="col-md-12">

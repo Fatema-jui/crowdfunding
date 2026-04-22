@@ -32,12 +32,13 @@ class AuthController extends Controller
         ]);
 
         // User create করো
-        $user = User::create([
-            'name'     => $request->name,
-            'email'    => $request->email,
-            'phone'    => $request->phone,
-            'password' => Hash::make($request->password),
-        ]);
+       $user = User::create([
+    'name'     => $request->name,
+    'email'    => $request->email,
+    'phone'    => $request->phone,
+    'password' => Hash::make($request->password),
+    'role'     => 'donor',
+            ]);
 
         // Register এর পরে auto login
         Auth::login($user);

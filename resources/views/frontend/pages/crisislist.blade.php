@@ -1,7 +1,6 @@
 @extends('frontend.partials.master')
 @section('content')
 
-
 <div class="container py-5">
 
     {{-- Page header --}}
@@ -78,30 +77,27 @@
                                 <span class="badge bg-primary">
                                     {{ $crisis->category->category_name ?? 'General' }}
                                 </span>
-                                {{-- DYNAMIC: if location field exists --}}
-                                {{-- <small class="text-muted">📍 {{ $crisis->location }}</small> --}}
                             </div>
-
-                            <h6 class="fw-bold mb-1">{{ $crisis->title }}</h6>
 
                             <p class="text-muted small mb-2">
                                 {{ Str::limit($crisis->description, 100) }}
                             </p>
 
                             {{-- Progress bar --}}
+                            @php
+                                $raised  = $crisis->donations->where('status', 'completed')->sum('amount');
+                                $goal    = $crisis->target_amount ?? 0;
+                                $percent = ($goal > 0) ? min(100, ($raised / $goal) * 100) : 0;
+                            @endphp
+
                             <div class="d-flex align-items-center gap-2">
                                 <div class="progress flex-grow-1" style="height: 6px;">
                                     <div class="progress-bar bg-success"
-                                         style="width: {{
-                                             isset($crisis->goal) && $crisis->goal > 0
-                                             ? min(100, ($crisis->raised / $crisis->goal) * 100)
-                                             : 0
-                                         }}%;">
+                                         style="width: {{ $percent }}%;">
                                     </div>
                                 </div>
-                                <small class="text-muted" style="white-space: nowrap;">
-                                    {{-- DYNAMIC: raised/goal --}}
-                                    ৳{{ number_format($crisis->raised ?? 0) }} raised
+                                <small class="text-muted" style="white-space: nowrap; font-size: 11px;">
+                                    ৳{{ number_format($raised) }} raised of ৳{{ number_format($goal) }}
                                 </small>
                             </div>
                         </div>
@@ -131,6 +127,5 @@
 
     </div>
 </div>
-
 
 @endsection

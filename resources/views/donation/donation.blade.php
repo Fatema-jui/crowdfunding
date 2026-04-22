@@ -24,14 +24,14 @@
             <td>{{$donation->donor_id}}</td>
             <td>{{$donation->amount}}</td>
             <td>{{$donation->payment_method}}</td>
-            <td>{{$donation->transaction_id}}</td>
             <td>{{$donation->donation_date}}</td>
+            <td>{{$donation->transaction_id}}</td>
             <td>{{$donation->status}}</td>
             <td>
                  <div class="btn-group" role="group" style="gap:5px;">
-                <a href="" class="btn btn-primary btn-sm">View</a>
+                <a href="{{ route('donation.view', $donation->id) }}" class="btn btn-primary btn-sm">View</a>
                 <a href="" class="btn btn-warning btn-sm">Edit</a>
-                <a href="" class="btn btn-danger btn-sm">Delete</a>               
+                <a href="{{ route('donation.delete', $donation->id) }}" class="btn btn-danger btn-sm">Delete</a>               
             </div>
             </td>
         </tr>

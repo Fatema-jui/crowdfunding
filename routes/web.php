@@ -86,6 +86,9 @@ Route::get('/donor/delete/{id}',[DonorController::class , 'donordelete'])->name(
 Route::get('/donation',[DonationController::class,'donationindex'])->name('donation');
 Route::get('/donation/donationform',[DonationController::class,'donationform'])->name('donation.form');
 Route::post('/donation/donationsubmit',[DonationController::class,'donationsubmit'])->name('donation.submit');
+Route::get('/donation/view/{id}',[DonationController::class,'donationview'])->name('donation.view');
+Route::get('/donation/delete/{id}',[DonationController::class,'donationdelete'])->name('donation.delete');
+
 
 
 
@@ -105,15 +108,19 @@ Route::get('/example2', [SslCommerzPaymentController::class, 'exampleHostedCheck
 Route::post('/pay', [SslCommerzPaymentController::class, 'index'])->name('donate.pay');
 Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
 
-Route::post('/success', [SslCommerzPaymentController::class, 'success']);
-Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
-Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+Route::match(['get', 'post'], '/success', [SslCommerzPaymentController::class, 'success']);
+Route::match(['get', 'post'], '/fail', [SslCommerzPaymentController::class, 'fail']);
+Route::match(['get', 'post'], '/cancel', [SslCommerzPaymentController::class, 'cancel']);
 
 Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
 //SSLCOMMERZ END
 
 Route::get('/payment/success', function () {
-    return view('frontend.pages.payment.success');
+
+    $donation = \App\Models\Donation::latest()->first();
+
+    return view('frontend.pages.payment.success', compact('donation'));
+
 })->name('payment.success');
 
 Route::post('/crowdfunding/logout', [AuthController::class, 'logout'])->name('logout');

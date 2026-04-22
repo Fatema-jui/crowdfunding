@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class UserController extends Controller
@@ -19,20 +20,19 @@ class UserController extends Controller
     
     }
 
-    public function usersubmit(Request $request){
-        User::create([
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'phone'=>$request->phone,
-            'password'=>$request->password,
-            'role'=>$request->role,
-            'address'=>$request->address,
-            'image'=>$request->image,
-            'status'=>$request->status
-
-        ]);
-        return redirect()->route('user');
-
-
+   public function usersubmit(Request $request){
+    User::create([
+        'name'     => $request->name,
+        'email'    => $request->email,
+        'phone'    => $request->phone,
+        'password' => Hash::make($request->password),  
+        'role'     => $request->role ?? 'user',        
+        'address'  => $request->address,
+        'image'    => $request->image,
+        'status'   => $request->status
+    ]);
+    return redirect()->route('user');
+      
     }
 }
+     

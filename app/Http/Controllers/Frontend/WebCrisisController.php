@@ -31,7 +31,7 @@ class WebCrisisController extends Controller
 
         // Search filter
         if ($request->search) {
-            $query->where('title', 'like', '%' . $request->search . '%');
+            $query->where('crisis_title', 'like', '%' . $request->search . '%');
         }
 
         $crises     = $query->latest()->get();
