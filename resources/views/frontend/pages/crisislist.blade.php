@@ -85,7 +85,7 @@
 
                             {{-- Progress bar --}}
                             @php
-                                $raised  = $crisis->donations->where('status', 'completed')->sum('amount');
+                                $raised  = $crisis->donations->sum('amount');
                                 $goal    = $crisis->target_amount ?? 0;
                                 $percent = ($goal > 0) ? min(100, ($raised / $goal) * 100) : 0;
                             @endphp
@@ -97,7 +97,8 @@
                                     </div>
                                 </div>
                                 <small class="text-muted" style="white-space: nowrap; font-size: 11px;">
-                                    ৳{{ number_format($raised) }} raised of ৳{{ number_format($goal) }}
+                                    {{ number_format($percent, 0) }}% complete •
+                                    BDT{{ number_format($raised) }} raised of BDT{{ number_format($goal) }}
                                 </small>
                             </div>
                         </div>

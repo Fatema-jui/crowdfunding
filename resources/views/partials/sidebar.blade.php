@@ -105,11 +105,17 @@
                         <hr class="my-3">
                         <ul class="nav flex-column mb-auto">
                             
-                            <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2" href="#"> <svg class="bi" aria-hidden="true">
-                                        <use xlink:href="#door-closed"></use>
-                                    </svg>
-                                    Sign out
-                                </a> </li>
+                            <li class="nav-item">
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="nav-link d-flex align-items-center gap-2 border-0 bg-transparent w-100">
+                                        <svg class="bi" aria-hidden="true">
+                                            <use xlink:href="#door-closed"></use>
+                                        </svg>
+                                        Sign out
+                                    </button>
+                                </form>
+                            </li>
                         </ul>
                     </div>
                 </div>

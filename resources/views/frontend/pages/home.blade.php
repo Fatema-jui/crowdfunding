@@ -38,7 +38,7 @@
                  style="border-top: 3px solid #0d6efd;">
                 <div class="card-body py-4">
                     <div class="fs-2 mb-2">💰</div>
-                    <h3 class="fw-bold text-primary mb-1">৳{{ number_format($totalDonated, 2) }}</h3>
+                    <h3 class="fw-bold text-primary mb-1">BDT {{ number_format($totalDonated, 2) }}</h3>
                     <p class="text-muted mb-0">Total Donated</p>
                 </div>
             </div>
@@ -143,7 +143,7 @@
                 <div class="px-3 pt-2">
                     <div class="d-flex justify-content-between small text-muted mb-1">
                         <span>{{ number_format($progress, 0) }}% complete</span>
-                        <span>৳{{ number_format($raised, 2) }} raised</span>
+                        <span>BDT {{ number_format($raised, 2) }} raised</span>
                     </div>
                     <div class="progress mb-2" style="height: 6px;">
                         <div class="progress-bar" style="width: {{ $progress }}%;"></div>

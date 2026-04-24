@@ -9,9 +9,9 @@ use App\Models\Crisis;
 class CrisisController extends Controller
 {
     public function crisisindex(){
-        $crises= Crisis::all();
-        return view ('crisis.crisis',compact('crises'));
-    }
+    $crises = Crisis::withSum('donations', 'amount')->get();  
+    return view('crisis.crisis', compact('crises'));
+}
 
 
     public function crisisform(){

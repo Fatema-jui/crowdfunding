@@ -41,15 +41,9 @@ Route::get('/crowdfunding/donate-success',[WebDonationController::class,'donateS
 
 
 
-
-
-
-
-
-
 //Admin panel
+Route::group(['middleware' => ['auth', 'admin']], function(){
 Route::get('/dashboard',[AdminController::class,'dashboardindex'])->name('dashboard');
-
 
 
 Route::get('/user',[UserController::class,'userindex'])->name('user');
@@ -101,6 +95,7 @@ Route::get('/volunteer/delete/{id}',[VolunteerController::class,'volunteerdelete
 
 Route::get('report',[ReportController::class,'index'])->name('report');
 Route::get('/setting',[BusinessSettingController::class,'settingindex'])->name('business.setting');
+});
 // SSLCOMMERZ Start
 Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
 Route::get('/example2', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);

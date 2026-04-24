@@ -19,17 +19,14 @@ class WebCrisisController extends Controller
         return view('frontend.pages.details', compact('crisis'));
     }
 
-    // Crisis list page — নতুন add করো
     public function crisisList(Request $request)
     {
-        $query = Crisis::with('category');
+        $query = Crisis::with(['category', 'donations']);  // ✅ donations যোগ করুন
 
-        // Category filter
         if ($request->category) {
             $query->where('category_id', $request->category);
         }
 
-        // Search filter
         if ($request->search) {
             $query->where('crisis_title', 'like', '%' . $request->search . '%');
         }

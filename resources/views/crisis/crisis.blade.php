@@ -11,6 +11,8 @@
             <th Scope="col">Crisis Name</th>
             <th Scope="col">Description</th>
             <th Scope="col">Image</th>
+            <th Scope="col">Target Amount</th>
+            <th Scope="col">Raised Amount</th>
             <th Scope="col">Status</th>
         </tr>
 </thead>
@@ -28,7 +30,8 @@
                  <span>No Image</span>
              @endif
          </td>
-
+         <td>BDT {{ number_format($crisis->target_amount, 2) }}</td>
+         <td>BDT {{ number_format($crisis->donations_sum_amount ?? 0, 2) }}</td>
         <td>{{$crisis->status}}</td>
         <td>
             <div class="btn-group" role="group" style="gap:5px;">

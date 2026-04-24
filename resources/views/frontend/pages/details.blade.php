@@ -30,6 +30,7 @@
                 $raised = $crisis->donations_sum_amount ?? 0;
                 $goal = $crisis->target_amount ?? 0;
                 $progress = $goal > 0 ? min(100, ($raised / $goal) * 100) : 0;
+                $isFull = $raised >= $goal && $goal > 0;  // 
             @endphp
 
             {{-- Crisis Title --}}
@@ -41,17 +42,19 @@
             {{-- Progress Card --}}
             <div class="card p-3 mt-4">
                 <div class="d-flex justify-content-between mb-1">
-                    <strong>৳{{ number_format($raised, 2) }} raised</strong>
-                    <span class="text-muted">Goal: ৳{{ number_format($goal, 2) }}</span>
+                    <strong>BDT {{ number_format($raised, 2) }} raised</strong>
+                    <span class="text-muted">Goal: BDT {{ number_format($goal, 2) }}</span>
                 </div>
                 <div class="progress mb-2" style="height: 10px;">
                     <div class="progress-bar bg-success"
                          style="width: {{ $progress }}%;">
                     </div>
                 </div>
-                <small class="text-muted">
-                    {{ $crisis->donations_count ?? 0 }} donors
-                </small>
+                <div class="d-flex justify-content-between">
+                    <small class="text-muted">{{ $crisis->donations_count ?? 0 }} donors</small>
+                    <small class="fw-medium" style="color:#0f766e">{{ number_format($progress, 1) }}% complete</small>
+                </div>
+
                 @if($crisis->deadline_date)
                     <br><small class="text-muted">Deadline: {{ \Carbon\Carbon::parse($crisis->deadline_date)->format('M d, Y') }}</small>
                 @endif
@@ -83,7 +86,7 @@
                             <button type="button"
                                     class="btn btn-outline-primary btn-sm"
                                     onclick="document.getElementById('amount').value='{{ $amt }}'">
-                                ৳{{ $amt }}
+                                BDT {{ number_format($amt) }}
                             </button>
                         @endforeach
                     </div>
@@ -101,9 +104,9 @@
 
                     <button type="submit"
                             class="btn w-100 py-2 fw-semibold"
-                            style="background-color: #0f766e; color: #fff;"
-                            @guest disabled @endguest>
-                        Confirm Donation
+                            style="background-color: {{ $isFull ? '#6b7280' : '#0f766e' }}; color: #fff;"
+                            {{ $isFull || auth()->guest() ? 'disabled' : '' }}>
+                        {{ $isFull ? 'Target Reached!' : 'Confirm Donation' }}
                     </button>
 
                 </form>

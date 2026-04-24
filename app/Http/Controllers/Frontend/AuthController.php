@@ -68,8 +68,14 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()
-                  ->route('website')
+
+            if(Auth::user()->role == 'admin') {
+                return redirect()->route('dashboard')
+                       ->with('success', 'Welcome Admin!');
+            }
+
+            $redirect = $request->input('redirect');
+            return redirect($redirect ?: route('website'))
                    ->with('success', 'Login successful!');
         }
 
@@ -84,7 +90,7 @@ public function logout(Request $request)
     Auth::logout();
     $request->session()->invalidate();
     $request->session()->regenerateToken();
-    return redirect()->route('show.login');
+    return redirect()->route('website');  
 }
 
 }
