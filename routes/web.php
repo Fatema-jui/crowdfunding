@@ -37,6 +37,7 @@ Route::get('/crowdfunding/crisislist',[WebCrisisController::class,'crisisList'])
 Route::get('/crowdfunding/detailspage/{id}',[WebCrisisController::class,'detailsShow'])->name('crisis.details');
 Route::get('/crowdfunding/expense-page/{id}',[WebCrisisController::class,'expenseShow'])->name('crisis.expense');
 
+Route::get('/crowdfunding/volunteerlist',[WebVolunteerController::class,'volunteerList'])->name('volunteer.list');
 Route::get('/crowdfunding/volunteerform',[WebVolunteerController::class,'volunteerForm'])->name('webvolunteer.form');
 Route::post('/crowdfunding/volunteersubmit',[WebVolunteerController::class,'volunteerSubmit'])->name('webvolunteer.submit');
 

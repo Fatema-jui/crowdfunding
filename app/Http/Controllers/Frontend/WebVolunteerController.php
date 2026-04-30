@@ -37,4 +37,18 @@ class WebVolunteerController extends Controller
             return redirect()->route('webvolunteer.form')->with('success', 'Your volunteer application has been submitted successfully!');
         }
 
+    public function volunteerList(){
+
+    $volunteers = Volunteer::where('status', 'approved')->latest()->get();
+    
+    $totalApproved = Volunteer::where('status', 'approved')->count();
+    $activeAreas = Volunteer::where('status', 'approved')
+                    ->whereNotNull('address')
+                    ->distinct('address')
+                    ->count('address');
+
+    return view('frontend.pages.volunteer.volunteerlist', 
+        compact('volunteers', 'totalApproved', 'activeAreas'));
+    }
+
 }

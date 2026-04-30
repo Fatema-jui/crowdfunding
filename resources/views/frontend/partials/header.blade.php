@@ -20,7 +20,7 @@
                     <a class="nav-link" href="{{ route('crisis.list') }}">Our Crisis</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Volunteer</a>
+                    <a class="nav-link" href="{{ route('volunteer.list')}}">Volunteer</a>
                 </li>
             </ul>
 
