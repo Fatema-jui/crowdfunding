@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Crisis extends Model
 {
+    
     protected $guarded = [];
 
     public function category()
@@ -16,5 +17,9 @@ class Crisis extends Model
     public function donations()
     {
         return $this->hasMany(Donation::class, 'crisis_id');
+    }
+    public function volunteers()
+    {
+    return $this->belongsToMany(Volunteer::class, 'crisis_volunteer', 'crisis_id', 'volunteer_id');
     }
 }

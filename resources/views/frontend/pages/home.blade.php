@@ -2,43 +2,45 @@
 @section('content')
 
 {{-- ── HERO ─────────────────────────────────────── --}}
-
-        <div class="mx-auto rounded shadow mb-4 position-relative overflow-hidden"
-             style="max-width: 1620px; height: 728px; background: url('{{ asset('images/hero.jpg') }}') center/cover no-repeat;">
-            <div class="position-absolute top-0 start-0 w-100 h-100"
-                 style="background: rgba(0, 0, 0, 0.45);"></div>
-            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white px-4">
-                <h1 class="display-5 fw-bold text-center mb-3" style="max-width: 680px;">
-                    Help People in Need. <br>
-                    Support &amp; Make a Difference.
-                </h1>
-                <p class="lead text-center mb-4" style="max-width: 620px; opacity: .92;">
-                    Join thousands of donors helping communities recover from floods, fires, and other emergencies across Bangladesh.
-                </p>
-                <div class="d-flex justify-content-center flex-wrap" style="gap: 1rem; z-index: 1;">
-                    <a href="{{ route('crisis.list')}}" class="btn btn-light btn-lg px-4 fw-semibold">
-                        Donate Now
-                    </a>
-                    <a href="#" class="btn btn-outline-light btn-lg px-4">
-                        Become a Volunteer
-                    </a>
-                </div>
-            </div>
+<div class="mx-auto rounded shadow mb-4 position-relative overflow-hidden"
+     style="max-width: 1620px; height: 728px; background: url('{{ asset('images/hero.jpg') }}') center/cover no-repeat;">
+    
+    <div class="position-absolute top-0 start-0 w-100 h-100"
+         style="background: rgba(0,0,0,0.45);"></div>
+    
+    <div class="position-absolute top-0 start-0 w-100 h-100 
+                d-flex flex-column justify-content-center align-items-center text-white px-4">
+        <h1 class="display-5 fw-bold text-center mb-3" style="max-width: 680px;">
+            Help People in Need. <br>
+            Support &amp; Make a Difference.
+        </h1>
+        <p class="lead text-center mb-4" style="max-width: 620px; opacity:.92;">
+            Join thousands of donors helping communities recover from floods, fires,
+            and other emergencies across Bangladesh.
+        </p>
+        <div class="d-flex justify-content-center flex-wrap" style="gap:1rem; z-index:1;">
+            <a href="{{ route('crisis.list') }}" class="btn btn-light btn-lg px-4 fw-semibold">
+                Donate Now
+            </a>
+            <a href="{{ route('webvolunteer.form') }}" class="btn btn-outline-light btn-lg px-4">
+                Become a Volunteer
+            </a>
         </div>
-
     </div>
 </div>
 
-{{-- ── STATS — 3 আলাদা card ──────────────────────── --}}
+{{-- ── STATS ───────────────────────────────────── --}}
 <div class="container my-4">
     <div class="row g-3">
 
         <div class="col-md-4">
-            <div class="card text-center shadow-sm h-100" 
+            <div class="card text-center shadow-sm h-100"
                  style="border-top: 3px solid #0d6efd;">
                 <div class="card-body py-4">
                     <div class="fs-2 mb-2">💰</div>
-                    <h3 class="fw-bold text-primary mb-1">BDT {{ number_format($totalDonated, 2) }}</h3>
+                    <h3 class="fw-bold text-primary mb-1">
+                        BDT {{ number_format($totalDonated, 2) }}
+                    </h3>
                     <p class="text-muted mb-0">Total Donated</p>
                 </div>
             </div>
@@ -69,60 +71,51 @@
     </div>
 </div>
 
-
-{{-- ── CATEGORY CARDS ─────────────────────────── --}}
+{{-- ── CATEGORY CARDS ──────────────────────────── --}}
 <div class="container my-4">
     <h5 class="mb-3">Browse by Category</h5>
     <div class="row row-cols-2 row-cols-md-4 g-3">
         @foreach($categories as $category)
-            <div class="col">
-                {{-- DYNAMIC: route add korte hobe — route('crises.index', ['category' => $cat->id]) --}}
-                <a href="#" class="text-decoration-none">
-                    <div class="card text-center h-100">
-                        {{-- DYNAMIC: $cat->image — apnar image field name onujayi change korben --}}
-                        @if($category->image)
-                            <img src="{{ asset('/category/' . $category->image) }}" 
-                                 class="card-img-top" 
-                                 alt="{{ $category->category_name }}"
-                                 style="height: 150px; object-fit: cover;">
-                        @else
-                            <div style="height: 150px; background: #cccccc; display:flex; align-items:center; justify-content:center;">
-                                <span class="text-muted">No Image</span>
-                            </div>
-                        @endif
-                        <div class="card-body">
-                            <h6 class="card-title mb-0">{{ $category->category_name }}</h6>
+        <div class="col">
+            {{-- ✅ Fix: # এর বদলে real route --}}
+            <a href="{{ route('crisis.list', ['category' => $category->id]) }}"
+               class="text-decoration-none">
+                <div class="card text-center h-100">
+                    @if($category->image)
+                        <img src="{{ asset('category/' . $category->image) }}"
+                             class="card-img-top"
+                             alt="{{ $category->category_name }}"
+                             style="height: 150px; object-fit: cover;">
+                    @else
+                        <div style="height:150px; background:#ccc; 
+                                    display:flex; align-items:center; justify-content:center;">
+                            <span class="text-muted">No Image</span>
                         </div>
+                    @endif
+                    <div class="card-body">
+                        <h6 class="card-title mb-0">{{ $category->category_name }}</h6>
                     </div>
-                </a>
-            </div>
+                </div>
+            </a>
+        </div>
         @endforeach
     </div>
 </div>
-
 
 {{-- ── CRISIS CARDS ─────────────────────────────── --}}
 <div class="container mb-5">
 
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h5 class="mb-0">Active Crisis Campaigns</h5>
-        {{-- DYNAMIC: href — route('crises.index') --}}
-        <a href="{{ route('crisis.list')}}" class="btn btn-outline-primary btn-sm">See All →</a>
+        <a href="{{ route('crisis.list') }}" class="btn btn-outline-primary btn-sm">
+            See All →
+        </a>
     </div>
 
     <div class="row g-4">
-
-        {{-- DYNAMIC: এখানে $categories র বদলে $crises loop দিবে
-             Controller এ: $crises = Crisis::latest()->take(6)->get();
-             তখন $cat এর বদলে $crisis ব্যবহার করবে --}}
-
         @foreach($crises as $crisis)
-        @php
-            $raised = $crisis->donations_sum_amount ?? 0;
-            $goal = $crisis->target_amount ?? 0;
-            $progress = $goal > 0 ? min(100, ($raised / $goal) * 100) : 0;
-        @endphp
 
+        {{-- ✅ @php block নেই — controller থেকে আসছে --}}
         <div class="col-md-4">
             <div class="card h-100 shadow-sm">
 
@@ -133,20 +126,22 @@
                          style="height: 180px; object-fit: cover;"
                          alt="{{ $crisis->crisis_title }}">
                 @else
-                    <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center"
+                    <div class="card-img-top bg-secondary d-flex align-items-center
+                                justify-content-center"
                          style="height: 180px;">
                         <span class="text-white">No Image</span>
                     </div>
                 @endif
 
-                {{-- Progress bar on image bottom --}}
+                {{-- Progress bar --}}
                 <div class="px-3 pt-2">
                     <div class="d-flex justify-content-between small text-muted mb-1">
-                        <span>{{ number_format($progress, 0) }}% complete</span>
-                        <span>BDT {{ number_format($raised, 2) }} raised</span>
+                        <span>{{ number_format($crisis->percent, 0) }}% complete</span>
+                        <span>BDT {{ number_format($crisis->raised, 2) }} raised</span>
                     </div>
                     <div class="progress mb-2" style="height: 6px;">
-                        <div class="progress-bar" style="width: {{ $progress }}%;"></div>
+                        <div class="progress-bar bg-success"
+                             style="width: {{ $crisis->percent }}%;"></div>
                     </div>
                 </div>
 
@@ -156,24 +151,24 @@
                     </span>
 
                     <h6 class="card-title">{{ $crisis->crisis_title }}</h6>
-                    <p class="text-truncate mb-3">{{ $crisis->description }}</p>
+                    <p class="text-truncate text-muted mb-3">{{ $crisis->description }}</p>
 
                     <div class="d-flex justify-content-between align-items-center mt-3">
-                        <small class="text-muted">{{ $crisis->donations_count ?? 0 }} donors</small>
-                        <a href="{{ route('crisis.details', $crisis->id) }}" class="btn btn-primary btn-sm">view</a>
+                        <small class="text-muted">
+                            {{ $crisis->donations_count ?? 0 }} donors
+                        </small>
+                        <a href="{{ route('crisis.details', $crisis->id) }}"
+                           class="btn btn-primary btn-sm">
+                            View
+                        </a>
                     </div>
                 </div>
 
             </div>
         </div>
         @endforeach
-
     </div>
 </div>
-
-
-
-
 
 {{-- ── CTA BANNER ───────────────────────────────── --}}
 <div class="bg-light py-4">
@@ -184,13 +179,12 @@
                 <h5 class="fw-bold mb-1">Helping the Homeless, Hungry & Hurting Children</h5>
                 <p class="text-muted mb-0 small">Your small contribution can change a life.</p>
             </div>
-            {{-- DYNAMIC: href — route('crises.index') --}}
-            <a href="#" class="btn btn-primary">Donate Now</a>
+            {{-- ✅ Fix: # এর বদলে real route --}}
+            <a href="{{ route('crisis.list') }}" class="btn btn-primary">
+                Donate Now
+            </a>
         </div>
     </div>
 </div>
-
-
-
 
 @endsection

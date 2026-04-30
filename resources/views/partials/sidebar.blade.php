@@ -71,6 +71,14 @@
                                 </a> 
                             </li>
 
+                            <li class="nav-item">   
+                             <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{ route('expense')}}"> <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#house-fill"></use>
+                                    </svg>
+                                    Expense
+                                </a> 
+                            </li>
+
 
                             <li class="nav-item">   
                              <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{ route('report')}}"> <svg class="bi" aria-hidden="true">
@@ -79,29 +87,9 @@
                                     Report
                                 </a> 
                             </li>
-
-
-                            <!--<li class="nav-item">   
-                             <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href=""> <svg class="bi" aria-hidden="true">
-                                        <use xlink:href="#house-fill"></use>
-                                    </svg>
-                                    Admin User
-                                </a> 
-                            </li>-->
-
-
-                            <li class="nav-item">   
-                             <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href=""> <svg class="bi" aria-hidden="true">
-                                        <use xlink:href="#house-fill"></use>
-                                    </svg>
-                                    Settings
-                                </a> 
-                            </li>
-                            
                             
                         </ul>
                        
-                        
                         <hr class="my-3">
                         <ul class="nav flex-column mb-auto">
                             

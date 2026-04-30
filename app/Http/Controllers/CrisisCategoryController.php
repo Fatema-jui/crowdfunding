@@ -69,9 +69,6 @@ class CrisisCategoryController extends Controller
 }
 
 
-
-
-
    public function categorydelete($id){
 
     $category=Category::find($id);

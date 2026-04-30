@@ -57,7 +57,7 @@ class WebDonationController extends Controller
         }
 
         $donation = session('donation');
-        return view('frontend.pages.donation.success', compact('donation'));
+        return view('frontend.pages.payment.success', compact('donation'));
     }
 }
 

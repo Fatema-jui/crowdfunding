@@ -8,39 +8,34 @@
     <table class="table table-striped table-hover">
         <thead>
             <tr>
-                <th Scope="col">#</th>
-                <th Scope="col">Name</th>
-                <th Scope="col">Email</th>
-                <th Scope="col">Phone</th>
-                <th Scope="col">Role</th>
-                <th Scope="col">Status</th>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Role</th>
+                <th scope="col">Action</th>  {{-- একটাই Action কলাম --}}
             </tr>
         </thead>
         <tbody>
-            @foreach($users as $user)
+            @foreach($users as $index => $user)
             <tr>
-                <td Scope="row">{{$user->id}}</td>
-                <td>{{$user->name}}</td>
-                <td>{{$user->email}}</td>
-                <td>{{$user->phone}}</td>
+                <td>{{ $index + 1 }}</td>
+                <td>{{ $user->name }}</td>
+                <td>{{ $user->email }}</td>
+                <td>{{ $user->phone }}</td>
                 <td>
-                
                     @if($user->role == 'donor')
-                   <span class="badge bg-success">Donor</span>
+                        <span class="badge bg-success">Donor</span>
                     @elseif($user->role == 'admin')
-                    <span class="badge bg-danger">Admin</span>
+                        <span class="badge bg-danger">Admin</span>
                     @else
-                     <span class="badge bg-secondary">User</span>
+                        <span class="badge bg-secondary">User</span>
                     @endif
-
                 </td>
-                <td>{{$user->status}}</td>
-                <td>
-                    <div class="btn-group" role="group" style="gap:5px;">
-                        <a href="" class="btn btn-primary btn-sm">View</a> 
-                        <a href="" class="btn btn-warning btn-sm">Edit</a>
-                        <a href="" class="btn btn-danger btn-sm">Delete</a>
-                    </div>
+                <td>  {{-- ✅ Button গুলো এই একটা td তে --}}
+                    <a href="{{ route('user.view', $user->id) }}" class="btn btn-primary btn-sm">View</a>
+                    <a href="" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{{ route('user.delete', $user->id) }}" class="btn btn-danger btn-sm" >Delete</a>
                 </td>
             </tr>
             @endforeach

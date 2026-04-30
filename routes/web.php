@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\AuthController;
 use App\Http\Controllers\Frontend\WebsiteController;
 use App\Http\Controllers\Frontend\WebCrisisController;
+use App\Http\Controllers\Frontend\webVolunteerController;
 use App\Http\Controllers\Frontend\WebDonationController;
 
 
@@ -16,7 +17,7 @@ use App\Http\Controllers\CrisisController;
 use App\Http\Controllers\DonorController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\VolunteerController;
-use App\Http\Controllers\BusinessSettingController;
+use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SslCommerzPaymentController;
 
@@ -31,8 +32,14 @@ Route::get('/crowdfunding/login',[AuthController::class,'showLogin'])->name('sho
 Route::post('/crowdfunding/loginsubmit',[AuthController::class,'loginSubmit'])->name('login.submit');
 
 Route::get('/crowdfunding',[WebsiteController::class,'websiteindex'])->name('website');
+
 Route::get('/crowdfunding/crisislist',[WebCrisisController::class,'crisisList'])->name('crisis.list');
 Route::get('/crowdfunding/detailspage/{id}',[WebCrisisController::class,'detailsShow'])->name('crisis.details');
+Route::get('/crowdfunding/expense-page/{id}',[WebCrisisController::class,'expenseShow'])->name('crisis.expense');
+
+Route::get('/crowdfunding/volunteerform',[WebVolunteerController::class,'volunteerForm'])->name('webvolunteer.form');
+Route::post('/crowdfunding/volunteersubmit',[WebVolunteerController::class,'volunteerSubmit'])->name('webvolunteer.submit');
+
 
 Route::post('/crowdfunding/donate',[WebDonationController::class,'donateStore'])->name('donate.store');
 Route::get('/crowdfunding/donate-success',[WebDonationController::class,'donateSuccess'])->name('donate.success');
@@ -49,6 +56,10 @@ Route::get('/dashboard',[AdminController::class,'dashboardindex'])->name('dashbo
 Route::get('/user',[UserController::class,'userindex'])->name('user');
 Route::get('/user/userform',[UserController::class,'userform'])->name('user.form');
 Route::post('/user/usersubmit',[UserController::class,'usersubmit'])->name('user.submit');
+Route::get('/user/view/{id}',[UserController::class,'userview'])->name('user.view');
+Route::get('/user/edit/{id}', [UserController::class,'useredit'])->name('user.edit');
+Route::put('/user/update/{id}', [UserController::class, 'userupdate'])->name('user.update');
+Route::get('/user/delete/{id}',[UserController::class,'userdelete'])->name('user.delete');
 
 
 Route::get('/crisiscategory',[CrisisCategoryController::class,'categoryindex'])->name('crisis.category');
@@ -68,7 +79,13 @@ Route::get('/crisis/view/{id}',[CrisisController::class,'crisisview'])->name('cr
 Route::get('/crisis/edit/{id}', [CrisisController::class,'edit'])->name('crisis.edit');
 Route::put('/crisis/update/{id}', [CrisisController::class, 'update'])->name('crisis.update');
 Route::get('/crisis/delete/{id}',[CrisisController::class,'crisisdelete'])->name('crisis.delete');
+Route::get('/crisis/volunteer-delete/{crisis_id}/{volunteer_id}', [CrisisController::class, 'volunteerDelete'])->name('crisis.volunteer.delete');
 
+Route::get('/expense',[ExpenseController::class,'expenseindex'])->name('expense');
+Route::get('/expense/expenseform',[ExpenseController::class,'expenseform'])->name('expense.form');
+Route::post('/expense/expensesubmit',[ExpenseController::class,'expensesubmit'])->name('expense.submit');
+Route::post('/expense/approve/{id}',[ExpenseController::class,'approve'])->name('expense.approve');
+Route::post('/expense/reject/{id}',[ExpenseController::class,'reject'])->name('expense.reject');
 
 
 Route::get('/donor',[DonorController::class,'donorindex'])->name('donor');
@@ -89,12 +106,17 @@ Route::get('/donation/delete/{id}',[DonationController::class,'donationdelete'])
 Route::get('/volunteer',[VolunteerController::class,'volunteerindex'])->name('volunteer');
 Route::get('/volunteer/volunteerform',[VolunteerController::class,'volunteerform'])->name('volunteer.form');
 Route::post('/volunteer/volunteersubmit',[VolunteerController::class,'volunteersubmit'])->name('volunteer.submit');
+Route::post('/volunteer/approve/{id}',[VolunteerController::class,'approve'])->name('volunteer.approve');
+Route::post('/volunteer/reject/{id}',[VolunteerController::class,'reject'])->name('volunteer.reject');
+
 Route::get('/volunteer/view/{id}',[VolunteerController::class,'volunteerview'])->name('volunteer.view');
 Route::get('/volunteer/delete/{id}',[VolunteerController::class,'volunteerdelete'])->name('volunteer.delete');
 
 
-Route::get('report',[ReportController::class,'index'])->name('report');
-Route::get('/setting',[BusinessSettingController::class,'settingindex'])->name('business.setting');
+Route::get('/report',[ReportController::class,'index'])->name('report');
+Route::get('/report/generate', [ReportController::class, 'generate'])->name('report.generate');
+Route::get('/report/export', [ReportController::class, 'export'])->name('report.export');
+ 
 });
 // SSLCOMMERZ Start
 Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);

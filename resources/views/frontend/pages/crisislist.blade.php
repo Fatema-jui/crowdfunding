@@ -26,10 +26,10 @@
         <div class="col-md-4">
             <select name="category" class="form-select">
                 <option value="">All Categories</option>
-                @foreach($categories as $cat)
-                    <option value="{{ $cat->id }}"
-                        {{ request('category') == $cat->id ? 'selected' : '' }}>
-                        {{ $cat->category_name }}
+                @foreach($categories as $catagory)
+                    <option value="{{ $catagory->id }}"
+                        {{ request('category') == $catagory->id ? 'selected' : '' }}>
+                        {{ $catagory->category_name }}
                     </option>
                 @endforeach
             </select>
@@ -61,7 +61,7 @@
                                 <img src="{{ asset('crises/' . $crisis->image) }}"
                                      class="img-fluid rounded"
                                      style="height: 80px; width: 100%; object-fit: cover;"
-                                     alt="{{ $crisis->title }}">
+                                     alt="{{ $crisis->crisis_title }}">
                             @else
                                 <div class="bg-secondary rounded d-flex align-items-center
                                             justify-content-center"
@@ -79,39 +79,49 @@
                                 </span>
                             </div>
 
+                            {{-- Crisis Title --}}
+                            <h6 class="fw-semibold mb-1">{{ $crisis->crisis_title }}</h6>
+
+                            {{-- Description --}}
                             <p class="text-muted small mb-2">
                                 {{ Str::limit($crisis->description, 100) }}
                             </p>
 
-                            {{-- Progress bar --}}
-                            @php
-                                $raised  = $crisis->donations->sum('amount');
-                                $goal    = $crisis->target_amount ?? 0;
-                                $percent = ($goal > 0) ? min(100, ($raised / $goal) * 100) : 0;
-                            @endphp
-
+                            {{-- Progress bar — controller থেকে আসা value --}}
                             <div class="d-flex align-items-center gap-2">
                                 <div class="progress flex-grow-1" style="height: 6px;">
                                     <div class="progress-bar bg-success"
-                                         style="width: {{ $percent }}%;">
+                                         style="width: {{ $crisis->percent }}%;">
                                     </div>
                                 </div>
-                                <small class="text-muted" style="white-space: nowrap; font-size: 11px;">
-                                    {{ number_format($percent, 0) }}% complete •
-                                    BDT{{ number_format($raised) }} raised of BDT{{ number_format($goal) }}
+                                <small class="text-muted"
+                                       style="white-space: nowrap; font-size: 11px;">
+                                    {{ number_format($crisis->percent, 0) }}% complete •
+                                    BDT{{ number_format($crisis->raised) }} raised of
+                                    BDT{{ number_format($crisis->goal) }}
                                 </small>
                             </div>
+
+                            {{-- Donors count --}}
+                            <small class="text-muted mt-1 d-block">
+                                {{ $crisis->donations_count ?? 0 }} donors
+                            </small>
                         </div>
 
                         {{-- Button --}}
-                        <div class="col-md-2 text-end">
-                            <a href="{{ route('crisis.details', $crisis->id) }}"
-                               class="btn btn-sm fw-semibold"
-                               style="background-color: #0f766e; color: #fff;">
-                                Details →
+                        <div class="col-md-2 text-end d-flex flex-column gap-2">
+                           <a href="{{ route('crisis.details', $crisis->id) }}"
+                              class="btn btn-sm fw-semibold"
+                              style="background-color: #0f766e; color: #fff;">
+                              Details →
+                            </a>
+
+                            <a href="{{ route('crisis.expense', $crisis->id) }}"
+                              class="btn btn-sm fw-semibold"
+                              style="background-color: #0f766e; color: #fff;">
+                              Expense →
                             </a>
                         </div>
-
                     </div>
                 </div>
             </div>

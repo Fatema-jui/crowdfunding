@@ -44,6 +44,22 @@ class VolunteerController extends Controller
         $volunteer->delete();
         return redirect()->back();
     }
+
+    public function approve($id){
+        $volunteer = Volunteer::findOrFail($id);
+        $volunteer->status = 'approved';
+        $volunteer->save();
     
+        return redirect()->back()->with('success', 'Volunteer approved successfully.');
+    }
     
+    public function reject($id){
+        $volunteer = Volunteer::findOrFail($id);
+        $volunteer->status = 'rejected';
+        $volunteer->save();
+
+        return redirect()->back()->with('success', 'Volunteer rejected successfully.'); 
+    
+    }
+
 }

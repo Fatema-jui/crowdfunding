@@ -2,45 +2,53 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
-use App\Models\Donation;
-use App\Models\Crisis;
+use App\Models\Expense;
 
 class ReportController extends Controller
 {
-    public function index(Request $request)
+     public function index()
     {
-        $query = Donation::with('donors', 'crises');
+        return view('report.index');
+    }
 
-        // Filter: From Date
-        if ($request->from_date) {
-            $query->whereDate('created_at', '>=', $request->from_date);
-        }
+    public function generate(Request $request)
+    {
+        $request->validate([
+            'from_date' => 'required|date',
+            'to_date'   => 'required|date|after_or_equal:from_date',
+        ]);
 
-        // Filter: To Date
-        if ($request->to_date) {
-            $query->whereDate('created_at', '<=', $request->to_date);
-        }
+        $from_date = $request->from_date;
+        $to_date   = $request->to_date;
 
-        // Filter: Crisis
-        if ($request->crisis_id) {
-            $query->where('crisis_id', $request->crisis_id);
-        }
+        $expenses = Expense::with(['crisis', 'volunteer'])
+            ->whereBetween('date', [$from_date, $to_date])
+            ->get();
 
-        $donations = (clone $query)->latest()->paginate(10);
-
-        $totalAmount = (clone $query)->sum('amount');
-        $totalDonor = (clone $query)->count();
-
-        $crisis = Crisis::all();
+        $total    = $expenses->sum('amount');
+        $approved = $expenses->where('status', 'approved')->count();
+        $pending  = $expenses->where('status', 'pending')->count();
 
         return view('report.index', compact(
-            'donations',
-            'totalAmount',
-            'totalDonor',
-            'crisis'
+            'expenses', 'total', 'approved', 'pending',
+            'from_date', 'to_date'
         ));
     }
-}
 
+
+    public function export(Request $request)
+{
+    $from_date = $request->from_date;
+    $to_date   = $request->to_date;
+
+    $expenses = Expense::with(['crisis', 'volunteer'])
+        ->whereBetween('date', [$from_date, $to_date])
+        ->get();
+
+    $total = $expenses->sum('amount');
+
+    return view('report.export', compact('expenses', 'total', 'from_date', 'to_date'));
+    }
+
+}

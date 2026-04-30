@@ -4,34 +4,29 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Donor;
+use App\Models\User;
 
 class DonorController extends Controller
 {
 
- public function donorindex(Request $request)
- {
-     $donors = Donor::query()
-         ->when($request->search, fn($q) =>
-             $q->where('name', 'like', "%{$request->search}%")
-               ->orWhere('donor_id', 'like', "%{$request->search}%")
-         )
-       
-         
-         ->latest('donation_date')
-         ->paginate(10);
+    public function donorindex(Request $request)
+    {
+        $donors = User::where('role', 'donor')
+            ->latest()
+            ->get();
 
-     $total = Donor::count();
+        $total = User::where('role', 'donor')->count();
 
-     return view('donor.donor', compact('donors', 'total'));
- }
+        return view('donor.donor', compact('donors', 'total'));
+    }
 
- public function donorform()
- {
+    public function donorform()
+    {
     return view ('donor.donorform');
- }
+    }
 
- public function donorsubmit(Request $request)
- {
+    public function donorsubmit(Request $request)
+    {
     Donor::create([
         'name'=>$request->name,
         'email'=>$request->email,
@@ -43,18 +38,18 @@ class DonorController extends Controller
         'status'=>'pending'
     ]);
     return redirect()->route('donor');
- }
+  }
 
- public function donorview($id)
- {
-  $donor = Donor::findOrFail($id);
-  return view('donor.donorview', compact('donor'));
- }
+    public function donorview($id)
+    {
+    $donor = User::findOrFail($id); 
+    return view('donor.donorview', compact('donor'));
+   }
 
- public function donordelete($id)
- {
-  Donor::findOrFail($id)->delete();
-  return redirect()->back();
- }
+   public function donordelete($id)
+   {
+    User::findOrFail($id)->delete();
+    return redirect()->back();
+   }
 
 }

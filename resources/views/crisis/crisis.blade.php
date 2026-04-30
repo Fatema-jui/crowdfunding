@@ -13,6 +13,7 @@
             <th Scope="col">Image</th>
             <th Scope="col">Target Amount</th>
             <th Scope="col">Raised Amount</th>
+            <th Scope="col">Action</th>
             <th Scope="col">Status</th>
         </tr>
 </thead>

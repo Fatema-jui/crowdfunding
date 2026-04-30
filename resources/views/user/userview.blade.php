@@ -1,8 +1,7 @@
 @extends('partials.master')
 @section('content')
-
-<div class="container mt-4">
-    <h3 class="mb-3 text-primary">Donor View</h3>
+<div class="container">
+    <h2 class="mb-3 text-primary">User View</h2>
 
     <div class="card shadow-sm border-0" style="max-width:600px;">
         <div class="card-body p-0">
@@ -11,22 +10,25 @@
                 <tbody>
                     <tr>
                         <th style="width:30%">Name</th>
-                        <td>{{ $donor->name }}</td>
+                        <td>{{ $user->name }}</td>
                     </tr>
 
                     <tr>
                         <th>Email</th>
-                        <td>{{ $donor->email }}</td>
+                        <td>{{ $user->email }}</td>
                     </tr>
 
                     <tr>
                        <th>Phone</th>
-                       <td>{{$donor->phone}}</td>
+                       <td>{{$user->phone}}</td>
+                    </tr>
+
+                    <tr>
+                       <th>Role</th>
+                       <td>{{ ($user->role) }}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
-</div>
-
 @endsection

@@ -27,12 +27,26 @@ class UserController extends Controller
         'phone'    => $request->phone,
         'password' => Hash::make($request->password),  
         'role'     => $request->role ?? 'user',        
-        'address'  => $request->address,
-        'image'    => $request->image,
-        'status'   => $request->status
+        
     ]);
     return redirect()->route('user');
       
     }
+
+    public function userview($id){
+        $user=User::findOrFail($id);
+        return view('user.userview',compact('user'));
+    }
+
+    public function useredit($id){
+        $user=User::findOrFail($id);
+        return view('user.useredit',compact('user'));
+    }
+
+    public function userdelete($id){
+        User::findOrFail($id)->delete();
+        return redirect()->back();
+    }
+
 }
      

@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Http\Controllers\Frontend;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\Crisis;
+use App\Models\Volunteer;
+class WebVolunteerController extends Controller
+{
+    public function volunteerForm(){
+
+        $crisis = Crisis::where('status', 'active')->latest()->first();
+        return view ('frontend.pages.volunteer.volunteer-form',compact('crisis'));
+    }
+
+    public function volunteerSubmit(Request $request){
+        //dd($request->all());
+
+            $request->validate([
+                'volunteer_name' => 'required|string|max:255',
+                'email' => 'required|email|max:255',
+                'phone' => 'required|string|max:20',
+                'message' => 'nullable|string',
+            ]);
+    
+             Volunteer::create([
+            'volunteer_name'=> $request->volunteer_name,
+            'email'   => $request->email,
+            'phone'   => $request->phone,
+            'address' => $request->address,
+            'age'     => $request->age,
+            'gender'  => $request->gender,
+            'message' => $request->message,
+        ]);
+    
+            return redirect()->route('webvolunteer.form')->with('success', 'Your volunteer application has been submitted successfully!');
+        }
+
+}

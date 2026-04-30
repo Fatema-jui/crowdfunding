@@ -65,4 +65,36 @@
     </div>
 </div>
 
+  <!--assign volunteer table-->
+ <div class="card shadow-sm border-0 mt-4" style="max-width:600px;">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Assigned Volunteers</h5>
+        </div>
+        <div class="card-body p-0">
+            <table class="table table-striped mb-0">
+                <thead class="table-info">
+                    <tr>
+                        <th>#</th>
+                        <th>Volunteer Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($crisis->volunteers as $index => $volunteer)
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $volunteer->volunteer_name }}</td>
+                            <td>
+                                <a href="{{ route('crisis.volunteer.delete', ['crisis_id' => $crisis->id, 'volunteer_id' => $volunteer->id]) }}" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
 @endsection
+

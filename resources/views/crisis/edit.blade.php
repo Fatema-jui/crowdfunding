@@ -19,17 +19,26 @@
             <input type="file" name="image" value="{{ $crisis->image }}" class="form-control"><br>
             <input type="number" name="number" value="{{ $crisis->number}}" class="form-control"><br>
             <select name="status" class="form-control">
-            <option value="active" {{ $crisis->status == 'active' ? 'selected' : '' }}>Active</option>
-            <option value="inactive" {{ $crisis->status == 'inactive' ? 'selected' : '' }}>Inactive</option>
-    </select><br>
+                <option value="active" {{ $crisis->status == 'active' ? 'selected' : '' }}>Active</option>
+                <option value="inactive" {{ $crisis->status == 'inactive' ? 'selected' : '' }}>Inactive</option>
+            </select><br>
 
-    <button type="submit" class="btn btn-primary">Update</button>
-</form>
+            <div class="form-group">
+                <select name="volunteer_ids[]" class="form-control" multiple style="height: 150px;">
+                    @foreach($volunteers as $volunteer)
+                        <option value="{{ $volunteer->id }}"
+                            {{ in_array($volunteer->id, $crisis->volunteer_ids ?? []) ? 'selected' : '' }}>
+                            {{ $volunteer->volunteer_name }}
+                        </option>
+                    @endforeach
+                </select>
+            
+            </div><br>
+
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
 
         </div>
     </div>
 </div>
 @endsection
-
-
-
