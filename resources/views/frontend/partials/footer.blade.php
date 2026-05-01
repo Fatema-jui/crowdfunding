@@ -1,47 +1,38 @@
- <footer class="site-footer bg-white">
-      <div class="container">
+<footer class="site-footer bg-dark py-5">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-6">
         <div class="row">
-          <div class="col-md-6">
-            <div class="row">
-              <div class="col-md-7">
-                <h2 class="footer-heading mb-4">About Us</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem modi, quaerat laborum id fugit blanditiis ratione delectus assumenda.</p>
 
-              </div>
-              <div class="col-md-4 ml-auto">
-                <h2 class="footer-heading mb-4">Features</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Testimonials</a></li>
-                  <li><a href="#">Terms of Service</a></li>
-                  <li><a href="#">Privacy</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
-              </div>
-
-            </div>
+          <div class="col-md-7">
+            <h2 class="footer-heading mb-4 text-white">About Us</h2>
+            <p class="text-secondary">CrisisHelp BD is dedicated to connecting people in need with volunteers during times of crisis across Bangladesh.</p>
           </div>
+
           <div class="col-md-4 ml-auto">
-
-            <div class="mb-5">
-              <h2 class="footer-heading mb-4">Subscribe to Newsletter</h2>
-              <form action="#" method="post" class="footer-suscribe-form">
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control rounded-0 border-secondary text-white bg-transparent" placeholder="Enter Email" aria-label="Enter Email" aria-describedby="button-addon2">
-                  <div class="input-group-append">
-                    <button class="btn btn-primary text-white" type="button" id="button-addon2">Subscribe</button>
-                  </div>
-                </div>
-            </div>
-
-
-            <h2 class="footer-heading mb-4">Follow Us</h2>
-            <a href="#about-section" class="smoothscroll pl-0 pr-3"><span class="icon-facebook"></span></a>
-            <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
-            <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
-            <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
-            </form>
+            <h2 class="footer-heading mb-4 text-white">Features</h2>
+            <ul class="list-unstyled">
+              <li><a href="#" class="text-secondary text-decoration-none">Our Crisis</a></li>
+              <li><a href="#" class="text-secondary text-decoration-none">Volunteer</a></li>
+              <li><a href="#" class="text-secondary text-decoration-none">Login</a></li>
+              <li><a href="#" class="text-secondary text-decoration-none">Register</a></li>
+              <li><a href="#" class="text-secondary text-decoration-none">Became a Volunteer</a></li>
+            </ul>
           </div>
+
         </div>
       </div>
-    </footer>
+
+      <div class="col-md-4 ml-auto">
+        <h2 class="footer-heading mb-4 text-white">Contact Us</h2>
+        <ul class="list-unstyled text-secondary">
+          <li class="mb-2">📍 Dhaka, Bangladesh</li>
+          <li class="mb-2">✉️ info@crisishelpbd.com</li>
+          <li class="mb-2">📞 +880 1234-567890</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</footer>
