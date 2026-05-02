@@ -51,7 +51,7 @@ class CrisisController extends Controller
     public function edit($id)
     {
         $crisis = Crisis::findOrFail($id);
-        // শুধু approved volunteer দেখাবে
+        // show approved volunteer 
         $volunteers = Volunteer::where('status', 'approved')->get();
         return view('crisis.edit', compact('crisis', 'volunteers'));
     }
@@ -62,7 +62,7 @@ class CrisisController extends Controller
         //dd($request->all());
         $crisis = Crisis::findOrFail($id);
 
-        $fileName = $crisis->image; // পুরানো image রাখবে
+        $fileName = $crisis->image; 
         if($request->hasFile('image')){
             $file = $request->file('image');
             $fileName = date('Ymdhis').$file->getClientOriginalName();

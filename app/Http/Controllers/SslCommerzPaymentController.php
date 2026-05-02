@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Library\SslCommerz\SslCommerzNotification;
 use App\Models\Donation;
 use App\Models\User;
+use App\Models\Crisis; // Added
 
 class SslCommerzPaymentController extends Controller
 {
@@ -24,7 +25,7 @@ class SslCommerzPaymentController extends Controller
     {
         $donarInfo = User::where('id', auth()->user()->id)->first();
 
-        // Create a unique tran_id (duplicates if crisis_id is given)
+        // Create a unique tran_id
         $uniqueTranId = 'TRX-3940348838-' . uniqid() . '-' . $request->crisis_id;
 
         $post_data = array();
@@ -44,7 +45,7 @@ class SslCommerzPaymentController extends Controller
         $post_data['cus_phone']    = '8801XXXXXXXXX';
         $post_data['cus_fax']      = "";
 
-        // শিপমেন্ট তথ্য
+        // Shipment information
         $post_data['ship_name']     = "Store Test";
         $post_data['ship_add1']     = "Dhaka";
         $post_data['ship_add2']     = "Dhaka";
@@ -59,20 +60,20 @@ class SslCommerzPaymentController extends Controller
         $post_data['product_category'] = "Crowdfunding";
         $post_data['product_profile']  = "non-physical-goods";
 
-        // অপশনাল প্যারামিটার
+        // Optional parameters
         $post_data['value_a'] = "ref001";
         $post_data['value_b'] = "ref002";
         $post_data['value_c'] = "ref003";
         $post_data['value_d'] = "ref004";
 
-        // পেমেন্টের আগে Donation রেকর্ড তৈরি করুন (pending স্ট্যাটাসে)
+        // Create donation record before payment (pending status)
         Donation::create([
             'crisis_id'      => $request->crisis_id,
             'donor_id'       => $donarInfo->id,
             'amount'         => $request->amount,
             'payment_method' => 'online',
             'donation_date'  => today(),
-            'transaction_id' => $uniqueTranId,  // ইউনিক tran_id
+            'transaction_id' => $uniqueTranId,
             'status'         => 'pending'
         ]);
 
@@ -122,7 +123,6 @@ class SslCommerzPaymentController extends Controller
         $post_data['value_c'] = "ref003";
         $post_data['value_d'] = "ref004";
 
-        // Donation::table() ভুল ছিল — সঠিক হলো Donation::where()
         Donation::updateOrInsert(
             ['transaction_id' => $post_data['tran_id']],
             [
@@ -150,13 +150,12 @@ class SslCommerzPaymentController extends Controller
         $sslc = new SslCommerzNotification();
 
         $order_details = Donation::where('transaction_id', $tran_id)
-            ->select('transaction_id', 'status', 'amount')
+            ->select('transaction_id', 'status', 'amount', 'crisis_id') //  crisis_id added
             ->first();
 
-        // রেকর্ড না পেলে crisis list এ ফেরত
         if (!$order_details) {
             return redirect()->route('crisis.list')
-                ->with('error', 'ট্রানজেকশন পাওয়া যায়নি।');
+                ->with('error', 'Transaction not found.');
         }
 
         if ($order_details->status == 'pending') {
@@ -168,21 +167,22 @@ class SslCommerzPaymentController extends Controller
                 Donation::where('transaction_id', $tran_id)
                     ->update(['status' => 'completed']);
 
-                // session এ tran_id রাখুন — payment.success রুটে পাবেন
-                session(['tran_id' => $tran_id]);
+                // Update raised_amount in crisis table
+                Crisis::where('id', $order_details->crisis_id)
+                    ->increment('raised_amount', $order_details->amount);
 
+                session(['tran_id' => $tran_id]);
                 return redirect()->route('payment.success');
             }
 
-            // ভ্যালিডেশন ব্যর্থ হলে
             return redirect()->route('crisis.list')
-                ->with('error', 'পেমেন্ট যাচাই করা সম্ভব হয়নি।');
+                ->with('error', 'Payment validation failed.');
 
         } elseif ($order_details->status == 'completed') {
             return redirect()->route('payment.success');
         } else {
             return redirect()->route('crisis.list')
-                ->with('error', 'অবৈধ ট্রানজেকশন।');
+                ->with('error', 'Invalid transaction.');
         }
     }
 
@@ -196,7 +196,7 @@ class SslCommerzPaymentController extends Controller
 
         if (!$order_details) {
             return redirect()->route('crisis.list')
-                ->with('error', 'ট্রানজেকশন পাওয়া যায়নি।');
+                ->with('error', 'Transaction not found.');
         }
 
         if ($order_details->status == 'pending') {
@@ -204,13 +204,13 @@ class SslCommerzPaymentController extends Controller
                 ->update(['status' => 'failed']);
 
             return redirect()->route('crisis.list')
-                ->with('error', 'পেমেন্ট ব্যর্থ হয়েছে। আবার চেষ্টা করুন।');
+                ->with('error', 'Payment failed. Please try again.');
 
         } elseif ($order_details->status == 'completed') {
             return redirect()->route('payment.success');
         } else {
             return redirect()->route('crisis.list')
-                ->with('error', 'অবৈধ ট্রানজেকশন।');
+                ->with('error', 'Invalid transaction.');
         }
     }
 
@@ -224,7 +224,7 @@ class SslCommerzPaymentController extends Controller
 
         if (!$order_details) {
             return redirect()->route('crisis.list')
-                ->with('error', 'ট্রানজেকশন পাওয়া যায়নি।');
+                ->with('error', 'Transaction not found.');
         }
 
         if ($order_details->status == 'pending') {
@@ -232,13 +232,13 @@ class SslCommerzPaymentController extends Controller
                 ->update(['status' => 'cancelled']);
 
             return redirect()->route('crisis.list')
-                ->with('error', 'পেমেন্ট বাতিল করা হয়েছে।');
+                ->with('error', 'Payment has been cancelled.');
 
         } elseif ($order_details->status == 'completed') {
             return redirect()->route('payment.success');
         } else {
             return redirect()->route('crisis.list')
-                ->with('error', 'অবৈধ ট্রানজেকশন।');
+                ->with('error', 'Invalid transaction.');
         }
     }
 

@@ -15,23 +15,23 @@ class WebsiteController extends Controller
     {
         $categories = Category::take(4)->get();
 
-        // ✅ Logic controller এ — map() দিয়ে
+        
         $crises = Crisis::with('category')
             ->withCount('donations')
             ->withSum('donations', 'amount')
             ->where('status', 'active')
             ->latest()
-            ->get() // আগে সব আনুন
+            ->get() 
             ->filter(function ($crisis) {
-                $raised = $crisis->donations_sum_amount ?? 0;
+                $raised = $crisis->raised_amount ?? 0;
                 $goal   = $crisis->target_amount ?? 0;
                 
-                // target পূরণ হয়নি এমনগুলো রাখবে
+                
                 return $goal <= 0 || $raised < $goal;
             })
-            ->take(3) // filter এর পরে take করুন
+            ->take(3) 
             ->map(function ($crisis) {
-                $raised          = $crisis->donations_sum_amount ?? 0;
+                $raised          = $crisis->raised_amount ?? 0;
                 $goal            = $crisis->target_amount ?? 0;
                 $crisis->raised  = $raised;
                 $crisis->goal    = $goal;

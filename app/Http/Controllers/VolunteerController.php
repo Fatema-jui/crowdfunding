@@ -23,9 +23,9 @@ class VolunteerController extends Controller
         'email'=>$request->email,
         'phone'=>$request->phone,
         'address'=>$request->address,
-        'skill'=>$request->skill,
-        'availability'=>$request->availability,
-        'experience'=>$request->experience,
+        'age'=>$request->age,
+        'gender'=>$request->gender,
+        'message'=>$request->message,
         'status'=>$request->status 
        ]);
 
@@ -33,18 +33,7 @@ class VolunteerController extends Controller
 
     }  
 
-    public function volunteerview($id){
-        $volunteer=Volunteer::find($id);
-        return view ('volunteer.volunteerview',compact('volunteer'));
-
-    }
-
-    public function volunteerdelete($id){
-        $volunteer=Volunteer::find($id);
-        $volunteer->delete();
-        return redirect()->back();
-    }
-
+    
     public function approve($id){
         $volunteer = Volunteer::findOrFail($id);
         $volunteer->status = 'approved';

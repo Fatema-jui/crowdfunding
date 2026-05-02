@@ -14,23 +14,19 @@ class WebCrisisController extends Controller
     public function crisisList(Request $request)
     {
         $query = Crisis::with('category')
-                       ->withSum('donations', 'amount')
                        ->withCount('donations')
                        ->where('status', 'active');
 
-        // Category filter
         if ($request->filled('category')) {
             $query->where('category_id', $request->category);
         }
 
-        // Search filter
         if ($request->filled('search')) {
             $query->where('crisis_title', 'like', '%' . $request->search . '%');
         }
 
-        // ✅ Logic সব controller এ — blade শুধু show করবে
         $crises = $query->latest()->get()->map(function ($crisis) {
-            $raised           = $crisis->donations_sum_amount ?? 0;
+            $raised           = $crisis->raised_amount ?? 0; 
             $goal             = $crisis->target_amount ?? 0;
             $crisis->raised   = $raised;
             $crisis->goal     = $goal;
@@ -47,11 +43,9 @@ class WebCrisisController extends Controller
     {
         $crisis = Crisis::with('category')
                         ->withCount('donations')
-                        ->withSum('donations', 'amount')
                         ->findOrFail($id);
 
-        // ✅ Details page এও logic controller এ
-        $raised          = $crisis->donations_sum_amount ?? 0;
+        $raised          = $crisis->raised_amount ?? 0; 
         $goal            = $crisis->target_amount ?? 0;
         $crisis->raised  = $raised;
         $crisis->goal    = $goal;
@@ -61,13 +55,11 @@ class WebCrisisController extends Controller
         return view('frontend.pages.details', compact('crisis'));
     }
 
-   public function expenseShow($id){
-
-    $crisis = Crisis::withSum('donations', 'amount')->findOrFail($id);
-    $expenses = Expense::with('volunteer')->where('crisis_id', $id)->get();
-    $totalSpent = $expenses->where('status', 'approved')->sum('amount');
-    return view('frontend.pages.expense-show', compact('crisis', 'expenses', 'totalSpent'));
-     
+    public function expenseShow($id)
+    {
+        $crisis = Crisis::findOrFail($id); 
+        $expenses = Expense::with('volunteer')->where('crisis_id', $id)->get();
+        $totalSpent = $expenses->where('status', 'approved')->sum('amount');
+        return view('frontend.pages.expense-show', compact('crisis', 'expenses', 'totalSpent'));
     }
 }
-

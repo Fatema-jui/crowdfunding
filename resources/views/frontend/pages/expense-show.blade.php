@@ -16,7 +16,7 @@
             <div class="col-6">
                 <div class="p-3 rounded-3 bg-primary text-white">
                     <p class="mb-1" style="font-size: 13px; opacity: 0.85;">Total collected</p>
-                    <p class="fw-semibold mb-0" style="font-size: 22px;">BDT {{ number_format($crisis->donations_sum_amount ?? 0) }}</p>
+                    <p class="fw-semibold mb-0" style="font-size: 22px;">BDT {{ number_format($crisis->raised_amount ?? 0) }}</p>
                 </div>
             </div>
             <div class="col-6">

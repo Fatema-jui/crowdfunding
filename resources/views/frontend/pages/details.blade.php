@@ -21,37 +21,22 @@
                 </div>
             @endif
 
-            {{-- Category badge --}}
             <span class="badge bg-primary mb-2">
                 {{ $crisis->category->category_name ?? 'General' }}
             </span>
 
-            @php
-                $raised = $crisis->donations_sum_amount ?? 0;
-                $goal = $crisis->target_amount ?? 0;
-                $progress = $goal > 0 ? min(100, ($raised / $goal) * 100) : 0;
-            @endphp
-
-            {{-- Crisis Title --}}
             <h3 class="fw-bold mt-2">{{ $crisis->crisis_title ?? 'Untitled Crisis' }}</h3>
-
-            {{-- Description --}}
             <p class="text-muted mt-3">{{ $crisis->description ?? 'No description available.' }}</p>
 
-            {{-- Progress Card --}}
             <div class="card p-3 mt-4">
                 <div class="d-flex justify-content-between mb-1">
-                    <strong>৳{{ number_format($raised, 2) }} raised</strong>
-                    <span class="text-muted">Goal: ৳{{ number_format($goal, 2) }}</span>
+                    <strong>BDT{{ number_format($crisis->raised, 2) }} raised</strong>
+                    <span class="text-muted">Goal: BDT{{ number_format($crisis->goal, 2) }}</span>
                 </div>
                 <div class="progress mb-2" style="height: 10px;">
-                    <div class="progress-bar bg-success"
-                         style="width: {{ $progress }}%;">
-                    </div>
+                    <div class="progress-bar bg-success" style="width: {{ $crisis->percent }}%;"></div>
                 </div>
-                <small class="text-muted">
-                    {{ $crisis->donations_count ?? 0 }} donors
-                </small>
+                <small class="text-muted">{{ $crisis->donations_count ?? 0 }} donors</small>
                 @if($crisis->deadline_date)
                     <br><small class="text-muted">Deadline: {{ \Carbon\Carbon::parse($crisis->deadline_date)->format('M d, Y') }}</small>
                 @endif
@@ -63,9 +48,8 @@
         <div class="col-lg-5">
             <div class="card shadow-sm p-4" style="position: sticky; top: 80px;">
 
-                <h5 class="fw-bold mb-4">♥ Donate Now</h5>
+                <h5 class="fw-bold mb-4"> Donate Now</h5>
 
-                {{-- If not logged in warning --}}
                 @guest
                     <div class="alert alert-warning small">
                         Please <a href="{{ route('show.login') }}">Login</a> before donating
@@ -76,30 +60,20 @@
                     @csrf
                     <input type="hidden" name="crisis_id" value="{{ $crisis->id }}">
 
-                    {{-- Quick amount buttons --}}
                     <p class="small text-muted mb-2">Choose an amount:</p>
                     <div class="d-flex gap-2 mb-3">
                         @foreach([100, 500, 1000, 5000] as $amt)
-                            <button type="button"
-                                    class="btn btn-outline-primary btn-sm"
+                            <button type="button" class="btn btn-outline-primary btn-sm"
                                     onclick="document.getElementById('amount').value='{{ $amt }}'">
-                                ৳{{ $amt }}
+                                BDT{{ $amt }}
                             </button>
                         @endforeach
                     </div>
 
-                    {{-- Custom amount --}}
                     <div class="mb-3">
                         <label class="form-label small">Custom Amount:</label>
-                        <input type="number"
-                               name="amount"
-                               id="amount"
-                               class="form-control"
-                               placeholder="Amount"
-                               min="1" required>
+                        <input type="number" name="amount" id="amount" class="form-control" placeholder="Amount" min="1" required>
                     </div>
-
-                    
 
                     <button type="submit"
                             class="btn w-100 py-2 fw-semibold"

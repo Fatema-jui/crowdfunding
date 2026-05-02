@@ -77,7 +77,7 @@
     <div class="row row-cols-2 row-cols-md-4 g-3">
         @foreach($categories as $category)
         <div class="col">
-            {{-- ✅ Fix: # এর বদলে real route --}}
+            
             <a href="{{ route('crisis.list', ['category' => $category->id]) }}"
                class="text-decoration-none">
                 <div class="card text-center h-100">
@@ -115,7 +115,7 @@
     <div class="row g-4">
         @foreach($crises as $crisis)
 
-        {{-- ✅ @php block নেই — controller থেকে আসছে --}}
+        {{-- no @php block  — data is coming from the controller --}}
         <div class="col-md-4">
             <div class="card h-100 shadow-sm">
 
@@ -179,7 +179,7 @@
                 <h5 class="fw-bold mb-1">Helping the Homeless, Hungry & Hurting Children</h5>
                 <p class="text-muted mb-0 small">Your small contribution can change a life.</p>
             </div>
-            {{-- ✅ Fix: # এর বদলে real route --}}
+            {{-- use real route --}}
             <a href="{{ route('crisis.list') }}" class="btn btn-primary">
                 Donate Now
             </a>

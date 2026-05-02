@@ -32,9 +32,9 @@
                         <span class="badge bg-secondary">User</span>
                     @endif
                 </td>
-                <td>  {{-- ✅ Button গুলো এই একটা td তে --}}
+                <td>  
                     <a href="{{ route('user.view', $user->id) }}" class="btn btn-primary btn-sm">View</a>
-                    <a href="" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{{ route('user.edit', $user->id) }}" class="btn btn-warning btn-sm">Edit</a>
                     <a href="{{ route('user.delete', $user->id) }}" class="btn btn-danger btn-sm" >Delete</a>
                 </td>
             </tr>

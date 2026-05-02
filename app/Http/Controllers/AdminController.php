@@ -21,7 +21,7 @@ class AdminController extends Controller
         $totalCrisis     = Crisis::count();
         $totalUser       = User::count();
         $totalCategory   = Category::count();
-        $recentDonations = Donation::latest()->take(5)->get();
+        
 
         return view('admin.dashboard.dashboard', compact(
             'totalDonor',
@@ -30,7 +30,7 @@ class AdminController extends Controller
             'totalCrisis',
             'totalUser',
             'totalCategory',
-            'recentDonations'
+            
         ));
         
     }

@@ -8,15 +8,15 @@ class Donation extends Model
 {
     protected $guarded=[];
 
-public function donor()
-{
+    public function donor()
+    {
     return $this->belongsTo(Donor::class);
-}
+    }
 
-public function crisis()
-{
+    public function crisis()
+    {
     return $this->belongsTo(Crisis::class, 'crisis_id');
-}
+    }
 
 
 }

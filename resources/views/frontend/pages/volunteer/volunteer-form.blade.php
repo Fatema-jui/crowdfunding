@@ -13,7 +13,6 @@
                         ← Back to Crises
                     </a>
                     <h4 class="fw-bold mb-1">Apply as a Volunteer</h4>
-                    <small class="text-muted">Crisis: <strong>{{ $crisis->crisis_title }}</strong></small>
                 </div>
 
                 <form action="{{ route('webvolunteer.submit') }}" class="row g-3" method="POST">

@@ -43,6 +43,17 @@ class UserController extends Controller
         return view('user.useredit',compact('user'));
     }
 
+    public function userupdate(Request $request,$id){
+        $user=User::findOrFail($id);
+        $user->update([
+            'name'     => $request->name,
+            'email'    => $request->email,
+            'phone'    => $request->phone,  
+            'role'     => $request->role ?? 'user', 
+        ]);
+        return redirect()->route('user');
+    }
+
     public function userdelete($id){
         User::findOrFail($id)->delete();
         return redirect()->back();

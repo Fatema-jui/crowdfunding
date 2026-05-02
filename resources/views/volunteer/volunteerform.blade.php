@@ -28,39 +28,34 @@
 </div><br>
 
 <div class="form-group">
-    <label for="skill" class="form-label">Skill:</label>
-    <select name="skill" class="form-control">
-    <option value="">--select skill--</option>
-    <option value="first aid">First Aid</option>
-    <option value="recuse">Recuse</option>
+    <label for="age" class="form-label">Age:</label>
+    <input name="age" type="number" class="form-control" placeholder="Enter Age..">
+    
+</div><br>
+
+<div class="form-group">
+    <label for="gender" class="form-label">Gender:</label>
+    <select name="gender" class="form-control">
+        <option value="">--select gender--</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
     </select>
 </div><br>
 
 <div class="form-group">
-    <label for="availability" class="form-label">Availability:</label>
-    <select name="availability" class="form-control">
-    <option value="">--select availability--</option>
-    <option value="part-time">Part-Time</option>
-    <option value="full-time">Full-Time</option>
-    </select>
-</div><br>
-
-<div class="form-group">
-    <label for="experience" class="form-label">Experience:</label>
-    <input name="experience" type="number" class="form-control" placeholder="Enter Experience..">
+    <label for="message" class="form-label">Message:</label>
+    <textarea name="message" class="form-control" rows="3" placeholder="Enter Message.."></textarea>
 </div><br>
 
 <div class="form-group">
     <label for="status" class="form-label">Status:</label>
-    <select name="status" class="form-control">
-        <option value="">--select status--</option>
-        <option value="pending">Pending</option>
-        <option value="approve">Approve</option>
-    </select><br>
+    <input name="status" type="text" class="form-control" placeholder="Enter Status..">
+</div><br>
 
     <button type="submit" class="btn btn-primary">Submit</button>
 
-</div>
+
 </form>
 
 @endsection

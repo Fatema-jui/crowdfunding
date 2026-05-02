@@ -35,9 +35,10 @@ class DonationController extends Controller
         return redirect()->route('donation');
     }
 
-    public function donationview($id){
-        $donation=Donation::find($id);
-        return view ('donation.donationview',compact('donation'));
+    public function donationview($id)
+    {
+    $donation = Donation::with(['donor.user', 'crisis'])->find($id);
+    return view('donation.donationview', compact('donation'));
     }
 
     public function donationdelete($id){

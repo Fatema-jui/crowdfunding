@@ -84,41 +84,6 @@
 
     </div>
 
-    
-    <div class="row mt-4">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0">Recent Donations</h5>
-                </div>
-
-                <div class="card-body">
-                    <table class="table table-bordered table-hover">
-                        <thead class="table-primary">
-                            <tr>
-                                <th>#</th>
-                                <th>Donor Name</th>
-                                <th>Amount</th>
-                                <th>Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($recentDonations as $index => $donation)
-                            <tr>
-                                <td>{{ $index + 1 }}</td>
-                                <td>{{ $donation->donor_name }}</td>
-                                <td>৳ {{ number_format($donation->amount) }}</td>
-                                <td>{{ $donation->created_at->format('d M Y') }}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
 </div>
 
 @endsection

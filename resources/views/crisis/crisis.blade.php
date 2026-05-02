@@ -32,7 +32,7 @@
              @endif
          </td>
          <td>BDT {{ number_format($crisis->target_amount, 2) }}</td>
-         <td>BDT {{ number_format($crisis->donations_sum_amount ?? 0, 2) }}</td>
+         <td>BDT {{ number_format($crisis->raised_amount ?? 0, 2) }}</td>
         <td>{{$crisis->status}}</td>
         <td>
             <div class="btn-group" role="group" style="gap:5px;">

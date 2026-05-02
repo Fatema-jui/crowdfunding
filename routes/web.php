@@ -42,8 +42,8 @@ Route::get('/crowdfunding/volunteerform',[WebVolunteerController::class,'volunte
 Route::post('/crowdfunding/volunteersubmit',[WebVolunteerController::class,'volunteerSubmit'])->name('webvolunteer.submit');
 
 
-Route::post('/crowdfunding/donate',[WebDonationController::class,'donateStore'])->name('donate.store');
-Route::get('/crowdfunding/donate-success',[WebDonationController::class,'donateSuccess'])->name('donate.success');
+//Route::post('/crowdfunding/donate',[WebDonationController::class,'donateStore'])->name('donate.store');
+//Route::get('/crowdfunding/donate-success',[WebDonationController::class,'donateSuccess'])->name('donate.success');
 
 
 
@@ -109,9 +109,6 @@ Route::get('/volunteer/volunteerform',[VolunteerController::class,'volunteerform
 Route::post('/volunteer/volunteersubmit',[VolunteerController::class,'volunteersubmit'])->name('volunteer.submit');
 Route::post('/volunteer/approve/{id}',[VolunteerController::class,'approve'])->name('volunteer.approve');
 Route::post('/volunteer/reject/{id}',[VolunteerController::class,'reject'])->name('volunteer.reject');
-
-Route::get('/volunteer/view/{id}',[VolunteerController::class,'volunteerview'])->name('volunteer.view');
-Route::get('/volunteer/delete/{id}',[VolunteerController::class,'volunteerdelete'])->name('volunteer.delete');
 
 
 Route::get('/report',[ReportController::class,'index'])->name('report');
