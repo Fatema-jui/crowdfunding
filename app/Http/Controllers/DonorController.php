@@ -44,19 +44,19 @@ class DonorController extends Controller
     {
     $donor = User::findOrFail($id); 
     return view('donor.donorview', compact('donor'));
-   }
+    }
 
    public function donoredit($id)
-   {
+    {
     $donor = User::findOrFail($id); 
     return view('donor.donoredit', compact('donor'));
-   }
+    }
    
    
    public function donordelete($id)
-   {
+    {
     User::findOrFail($id)->delete();
     return redirect()->back();
-   }
+    }
 
 }

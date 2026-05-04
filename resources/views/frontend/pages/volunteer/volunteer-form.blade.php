@@ -9,8 +9,8 @@
 
                 {{-- Header --}}
                 <div class="mb-4">
-                    <a href="{{ route('crisis.list') }}" class="btn btn-outline-secondary btn-sm mb-3">
-                        ← Back to Crises
+                    <a href="{{ route('website') }}" class="btn btn-outline-secondary btn-sm mb-3">
+                        ← Back to Home
                     </a>
                     <h4 class="fw-bold mb-1">Apply as a Volunteer</h4>
                 </div>
@@ -51,7 +51,7 @@
 
                     <div class="col-md-6">
                         <label for="gender" class="form-label">Gender:</label>
-                        <select name="gender" class="form-select" id="gender">
+                        <select name="gender" class="form-control" id="gender">
                             <option value="">-- Select Gender --</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>

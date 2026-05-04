@@ -28,6 +28,10 @@
                         <th>Target Amount</th>
                         <td>{{$crisis->target_amount}}</td>
                     </tr>
+                    <tr>
+                        <th>Raised Amount</th>
+                        <td>{{$crisis->raised_amount}}</td>
+                    </tr>
                     
                     <tr>
                         <th>Deadline Date</th>

@@ -15,6 +15,7 @@
             <th Scope="col">Description</th>
             <th Scope="col">Image</th>
             <th Scope="col">Status</th>
+            <th Scope="col">Action</th>
         </tr>
 </thead>
 
@@ -37,7 +38,7 @@
     </tr>
     @endforeach
 </tbody>
- </table>
+</table>
 </div>
 
 @endsection

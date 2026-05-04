@@ -18,7 +18,6 @@ class WebsiteController extends Controller
         
         $crises = Crisis::with('category')
             ->withCount('donations')
-            ->withSum('donations', 'amount')
             ->where('status', 'active')
             ->latest()
             ->get() 

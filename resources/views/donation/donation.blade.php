@@ -7,14 +7,14 @@
   <table class="table table-striped table-hover">
     <thead>
         <th Scope="col">#</th>
-        <th Scope="col">Select Crisis</th>
-        <th Scope="col">Donar Name</th>
+        <th Scope="col">Crisis_id</th>
+        <th Scope="col">Donar_id</th>
         <th Scope="col">Donation Amount</th>
         <th Scope="col">payment Method</th>
         <th Scope="col">Donation Date</th>
         <th Scope="col">Transaction ID</th>
         <th Scope="col">Status</th>
-
+        <th Scope="col">Action</th>
     </thead>
     <tbody>
         @foreach($donations as $donation)

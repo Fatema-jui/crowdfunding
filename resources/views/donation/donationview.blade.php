@@ -10,11 +10,11 @@
                 <tbody>
                     <tr>
                         <th style="width:35%">Select Crisis</th>
-                        <td>{{ $donation->crisis->title }}</td>
+                        <td>{{ $donation->crisis->crisis_title }}</td>
                     </tr>
                     <tr>
                         <th>Donor Name</th>
-                        <td>{{ $donation->donor->name }}</td>
+                        <td>{{ $donation->donor?->name }}</td>
                     </tr>
                     <tr>
                         <th>Donation Amount</th>

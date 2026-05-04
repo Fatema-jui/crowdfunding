@@ -8,22 +8,20 @@
         <div class="row mb-3 align-items-end">
             <div class="col-md-3">
                 <label>From Date</label>
-                <input type="date" name="from_date" class="form-control"
-                    value="{{ $from_date ?? '' }}" required>
+                <input type="date" name="from_date" class="form-control" value="{{ $from_date ?? '' }}" required>
             </div>
             <div class="col-md-3">
                 <label>To Date</label>
-                <input type="date" name="to_date" class="form-control"
-                    value="{{ $to_date ?? '' }}" required>
+                <input type="date" name="to_date" class="form-control" value="{{ $to_date ?? '' }}" required>
             </div>
             <div class="col-md-2">
                 <button type="submit" class="btn btn-primary w-100">Generate</button>
             </div>
             @isset($expenses)
             <div class="col-md-2">
-               <a href="{{ route('report.export', ['from_date' => $from_date, 'to_date' => $to_date]) }}"
-                 class="btn btn-secondary w-100">Export
-                </a>
+               <a href="{{ route('report.export', ['from_date' => $from_date, 'to_date' => $to_date]) }}" class="btn btn-secondary w-100">
+                Export
+               </a>
             </div>
             @endisset
         </div>
@@ -78,18 +76,18 @@
                         <td colspan="7" class="text-center">No expenses found.</td>
                     </tr>
                 @else
-                    @foreach($expenses as $i => $exp)
+                    @foreach($expenses as $i => $expense)
                     <tr>
                         <td>{{ $i + 1 }}</td>
-                        <td>{{ $exp->crisis->crisis_title ?? '—' }}</td>
-                        <td>{{ $exp->volunteer->volunteer_name ?? '—' }}</td>
-                        <td>{{ $exp->purpose }}</td>
-                        <td>{{ number_format($exp->amount, 2) }}</td>
-                        <td>{{ $exp->date }}</td>
+                        <td>{{ $expense->crisis->crisis_title ?? '—' }}</td>
+                        <td>{{ $expense->volunteer->volunteer_name ?? '—' }}</td>
+                        <td>{{ $expense->purpose }}</td>
+                        <td>{{ number_format($expense->amount, 2) }}</td>
+                        <td>{{ $expense->date }}</td>
                         <td>
-                            @if($exp->status === 'approved')
+                            @if($expense->status === 'approved')
                                 <span class="badge bg-success">Approved</span>
-                            @elseif($exp->status === 'pending')
+                            @elseif($expense->status === 'pending')
                                 <span class="badge bg-warning text-dark">Pending</span>
                             @else
                                 <span class="badge bg-danger">Rejected</span>

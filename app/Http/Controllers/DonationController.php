@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Crisis;
 use App\Models\Donor;
 use App\Models\Donation;
+use App\Models\User;
 
 
 class DonationController extends Controller
@@ -17,14 +18,15 @@ class DonationController extends Controller
 
     public function donationform(){
         $crises=Crisis::all();
-        $donors=Donor::all();
-        return view ('donation.donationform',compact('crises','donors'));
+        $users=User::all();
+        return view ('donation.donationform',compact('crises','users'));
     }
 
     public function donationsubmit(Request $request){
+    
         Donation::create([
             'crisis_id'=>$request->crisis_id,
-            'donor_id'=>$request->donor_id,
+            'donor_id'=>$request->user_id,
             'amount'=>$request->amount,
             'payment_method'=>$request->payment_method,
             'donation_date'=>$request->donation_date,
@@ -36,8 +38,9 @@ class DonationController extends Controller
     }
 
     public function donationview($id)
-    {
-    $donation = Donation::with(['donor.user', 'crisis'])->find($id);
+    {  
+        
+    $donation = Donation::with(['donor', 'crisis'])->find($id);
     return view('donation.donationview', compact('donation'));
     }
 

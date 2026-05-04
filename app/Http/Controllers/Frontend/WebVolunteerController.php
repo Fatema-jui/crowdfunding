@@ -9,8 +9,8 @@ class WebVolunteerController extends Controller
 {
     public function volunteerForm(){
 
-        $crisis = Crisis::where('status', 'active')->latest()->first();
-        return view ('frontend.pages.volunteer.volunteer-form',compact('crisis'));
+        //$crisis = Crisis::where('status', 'active')->latest()->first();
+        return view ('frontend.pages.volunteer.volunteer-form');
     }
 
     public function volunteerSubmit(Request $request){
@@ -33,7 +33,7 @@ class WebVolunteerController extends Controller
             'message' => $request->message,
         ]);
     
-            return redirect()->route('webvolunteer.form')->with('success', 'Your volunteer application has been submitted successfully!');
+            return redirect()->route('website')->with('success', 'Your volunteer application has been submitted successfully!');
         }
 
     public function volunteerList(){

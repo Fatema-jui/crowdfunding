@@ -26,7 +26,7 @@
 
             <div class="d-flex gap-2">
                 @auth
-                    {{-- Login করা আছে → নাম দেখাও --}}
+                    
                     <span class="btn btn-outline-light btn-sm">
                          {{ auth()->user()->name }}
                     </span>
@@ -38,7 +38,7 @@
                         @csrf
                     </form>
                 @else
-                    {{-- Login করা নেই → Login/Register দেখাও --}}
+                    
                     <a href="{{ route('show.login') }}" class="btn btn-outline-light btn-sm">Login</a>
                     <a href="{{ route('show.register') }}" class="btn btn-outline-light btn-sm">Register</a>
                 @endauth

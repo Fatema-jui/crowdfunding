@@ -10,7 +10,7 @@ class Donation extends Model
 
     public function donor()
     {
-    return $this->belongsTo(Donor::class);
+    return $this->belongsTo(User::class, 'donor_id');
     }
 
     public function crisis()

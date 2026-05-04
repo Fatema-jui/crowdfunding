@@ -46,9 +46,6 @@ Route::post('/crowdfunding/volunteersubmit',[WebVolunteerController::class,'volu
 //Route::get('/crowdfunding/donate-success',[WebDonationController::class,'donateSuccess'])->name('donate.success');
 
 
-
-
-
 //Admin panel
 Route::group(['middleware' => ['auth', 'admin']], function(){
 Route::get('/dashboard',[AdminController::class,'dashboardindex'])->name('dashboard');
@@ -100,7 +97,6 @@ Route::get('/donation/donationform',[DonationController::class,'donationform'])-
 Route::post('/donation/donationsubmit',[DonationController::class,'donationsubmit'])->name('donation.submit');
 Route::get('/donation/view/{id}',[DonationController::class,'donationview'])->name('donation.view');
 Route::get('/donation/delete/{id}',[DonationController::class,'donationdelete'])->name('donation.delete');
-
 
 
 

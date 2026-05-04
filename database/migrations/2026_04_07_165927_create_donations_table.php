@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('payment_method')->nullable();
             $table->date('donation_date')->nullable();
             $table->string('transaction_id')->nullable();
-            $table->enum('status',['pending','completed','failed'])->nullable()->default('pending');
+            $table->enum('status',['pending','completed','failed'])->nullable();
             $table->timestamps();
         });
     }

@@ -18,11 +18,11 @@
 </div><br>
 
 <div class="form-group">
-    <label for="donor_name" class="form-label">Donar Name:</label>
-    <select name="donor_id" class="form-control" id="donor_name">
+    <label for="user_name" class="form-label">Donar Name:</label>
+    <select name="user_id" class="form-control" id="user_name">
         <option value="">--Donor Name--</option>
-        @foreach($donors as $donor)
-        <option value="{{$donor->id}}">{{$donor->name}}</option>
+        @foreach($users as $user)
+        <option value="{{$user->id}}">{{$user->name}}</option>
         @endforeach
     </select>   
 </div><br>
@@ -58,7 +58,7 @@
     <select name="status" class="form-control" id="status">
         <option value="">--Select Status--</option>
         <option value="pending">Pending</option>
-        <option value="complete">Complete</option>
+        <option value="completed">Completed</option>
         <option value="failed">Failed</option>
     </select>
 </div><br>

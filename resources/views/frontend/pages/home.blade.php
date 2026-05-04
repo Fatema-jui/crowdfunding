@@ -10,11 +10,11 @@
     
     <div class="position-absolute top-0 start-0 w-100 h-100 
                 d-flex flex-column justify-content-center align-items-center text-white px-4">
-        <h1 class="display-5 fw-bold text-center mb-3" style="max-width: 680px;">
+        <h1 class="display-5 fw-bold text-center mb-3" style="max-width: 680px; color: #ffffff;">
             Help People in Need. <br>
             Support &amp; Make a Difference.
         </h1>
-        <p class="lead text-center mb-4" style="max-width: 620px; opacity:.92;">
+        <p class="lead text-center mb-4" style="max-width: 650px; opacity:.92;">
             Join thousands of donors helping communities recover from floods, fires,
             and other emergencies across Bangladesh.
         </p>
