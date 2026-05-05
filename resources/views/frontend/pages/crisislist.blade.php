@@ -17,7 +17,7 @@
     {{-- Filter form --}}
     <form method="GET" action="{{ route('crisis.list') }}" class="row g-2 mb-4">
         <div class="col-md-5">
-            <input type="text"name="search"class="form-control"placeholder="Search crises..."value="{{ request('search') }}">
+            <input type="text" name="search" class="form-control" placeholder="Search crises..."value="{{ request('search') }}">
         </div>
         <div class="col-md-4">
             <select name="category" class="form-select">

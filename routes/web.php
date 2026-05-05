@@ -6,7 +6,7 @@ use App\Http\Controllers\Frontend\AuthController;
 use App\Http\Controllers\Frontend\WebsiteController;
 use App\Http\Controllers\Frontend\WebCrisisController;
 use App\Http\Controllers\Frontend\webVolunteerController;
-use App\Http\Controllers\Frontend\WebDonationController;
+
 
 
 //Admin import route
@@ -41,9 +41,6 @@ Route::get('/crowdfunding/volunteerlist',[WebVolunteerController::class,'volunte
 Route::get('/crowdfunding/volunteerform',[WebVolunteerController::class,'volunteerForm'])->name('webvolunteer.form');
 Route::post('/crowdfunding/volunteersubmit',[WebVolunteerController::class,'volunteerSubmit'])->name('webvolunteer.submit');
 
-
-//Route::post('/crowdfunding/donate',[WebDonationController::class,'donateStore'])->name('donate.store');
-//Route::get('/crowdfunding/donate-success',[WebDonationController::class,'donateSuccess'])->name('donate.success');
 
 
 //Admin panel

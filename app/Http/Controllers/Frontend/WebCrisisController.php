@@ -16,6 +16,7 @@ class WebCrisisController extends Controller
         $query = Crisis::with('category')
                        ->withCount('donations')
                        ->where('status', 'active');
+        $categories = Category::all();            
 
         if ($request->filled('category')) {
             $query->where('category_id', $request->category);
@@ -34,7 +35,7 @@ class WebCrisisController extends Controller
             return $crisis;
         });
 
-        $categories = Category::all();
+        //$categories = Category::all();
 
         return view('frontend.pages.crisislist', compact('crises', 'categories'));
     }

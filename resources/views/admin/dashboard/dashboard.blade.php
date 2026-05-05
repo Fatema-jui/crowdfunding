@@ -5,55 +5,22 @@
 
     <h2 class="mb-4">Admin Dashboard</h2>
 
-    
-    <div class="row">
+    <div class="row row-cols-md-6 g-3">
 
-        <div class="col-md-3 mb-3">
-            <div class="card text-white bg-primary">
+        {{-- 1. Category --}}
+        <div class="col">
+            <div class="card text-white bg-secondary h-100">
                 <div class="card-body">
-                    <h6>Total Donor</h6>
-                    <h2>{{ $totalDonor }}</h2>
-                    <a href="{{ route('donor') }}" class="text-white">View Details →</a>
+                    <h6>Total Categories</h6>
+                    <h2>{{ $totalCategory ?? 0 }}</h2>
+                    <a href="{{ route('crisis.category') }}" class="text-white">View Details →</a>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-3 mb-3">
-            <div class="card text-white bg-warning">
-                <div class="card-body">
-                    <h6>Total Volunteer</h6>
-                    <h2>{{ $totalVolunteer }}</h2>
-                    <a href="{{ route('volunteer') }}" class="text-white">View Details →</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-3 mb-3">
-            <div class="card text-white bg-success">
-                <div class="card-body">
-                    <h6>Total Donation</h6>
-                    <h2>৳ {{ number_format($totalDonation) }}</h2>
-                    <a href="{{ route('donation') }}" class="text-white">View Details →</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-3 mb-3">
-            <div class="card text-white bg-danger">
-                <div class="card-body">
-                    <h6>View Report</h6>
-                    <h2>📊</h2>
-                    <a href="{{ route('report') }}" class="text-white">View Details →</a>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="row">
-
-        <div class="col-md-4 mb-3">
-            <div class="card text-white bg-info">
+        {{-- 2. Crisis --}}
+        <div class="col">
+            <div class="card text-white bg-warning h-100">
                 <div class="card-body">
                     <h6>Total Crises</h6>
                     <h2>{{ $totalCrisis ?? 0 }}</h2>
@@ -62,22 +29,46 @@
             </div>
         </div>
 
-        <div class="col-md-4 mb-3">
-            <div class="card text-white bg-secondary">
+        {{-- 3. Donor --}}
+        <div class="col">
+            <div class="card text-white bg-primary h-100">
                 <div class="card-body">
-                    <h6>Total Users</h6>
+                    <h6>Total Donor</h6>
                     <h2>{{ $totalUser ?? 0 }}</h2>
                     <a href="{{ route('user') }}" class="text-white">View Details →</a>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4 mb-3">
-            <div class="card text-white bg-dark">
+        {{-- 4. Donation --}}
+        <div class="col">
+            <div class="card text-white bg-success h-100">
                 <div class="card-body">
-                    <h6>Total Categories</h6>
-                    <h2>{{ $totalCategory ?? 0 }}</h2>
-                    <a href="{{ route('crisis.category') }}" class="text-white">View Details →</a>
+                    <h6>Total Donation</h6>
+                    <h4>BDT {{ number_format($totalDonation) }}</h4>
+                    <a href="{{ route('donation') }}" class="text-white">View Details →</a>
+                </div>
+            </div>
+        </div>
+
+        {{-- 5. Volunteer --}}
+        <div class="col">
+            <div class="card text-white bg-orange h-100" style="background-color: #fd7e14;">
+                <div class="card-body">
+                    <h6>Total Volunteer</h6>
+                    <h2>{{ $totalVolunteer }}</h2>
+                    <a href="{{ route('volunteer') }}" class="text-white">View Details →</a>
+                </div>
+            </div>
+        </div>
+
+        {{-- 6. Report --}}
+        <div class="col">
+            <div class="card text-white bg-info h-100">
+                <div class="card-body">
+                    <h6>View Report</h6>
+                    <h2>📊</h2>
+                    <a href="{{ route('report') }}" class="text-white">View Details →</a>
                 </div>
             </div>
         </div>
