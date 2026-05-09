@@ -8,7 +8,7 @@
 @csrf
 
 <div class="form-group" >
-    <label for="name" class="form-label">Name:</label>
+    <label for="volunteer_name" class="form-label">Name:</label>
     <input name="volunteer_name" type="text" class="form-control" placeholder="Enter Name..">
 </div><br>
 
@@ -19,12 +19,12 @@
 
 <div class="form-group">
     <label for="phone" class="form-label">Phone:</label>
-    <input name="phone" type="number" class="form-control" placeholder="Enter Phone..">
+    <input name="phone" type="text" class="form-control" placeholder="Enter Phone..">
 </div><br>
 
 <div class="form-group">
     <label for="address" class="form-label">Address:</label>
-    <textarea name="address" type="text" class="form-control" row="3" placeholder="Enter Address.."></textarea>
+    <textarea name="address" type="text" class="form-control" rows="3" placeholder="Enter Address.."></textarea>
 </div><br>
 
 <div class="form-group">
@@ -45,7 +45,7 @@
 
 <div class="form-group">
     <label for="message" class="form-label">Message:</label>
-    <textarea name="message" class="form-control" rows="3" placeholder="Enter Message.."></textarea>
+    <textarea name="message" type="text" class="form-control" rows="3" placeholder="Enter Message.."></textarea>
 </div><br>
 
 <div class="form-group">

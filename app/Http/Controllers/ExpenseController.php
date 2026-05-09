@@ -14,9 +14,18 @@ class ExpenseController extends Controller
         return view ('expense.expense', compact('expenses'));
     }
 
-    public function expenseform(){
+    public function expenseform(Request $request){
         $crises = Crisis::all();
-        $volunteers = Volunteer::all();
+
+        if($request->crisis_id){
+
+          $crisis = Crisis::with('volunteers')->find($request->crisis_id);
+          $volunteers = $crisis->volunteers;
+       } 
+
+     else {
+        $volunteers = collect();
+          }
         return view('expense.expenseform', compact('crises', 'volunteers'));
     }
 

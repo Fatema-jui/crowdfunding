@@ -13,8 +13,8 @@
             <th Scope="col">Image</th>
             <th Scope="col">Target Amount</th>
             <th Scope="col">Raised Amount</th>
-            <th Scope="col">Action</th>
             <th Scope="col">Status</th>
+            <th Scope="col">Action</th>
         </tr>
 </thead>
 
@@ -37,6 +37,7 @@
         <td>
             <div class="btn-group" role="group" style="gap:5px;">
                 <a href="{{ route('crisis.view' , $crisis->id)}}" class="btn btn-primary btn-sm">View</a>
+                <a href="{{ route('volunteer.assign', $crisis->id) }}" class="btn btn-success btn-sm">Assign</a>
                 <a href="{{ route('crisis.edit', $crisis->id) }}" class="btn btn-warning btn-sm">Edit</a>
                 <a href="{{ route('crisis.delete',$crisis->id)}}" class="btn btn-danger btn-sm">Delete</a>               
             </div>

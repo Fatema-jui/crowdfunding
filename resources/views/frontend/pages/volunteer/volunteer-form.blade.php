@@ -14,6 +14,10 @@
                     </a>
                     <h4 class="fw-bold mb-1">Apply as a Volunteer</h4>
                 </div>
+                
+                @if(session('success'))
+                <div class="alert alert-success mt-2">{{ session('success') }}</div>
+                 @endif
 
                 <form action="{{ route('webvolunteer.submit') }}" class="row g-3" method="POST">
                     @csrf

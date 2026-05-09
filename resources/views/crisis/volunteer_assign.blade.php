@@ -1,10 +1,9 @@
 @extends('partials.master')
 @section('content')
 
-<div class="container mt-4">
-    <h3 class="mb-3 text-primary">Crisis View</h3>
+<div class="container" style="padding: 20px 30px;">
+    <h3 class="mb-3 text-primary">Volunteer Assignment</h3>
 
-    {{-- Crisis Details Card --}}
     <div class="card shadow-sm border-0" style="max-width:600px;">
         <div class="card-body p-0">
             <table class="table table-striped mb-0">
@@ -55,41 +54,35 @@
                             @endif
                         </td>
                     </tr>
-                </tbody>
-            </table>
-        </div>
-    </div> 
 
-    
-    <div class="card shadow-sm border-0 mt-4" style="max-width:600px; padding-bottom: 60px;">
-        <div class="card-header bg-primary text-white">
-            <h5 class="mb-0">Assigned Volunteers</h5>
-        </div>
-        <div class="card-body p-0">
-            <table class="table table-striped mb-0">
-                <thead>
+                   
                     <tr>
-                        <th>#</th>
-                        <th>Volunteer Name</th>
-                        <th>Action</th>
+                        <td colspan="2">
+                            <form action="{{ route('volunteer.assign.store', $crisis->id) }}" method="POST">
+                                @csrf
+                                <div class="p-2">
+                                    <label class="fw-bold mb-2">Assign Volunteers:</label>
+                                    <select name="volunteer_ids[]" class="form-control" multiple style="height: 150px;">
+                                        @foreach($volunteers as $volunteer)
+                                            <option value="{{ $volunteer->id }}"
+                                                {{ $crisis->volunteers->contains($volunteer->id) ? 'selected' : '' }}>
+                                                {{ $volunteer->volunteer_name }}
+                                            </option>
+                                        @endforeach
+                                    </select><br>
+                                    
+                                    <button type="submit" class="btn btn-primary">
+                                        submit
+                                    </button>
+                                </div>
+                            </form>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach($crisis->volunteers as $index => $volunteer)
-                        <tr>
-                            <td>{{ $index + 1 }}</td>
-                            <td>{{ $volunteer->volunteer_name }}</td>
-                            <td>
-                                <a href="{{ route('crisis.volunteer.delete', ['crisis_id' => $crisis->id, 'volunteer_id' => $volunteer->id]) }}" 
-                                   class="btn btn-danger btn-sm">Delete</a>
-                            </td>
-                        </tr>
-                    @endforeach
+
                 </tbody>
             </table>
         </div>
-    </div> 
-
+    </div>
 </div>
 
 @endsection

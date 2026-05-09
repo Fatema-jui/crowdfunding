@@ -20,7 +20,8 @@ class CrisisController extends Controller
     }
 
     public function crisissubmit(Request $request){
-        $fileName = '';
+        
+       $fileName = '';
         
         if($request->hasFile('image')){
             $file = $request->file('image');
@@ -43,17 +44,35 @@ class CrisisController extends Controller
         return redirect()->route('crisis');
     }
 
+
     public function crisisview($id){
         $crisis = Crisis::with('volunteers')->find($id);
         return view('crisis.crisisview', compact('crisis'));
     }
 
+
+    // GET
+    public function volunteerAssign($id){
+
+    $crisis = Crisis::with('volunteers')->findOrFail($id);
+    $volunteers = Volunteer::where('status', 'approved')->get();
+    return view('crisis.volunteer_assign', compact('crisis', 'volunteers'));
+   }
+
+    // POST
+    public function volunteerAssignStore(Request $request, $id){
+
+    $crisis = Crisis::findOrFail($id);
+    $crisis->volunteers()->sync($request->volunteer_ids ?? []);
+    return redirect()->back();
+     
+    }
+
+
     public function edit($id)
     {
         $crisis = Crisis::findOrFail($id);
-        // show approved volunteer 
-        $volunteers = Volunteer::where('status', 'approved')->get();
-        return view('crisis.edit', compact('crisis', 'volunteers'));
+        return view('crisis.edit', compact('crisis'));
     }
 
     public function update(Request $request, $id)
@@ -81,23 +100,25 @@ class CrisisController extends Controller
             'status'        => $request->status,
         ]);
 
-        // Multiple volunteers sync
-        $crisis->volunteers()->sync($request->volunteer_ids ?? []);
 
-        return redirect()->route('crisis')->with('success', 'Updated successfully');
+        return redirect()->route('crisis');
     }
+
+
 
     public function crisisdelete($id){
         $crisis = Crisis::find($id);
         $crisis->delete();
-        return redirect()->route('crisis')->with('success', 'Deleted successfully');
+        return redirect()->route('crisis');
     }
+
+
 
     public function volunteerDelete($crisis_id, $volunteer_id)
     {
         $crisis = Crisis::findOrFail($crisis_id);
         $crisis->volunteers()->detach($volunteer_id);
     
-        return redirect()->back()->with('success', 'Volunteer removed from crisis successfully.');
+        return redirect()->back();
     }   
 }

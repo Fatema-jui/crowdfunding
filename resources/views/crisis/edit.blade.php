@@ -23,17 +23,7 @@
                 <option value="inactive" {{ $crisis->status == 'inactive' ? 'selected' : '' }}>Inactive</option>
             </select><br>
 
-            <div class="form-group">
-                <select name="volunteer_ids[]" class="form-control" multiple style="height: 150px;">
-                    @foreach($volunteers as $volunteer)
-                        <option value="{{ $volunteer->id }}"
-                            {{ in_array($volunteer->id, $crisis->volunteer_ids ?? []) ? 'selected' : '' }}>
-                            {{ $volunteer->volunteer_name }}
-                        </option>
-                    @endforeach
-                </select>
-            
-            </div><br>
+            <br>
 
             <button type="submit" class="btn btn-primary">Update</button>
         </form>

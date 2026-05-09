@@ -9,7 +9,6 @@ class WebVolunteerController extends Controller
 {
     public function volunteerForm(){
 
-        //$crisis = Crisis::where('status', 'active')->latest()->first();
         return view ('frontend.pages.volunteer.volunteer-form');
     }
 
