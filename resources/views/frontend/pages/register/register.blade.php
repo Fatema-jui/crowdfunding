@@ -32,8 +32,9 @@
                     @endif
 
                     <form action="{{ route('submit.register') }}" method="POST">
-                        
-                    @csrf
+                        @csrf
+                        {{-- এই line টা নতুন যোগ হয়েছে --}}
+                        <input type="hidden" name="redirect" value="{{ request('redirect') }}">
 
                         <div class="mb-3">
                             <label class="form-label fw-medium">Full Name</label>
@@ -96,7 +97,7 @@
 
                         <p class="text-center mt-3 mb-0 small">
                             Already have account?
-                            <a href="{{ route('show.login') }}" style="color: #0f766e;">Login here</a>
+                            <a href="{{ route('show.login') }}?redirect={{ request('redirect') }}" style="color: #0f766e;">Login here</a>
                         </p>
 
                     </form>
@@ -105,7 +106,5 @@
         </div>
     </div>
 </div>
-
-
 
 @endsection

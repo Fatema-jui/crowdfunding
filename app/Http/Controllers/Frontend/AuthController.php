@@ -31,20 +31,19 @@ class AuthController extends Controller
             'password.confirmed' => 'Password confirmation does not match',
         ]);
 
-        // User create করো
-       $user = User::create([
-    'name'     => $request->name,
-    'email'    => $request->email,
-    'phone'    => $request->phone,
-    'password' => Hash::make($request->password),
-    'role'     => 'donor',
-            ]);
+        $user = User::create([
+            'name'     => $request->name,
+            'email'    => $request->email,
+            'phone'    => $request->phone,
+            'password' => Hash::make($request->password),
+            'role'     => 'donor',
+        ]);
 
-        // Register এর পরে auto login
         Auth::login($user);
 
-        return redirect()
-               ->route('website')
+        // ── নতুন: redirect parameter থাকলে সেখানে যাবে ──
+        $redirect = $request->input('redirect');
+        return redirect($redirect ?: route('website'))
                ->with('success', 'Registration successful!');
     }
 
@@ -79,18 +78,16 @@ class AuthController extends Controller
                    ->with('success', 'Login successful!');
         }
 
-        // Login fail
         return back()
                ->withErrors(['email' => 'Email or Password is incorrect'])
                ->withInput($request->only('email'));
     }
 
-public function logout(Request $request)
-{
-    Auth::logout();
-    $request->session()->invalidate();
-    $request->session()->regenerateToken();
-    return redirect()->route('website');  
-}
-
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('website');
+    }
 }

@@ -10,7 +10,7 @@
 
                     {{-- Header --}}
                     <div class="text-center mb-4">
-                        <h4 class=" fw-bold">Welcome Back</h4>
+                        <h4 class="fw-bold">Welcome Back</h4>
                         <p class="text-muted small">log in to your account</p>
                     </div>
 
@@ -30,6 +30,8 @@
 
                     <form action="{{ route('login.submit') }}" method="POST">
                         @csrf
+                        {{-- এই line টা নতুন যোগ হয়েছে --}}
+                        <input type="hidden" name="redirect" value="{{ request('redirect') }}">
 
                         <div class="mb-3">
                             <label class="form-label fw-medium">Email</label>

@@ -52,7 +52,11 @@
 
                 @guest
                     <div class="alert alert-warning small">
-                        Please <a href="{{ route('show.login') }}">Login</a> before donating
+                        Please 
+                        <a href="{{ route('show.login') }}?redirect={{ urlencode(url()->current()) }}">Login</a> 
+                        or 
+                        <a href="{{ route('show.register') }}?redirect={{ urlencode(url()->current()) }}">Register</a> 
+                        before donating
                     </div>
                 @endguest
 

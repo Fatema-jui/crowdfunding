@@ -2,8 +2,8 @@
 @section('content')
 
 {{-- ── HERO ─────────────────────────────────────── --}}
-<div class="mx-auto rounded shadow mb-4 position-relative overflow-hidden"
-     style="max-width: 1620px; height: 728px; background: url('{{ asset('images/hero.jpg') }}') center/cover no-repeat;">
+<div class="w-100 rounded shadow mb-4 position-relative overflow-hidden"
+     style="height: 728px; background: url('{{ asset('images/hero.jpg') }}') center/cover no-repeat;">
     
     <div class="position-absolute top-0 start-0 w-100 h-100"
          style="background: rgba(0,0,0,0.45);"></div>
@@ -77,7 +77,6 @@
     <div class="row row-cols-2 row-cols-md-4 g-3">
         @foreach($categories as $category)
         <div class="col">
-            
             <a href="{{ route('crisis.list', ['category' => $category->id]) }}"
                class="text-decoration-none">
                 <div class="card text-center h-100">
@@ -114,12 +113,9 @@
 
     <div class="row g-4">
         @foreach($crises as $crisis)
-
-        {{-- no @php block  — data is coming from the controller --}}
         <div class="col-md-4">
             <div class="card h-100 shadow-sm">
 
-                {{-- Image --}}
                 @if($crisis->image)
                     <img src="{{ asset('crises/' . $crisis->image) }}"
                          class="card-img-top rounded-top"
@@ -133,7 +129,6 @@
                     </div>
                 @endif
 
-                {{-- Progress bar --}}
                 <div class="px-3 pt-2">
                     <div class="d-flex justify-content-between small text-muted mb-1">
                         <span>{{ number_format($crisis->percent, 0) }}% complete</span>
@@ -179,7 +174,6 @@
                 <h5 class="fw-bold mb-1">Helping the Homeless, Hungry & Hurting Children</h5>
                 <p class="text-muted mb-0 small">Your small contribution can change a life.</p>
             </div>
-            {{-- use real route --}}
             <a href="{{ route('crisis.list') }}" class="btn btn-primary">
                 Donate Now
             </a>

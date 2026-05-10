@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +18,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-
     <link href="https://fonts.googleapis.com/css?family=Mansalva|Roboto&display=swap" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;">
 
     <link rel="stylesheet" href="fonts/icomoon/style.css" fetchpriority="high">
@@ -39,10 +37,11 @@
 
   </head>
 
-  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+  {{-- ✅ overflow-hidden যোগ করা হয়েছে --}}
+  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" class="overflow-hidden">
 
-    
-    <div class="site-wrap" id="home-section">
+    {{-- ✅ overflow-hidden w-100 যোগ করা হয়েছে --}}
+    <div class="site-wrap overflow-hidden w-100" id="home-section">
 
       <div class="site-mobile-menu site-navbar-target">
         <div class="site-mobile-menu-header">
@@ -52,22 +51,21 @@
         </div>
         <div class="site-mobile-menu-body"></div>
       </div>
+    
+    
+    
+    @include('frontend.partials.header')
 
+    
+    
+    @yield('content')
 
-      
-      
-      
-    @include('frontend.partials.header')  
-
-
-
-
-      @yield('content')
-
-
+    
+    
     @include('frontend.partials.footer')
 
-    </div>
+    
+  </div>
 
     <script src="{{url('/frontend/js/jquery-3.3.1.min.js')}}"></script>
     <script src="{{url('/frontend/js/popper.min.js')}}"></script>
@@ -82,29 +80,23 @@
 
     <script src="{{url('/frontend/js/main.js')}}"></script>
 
-     <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"cd0b4b3a733644fc843ef0b185f98241","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"cd0b4b3a733644fc843ef0b185f98241","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        (function (window, document) {
+            var loader = function () {
+                var script = document.createElement("script"), tag = document.getElementsByTagName("script")[0];
+                script.src = "https://sandbox.sslcommerz.com/embed.min.js?" + Math.random().toString(36).substring(7);
+                tag.parentNode.insertBefore(script, tag);
+            };
 
-
-<script>
-    (function (window, document) {
-        var loader = function () {
-            var script = document.createElement("script"), tag = document.getElementsByTagName("script")[0];
-            script.src = "https://sandbox.sslcommerz.com/embed.min.js?" + Math.random().toString(36).substring(7);
-            tag.parentNode.insertBefore(script, tag);
-        };
-
-        window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
-    })(window, document);
-</script>
-
-
-
-
+            window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
+        })(window, document);
+    </script>
 
 </body>
 
