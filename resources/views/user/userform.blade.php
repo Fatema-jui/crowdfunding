@@ -42,25 +42,6 @@
         </select>
     </div><br>
 
-    <div class="form-group">
-        <label for="address" class="form-label">Address:</label>
-        <textarea name="address" type="text" class="form-control" placeholder="Enter Your Address here.."></textarea>
-    </div><br>
-
-    <div class="form-group">
-        <label for="image" class="form-label">Image:</label>
-        <input name="image" type="file" class="form-control" id="image" placeholder="Enter Your Image here..">
-    </div><br>
-
-    <div class="form-group">
-        <label for="status" class="form-label">Status:</label>
-        <select name="status" class="form-control" id="status" >
-            <option value="">--Select Status--</option>
-            <option value="pending">Pending</option>
-            <option value="approve">Approve</option>
-        </select>
-    </div><br>
-
     <button type="submit" class="btn btn-primary">Submit</button>
 
 </form>

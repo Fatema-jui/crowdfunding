@@ -35,7 +35,7 @@ class WebsiteController extends Controller
                 $crisis->raised  = $raised;
                 $crisis->goal    = $goal;
                 $crisis->percent = $goal > 0 ? min(100, ($raised / $goal) * 100) : 0;
-                $crisis->isFull  = $goal > 0 && $raised >= $goal;
+                
                 return $crisis;
             });
 

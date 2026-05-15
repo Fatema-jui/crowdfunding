@@ -35,7 +35,7 @@ class WebCrisisController extends Controller
             return $crisis;
         });
 
-        //$categories = Category::all();
+        
 
         return view('frontend.pages.crisislist', compact('crises', 'categories'));
     }

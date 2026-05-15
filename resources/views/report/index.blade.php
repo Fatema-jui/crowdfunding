@@ -36,12 +36,7 @@
                 <h4>BDT {{ number_format($total, 2) }}</h4>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card text-center p-3">
-                <small class="text-muted">Entries</small>
-                <h4>{{ $expenses->count() }}</h4>
-            </div>
-        </div>
+        
         <div class="col-md-3">
             <div class="card text-center p-3">
                 <small class="text-muted">Approved</small>

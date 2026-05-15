@@ -10,7 +10,7 @@ use App\Models\Volunteer;
 class CrisisController extends Controller
 {
     public function crisisindex(){
-        $crises = Crisis::withSum('donations', 'amount')->get();  
+        $crises = Crisis::all();  
         return view('crisis.crisis', compact('crises'));
     }
 
@@ -51,7 +51,7 @@ class CrisisController extends Controller
     }
 
 
-    // GET
+    
     public function volunteerAssign($id){
 
     $crisis = Crisis::with('volunteers')->findOrFail($id);
@@ -59,7 +59,7 @@ class CrisisController extends Controller
     return view('crisis.volunteer_assign', compact('crisis', 'volunteers'));
    }
 
-    // POST
+    
     public function volunteerAssignStore(Request $request, $id){
 
     $crisis = Crisis::findOrFail($id);

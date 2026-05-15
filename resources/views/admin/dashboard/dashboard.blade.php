@@ -7,7 +7,7 @@
 
     <div class="row row-cols-md-6 g-3">
 
-        {{-- 1. Category --}}
+        {{--  Category --}}
         <div class="col">
             <div class="card text-white bg-secondary h-100">
                 <div class="card-body">
@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        {{-- 2. Crisis --}}
+        {{--  Crisis --}}
         <div class="col">
             <div class="card text-white bg-warning h-100">
                 <div class="card-body">
@@ -29,7 +29,7 @@
             </div>
         </div>
 
-        {{-- 3. Donor --}}
+        {{--  Donor --}}
         <div class="col">
             <div class="card text-white bg-primary h-100">
                 <div class="card-body">
@@ -40,7 +40,7 @@
             </div>
         </div>
 
-        {{-- 4. Donation --}}
+        {{--  Donation --}}
         <div class="col">
             <div class="card text-white bg-success h-100">
                 <div class="card-body">
@@ -51,7 +51,7 @@
             </div>
         </div>
 
-        {{-- 5. Volunteer --}}
+        {{-- Volunteer --}}
         <div class="col">
             <div class="card text-white bg-orange h-100" style="background-color: #fd7e14;">
                 <div class="card-body">
@@ -62,7 +62,7 @@
             </div>
         </div>
 
-        {{-- 6. Report --}}
+        {{--  Report --}}
         <div class="col">
             <div class="card text-white bg-info h-100">
                 <div class="card-body">

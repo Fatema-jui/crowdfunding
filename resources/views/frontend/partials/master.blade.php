@@ -34,14 +34,16 @@
 
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{{url('/frontend/css/style.css')}}">
+        
+        
 
   </head>
 
-  {{-- ✅ overflow-hidden যোগ করা হয়েছে --}}
-  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" class="overflow-hidden">
+  
+  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" class="overflow-hidden" >
 
-    {{-- ✅ overflow-hidden w-100 যোগ করা হয়েছে --}}
-    <div class="site-wrap overflow-hidden w-100" id="home-section">
+    
+    <div class="site-wrap overflow-hidden  w-100" id="home-section">
 
       <div class="site-mobile-menu site-navbar-target">
         <div class="site-mobile-menu-header">

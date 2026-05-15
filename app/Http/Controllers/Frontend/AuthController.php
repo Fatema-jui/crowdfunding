@@ -14,7 +14,7 @@ class AuthController extends Controller
         return view ('frontend.pages.register.register');
     }
 
-    // ── REGISTER SUBMIT ───────────────────────────
+    // ── REGISTER SUBMIT 
     public function submitRegister(Request $request)
     {
         $request->validate([
@@ -41,7 +41,7 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        // ── নতুন: redirect parameter থাকলে সেখানে যাবে ──
+        // new parameter to redirect to the intended page after registration    
         $redirect = $request->input('redirect');
         return redirect($redirect ?: route('website'))
                ->with('success', 'Registration successful!');
@@ -51,7 +51,7 @@ class AuthController extends Controller
         return view ('frontend.pages.login.login');
     }
 
-    // ── LOGIN SUBMIT ──────────────────────────────
+    // ── LOGIN SUBMIT 
     public function loginSubmit(Request $request)
     {
         $request->validate([
@@ -70,7 +70,7 @@ class AuthController extends Controller
 
             if(Auth::user()->role == 'admin') {
                 return redirect()->route('dashboard')
-                       ->with('success', 'Welcome Admin!');
+                          ->with('success', 'Login successful! Welcome Admin');
             }
 
             $redirect = $request->input('redirect');

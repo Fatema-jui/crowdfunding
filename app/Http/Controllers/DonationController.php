@@ -43,6 +43,7 @@ class DonationController extends Controller
     $donation = Donation::with(['donor', 'crisis'])->find($id);
     return view('donation.donationview', compact('donation'));
     }
+    
 
     public function donationdelete($id){
         $donation=Donation::find($id);

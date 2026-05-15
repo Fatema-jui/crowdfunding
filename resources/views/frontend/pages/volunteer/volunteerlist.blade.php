@@ -49,7 +49,7 @@
             <tbody>
                 @foreach($volunteers as $volunteer)
                 <tr>
-                    <td>{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</td>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $volunteer->volunteer_name }}</td>
                     <td>{{ $volunteer->email }}</td>
                     <td>{{ $volunteer->address ?? 'N/A' }}</td>
