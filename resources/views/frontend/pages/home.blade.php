@@ -122,9 +122,7 @@
                          style="height: 180px; object-fit: cover;"
                          alt="{{ $crisis->crisis_title }}">
                 @else
-                    <div class="card-img-top bg-secondary d-flex align-items-center
-                                justify-content-center"
-                         style="height: 180px;">
+                    <div class="card-img-top bg-secondary d-flex align-items-centerjustify-content-center" style="height: 180px;">
                         <span class="text-white">No Image</span>
                     </div>
                 @endif
@@ -171,7 +169,7 @@
         <div class="d-flex justify-content-between align-items-center
                     bg-white rounded shadow-sm p-4 flex-wrap gap-3">
             <div>
-                <h5 class="fw-bold mb-1">Helping the Homeless, Hungry & Hurting Children</h5>
+                <h5 class="fw-bold mb-1">Helping the Homeless, Hungry & Hurting People</h5>
                 <p class="text-muted mb-0 small">Your small contribution can change a life.</p>
             </div>
             <a href="{{ route('crisis.list') }}" class="btn btn-primary">

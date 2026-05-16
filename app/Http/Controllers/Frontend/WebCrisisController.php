@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Crisis;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
 use App\Models\Expense;
 use App\Models\Volunteer;
@@ -52,6 +53,9 @@ class WebCrisisController extends Controller
         $crisis->goal    = $goal;
         $crisis->percent = $goal > 0 ? min(100, ($raised / $goal) * 100) : 0;
         $crisis->isFull  = $raised >= $goal && $goal > 0;
+        
+        $crisis->button_disabled = $crisis->isFull || Auth::guest() ? 'disabled' : '';
+        $crisis->target_reached = $crisis->isFull ? 'Target Reached!' : 'Confirm Donation';
 
         return view('frontend.pages.details', compact('crisis'));
     }
@@ -61,6 +65,7 @@ class WebCrisisController extends Controller
         $crisis = Crisis::findOrFail($id); 
         $expenses = Expense::with('volunteer')->where('crisis_id', $id)->get();
         $totalSpent = $expenses->where('status', 'approved')->sum('amount');
-        return view('frontend.pages.expense-show', compact('crisis', 'expenses', 'totalSpent'));
+        $total = $expenses->sum('amount');
+        return view('frontend.pages.expense-show', compact('crisis', 'expenses', 'totalSpent', 'total'));
     }
 }

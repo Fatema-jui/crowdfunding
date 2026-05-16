@@ -58,7 +58,7 @@
                 <tr style="border-top: 2px solid #dee2e6;">
                     <td class="pt-3 fw-bold">Total</td>
                     <td></td>
-                    <td class="pt-3 fw-bold">BDT  {{ number_format($expenses->sum('amount')) }}</td>
+                    <td class="pt-3 fw-bold">BDT  {{ number_format($total) }}</td>
                     <td></td>
                 </tr>
             </tbody>

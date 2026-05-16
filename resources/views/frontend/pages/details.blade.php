@@ -14,8 +14,7 @@
                      style="height: 300px; object-fit: cover;"
                      alt="{{ $crisis->crisis_title }}">
             @else
-                <div class="bg-secondary rounded d-flex align-items-center
-                            justify-content-center mb-4"
+                <div class="bg-secondary rounded d-flex align-items-center justify-content-center mb-4"
                      style="height: 300px;">
                     <span class="text-white">No Image</span>
                 </div>
@@ -80,10 +79,10 @@
                     </div>
 
                     <button type="submit"
-                            class="btn w-100 py-2 fw-semibold"
-                            style="background-color: {{ $crisis->isFull ? '#6b7280' : '#0f766e' }}; color: #fff;"
-                            {{ $crisis->isFull || auth()->guest() ? 'disabled' : '' }}>
-                        {{ $crisis->isFull ? 'Target Reached!' : 'Confirm Donation' }}
+                      class="btn w-100 py-2 fw-semibold"
+                      style="background-color: {{ $crisis->isFull ? '#6b7280' : '#0f766e' }}; color: #fff;"
+                      {{ $crisis->button_disabled  }}>
+                      {{ $crisis->target_reached }}
                     </button>
 
                 </form>
