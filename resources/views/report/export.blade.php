@@ -37,9 +37,9 @@
                         <td>{{ number_format($expense->amount, 2) }}</td>
                         <td>{{ $expense->date }}</td>
                         <td>
-                            @if($expense->status === 'approved')
+                            @if($expense->status == 'approved')
                                 <span class="text-success font-weight-bold">Approved</span>
-                            @elseif($expense->status === 'pending')
+                            @elseif($expense->status == 'pending')
                                 <span class="text-warning font-weight-bold">Pending</span>
                             @else
                                 <span class="text-danger font-weight-bold">Rejected</span>

@@ -33,7 +33,7 @@
 
                     <form action="{{ route('submit.register') }}" method="POST">
                         @csrf
-                        {{-- এই line টা নতুন যোগ হয়েছে --}}
+                        
                         <input type="hidden" name="redirect" value="{{ request('redirect') }}">
 
                         <div class="mb-3">

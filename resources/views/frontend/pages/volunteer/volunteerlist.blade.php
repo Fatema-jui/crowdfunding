@@ -1,21 +1,16 @@
 @extends('frontend.partials.master')
 @section('content')
 
-{{-- Header --}}
-<div style="background-color: #198754; padding: 40px 0;">
-    <div class="container d-flex justify-content-between align-items-center">
-        <div>
-            <h2 class="text-white fw-bold mb-1">Approved Volunteers</h2>
-            <p class="text-white-50 mb-0">Admin approved volunteer list</p>
-        </div>
-        <span class="badge fs-6 px-3 py-2"
-              style="background-color: rgba(255,255,255,0.15); color:white;">
-            Total: {{ $totalApproved }} Volunteers
-        </span>
-    </div>
-</div>
-
 <div class="container my-4">
+
+    {{-- Header Card --}}
+    <div class="card border-0 shadow-sm mb-4"
+         style="background-color: #198754;">
+        <div class="card-body py-4 px-4">
+            <h2 class="text-white fw-bold mb-1">Approved Volunteers</h2>
+            <p class="text-white mb-0">Admin approved volunteer list</p>
+        </div>
+    </div>
 
     {{-- Stats Cards --}}
     <div class="row g-3 mb-4">
@@ -33,36 +28,43 @@
         </div>
     </div>
 
-    {{-- Table --}}
-    <div class="table-responsive">
-        <table class="table table-striped table-hover align-middle">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Area</th>
-                    <th scope="col">Approved On</th>
-                    <th scope="col">Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($volunteers as $volunteer)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $volunteer->volunteer_name }}</td>
-                    <td>{{ $volunteer->email }}</td>
-                    <td>{{ $volunteer->address ?? 'N/A' }}</td>
-                    <td>{{ \Carbon\Carbon::parse($volunteer->updated_at)->format('d M Y') }}</td>
-                    <td>
-                        <span class="badge bg-success px-3 py-2">
-                            Approved
-                        </span>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+    {{-- Table Card --}}
+    <div class="card border-0 shadow-sm">
+        <div class="card-header bg-white border-bottom py-3">
+            <h5 class="fw-bold mb-0">Volunteer List</h5>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover align-middle mb-0">
+                    <thead class="bg-white border-bottom">
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Area</th>
+                            <th>Approved On</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($volunteers as $volunteer)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $volunteer->volunteer_name }}</td>
+                            <td>{{ $volunteer->email }}</td>
+                            <td>{{ $volunteer->address ?? 'N/A' }}</td>
+                            <td>{{ \Carbon\Carbon::parse($volunteer->updated_at)->format('d M Y') }}</td>
+                            <td>
+                                <span class="badge bg-success px-3 py-2">
+                                    Approved
+                                </span>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
 </div>

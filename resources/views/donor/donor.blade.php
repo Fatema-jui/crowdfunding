@@ -17,7 +17,7 @@
         <tbody>
             @foreach($donors as $donor)
             <tr>
-                <td scope="row">{{ $donor->id }}</td>
+                <td scope="row">{{  $loop->iteration }}</td>
                 <td>{{ $donor->name }}</td>
                 <td>{{ $donor->email }}</td>
                 <td>{{ $donor->phone }}</td>

@@ -71,18 +71,18 @@
                         <td colspan="7" class="text-center">No expenses found.</td>
                     </tr>
                 @else
-                    @foreach($expenses as $i => $expense)
+                    @foreach($expenses as $index => $expense)
                     <tr>
-                        <td>{{ $i + 1 }}</td>
+                        <td>{{ $index + 1 }}</td>
                         <td>{{ $expense->crisis->crisis_title ?? '—' }}</td>
                         <td>{{ $expense->volunteer->volunteer_name ?? '—' }}</td>
                         <td>{{ $expense->purpose }}</td>
                         <td>{{ number_format($expense->amount, 2) }}</td>
                         <td>{{ $expense->date }}</td>
                         <td>
-                            @if($expense->status === 'approved')
+                            @if($expense->status == 'approved')
                                 <span class="badge bg-success">Approved</span>
-                            @elseif($expense->status === 'pending')
+                            @elseif($expense->status == 'pending')
                                 <span class="badge bg-warning text-dark">Pending</span>
                             @else
                                 <span class="badge bg-danger">Rejected</span>

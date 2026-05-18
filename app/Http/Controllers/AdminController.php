@@ -16,7 +16,7 @@ class AdminController extends Controller
 {
     public function dashboardindex(){
         $totalDonor      = Donor::count();
-        $totalVolunteer  = Volunteer::count();
+        $totalVolunteer  = Volunteer::where('status', 'approved')->count();
         $totalDonation   = Donation::sum('amount');
         $totalCrisis     = Crisis::count();
         $totalUser       = User::count();

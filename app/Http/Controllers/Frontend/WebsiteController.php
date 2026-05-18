@@ -13,7 +13,7 @@ class WebsiteController extends Controller
 {
     public function websiteindex()
     {
-        $categories = Category::take(4)->get();
+        $categories = Category::latest()->take(4)->get();
 
         
         $crises = Crisis::with('category')
@@ -41,7 +41,7 @@ class WebsiteController extends Controller
 
         $totalDonated = Donation::sum('amount');
         $activeCrises = Crisis::where('status', 'active')->count();
-        $volunteers   = Volunteer::count();
+        $volunteers   = Volunteer::where('status', 'approved')->count();
 
         return view('frontend.pages.home', compact(
             'categories',
