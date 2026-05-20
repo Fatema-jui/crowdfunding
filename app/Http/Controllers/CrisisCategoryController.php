@@ -52,7 +52,7 @@ class CrisisCategoryController extends Controller
     }
 
     public function update(Request $request, $id)
-{ 
+    { 
     $request->validate([
         'category_name' => 'required',
         'status' => 'required',
