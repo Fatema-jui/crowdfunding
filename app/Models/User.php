@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use App\Models\Donation;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
@@ -44,5 +45,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function donations()
+    {
+    return $this->hasMany(Donation::class, 'donor_id');
     }
 }

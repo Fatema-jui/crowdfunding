@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Library\SslCommerz\SslCommerzNotification;
 use App\Models\Donation;
 use App\Models\User;
@@ -96,7 +97,7 @@ class SslCommerzPaymentController extends Controller
         $sslc = new SslCommerzNotification();
 
         $order_details = Donation::where('transaction_id', $tran_id)
-            ->select('transaction_id', 'status', 'amount', 'crisis_id') //  crisis_id added
+            ->select('transaction_id', 'status', 'amount', 'crisis_id', 'donor_id') //  crisis_id and donor_id added
             ->first();
 
         if (!$order_details) {
@@ -116,6 +117,11 @@ class SslCommerzPaymentController extends Controller
                 // Update raised_amount in crisis table
                 Crisis::where('id', $order_details->crisis_id)
                     ->increment('raised_amount', $order_details->amount);
+                // Log in the donor after successful payment
+                    $donor = User::find($order_details->donor_id);
+                    if ($donor) {
+                        Auth::login($donor);
+                    }
 
                 session(['tran_id' => $tran_id]);
                 return redirect()->route('payment.success');

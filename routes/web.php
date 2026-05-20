@@ -119,6 +119,8 @@ Route::get('/report/generate', [ReportController::class, 'generate'])->name('rep
 Route::get('/report/export', [ReportController::class, 'export'])->name('report.export');
  
 });
+
+
 // SSLCOMMERZ Start
 Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
 Route::get('/example2', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
@@ -134,6 +136,8 @@ Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
 //SSLCOMMERZ END
 
 Route::get('/payment/success', function () {
+   
+    $tran_id  = session('tran_id');
 
     $donation = \App\Models\Donation::latest()->first();
 

@@ -18,6 +18,16 @@
 </div><br>
 
 <div class="form-group">
+    <label for="password" class="form-label">Password:</label>
+    <input name="password" type="password" class="form-control" id="password" placeholder="••••••••">
+</div><br>
+
+<div class="form-group">
+    <label for="role" class="form-label">Role:</label>
+    <input name="role" type="text" class="form-control" id="role" placeholder="Enter role here.." value="donor" readonly>
+</div><br>
+
+<div class="form-group">
     <label for="phone" class="form-label">Phone:</label>
     <input name="phone" type="number" class="form-control" id="phone" placeholder="Enter Phone Number..">
 </div><br>

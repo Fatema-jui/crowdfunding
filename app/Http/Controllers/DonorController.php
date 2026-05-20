@@ -12,11 +12,12 @@ class DonorController extends Controller
     public function donorindex(Request $request)
     {
         $donors = User::where('role', 'donor')
-            ->latest()
+            ->whereHas('donations')
             ->get();
 
-        $total = User::where('role', 'donor')->count();
-
+        $total = User::where('role', 'donor')
+            ->whereHas('donations')
+            ->count();
         return view('donor.donor', compact('donors', 'total'));
     }
 
@@ -27,15 +28,13 @@ class DonorController extends Controller
 
     public function donorsubmit(Request $request)
     {
-    Donor::create([
+    User::create([
         'name'=>$request->name,
         'email'=>$request->email,
+        'password'=>bcrypt($request->password),
         'phone'=>$request->phone,
-        'address'=>$request->address,
-        'donor_type'=>$request->donor_type,
-        'donation_date'=>$request->donation_date,
-        'total_donation'=>$request->total_donation,
-        'status'=>'pending'
+        'role'=>'donor',
+    
     ]);
     return redirect()->route('donor');
   }
