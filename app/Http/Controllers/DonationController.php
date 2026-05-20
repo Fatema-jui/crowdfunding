@@ -12,7 +12,7 @@ use App\Models\User;
 class DonationController extends Controller
 {
     public function donationindex(){
-        $donations=Donation::all();
+        $donations=Donation::with(['donor', 'crisis'])->get();
         return view ('donation.donation',compact('donations'));
     }
 

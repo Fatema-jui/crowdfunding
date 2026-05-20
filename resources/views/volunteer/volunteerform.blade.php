@@ -18,6 +18,16 @@
 </div><br>
 
 <div class="form-group">
+    <label for="password" class="form-label">Password:</label>
+    <input  name="password" type="password" class="form-control" placeholder="Enter Password..">
+</div><br>
+
+<div class="form-group">
+    <label for="password-conformation" class="form-label">Confirm Password:</label>
+    <input  name="password_confirmation" type="password" class="form-control" placeholder="Confirm Password..">
+</div><br>
+
+<div class="form-group">
     <label for="phone" class="form-label">Phone:</label>
     <input name="phone" type="text" class="form-control" placeholder="Enter Phone..">
 </div><br>
@@ -31,6 +41,17 @@
     <label for="age" class="form-label">Age:</label>
     <input name="age" type="number" class="form-control" placeholder="Enter Age..">
     
+</div><br>
+
+<div class="form-group">
+    <label for="NID" class="form-label">NID:</label>
+    <input name="NID" type="text" class="form-control" placeholder="Enter NID..">
+</div><br>
+
+<div class="form-group">
+    <label for="birth-date" class="form-label">Birth Date:</label>
+    <input name="birth_date" type="date" class="form-control" placeholder="Enter Birth Date..">      
+
 </div><br>
 
 <div class="form-group">

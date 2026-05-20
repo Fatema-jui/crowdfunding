@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\Crisis;
 use App\Models\Volunteer;
@@ -18,6 +19,9 @@ class WebVolunteerController extends Controller
             $request->validate([
                 'volunteer_name' => 'required|string|max:255',
                 'email' => 'required|email|max:255',
+                'password' => 'required|string|min:6|confirmed',
+                'NID' => 'nullable|string|max:20',
+                'birth_date' => 'nullable|date',
                 'phone' => 'required|string|max:20',
                 'message' => 'nullable|string',
             ]);
@@ -25,15 +29,76 @@ class WebVolunteerController extends Controller
              Volunteer::create([
             'volunteer_name'=> $request->volunteer_name,
             'email'   => $request->email,
+            'password' => bcrypt($request->password),
             'phone'   => $request->phone,
             'address' => $request->address,
             'age'     => $request->age,
+            'NID'     => $request->NID,
+            'birth_date' => $request->birth_date,
             'gender'  => $request->gender,
             'message' => $request->message,
         ]);
     
-            return redirect()->route('website')->with('success', 'Your volunteer application has been submitted successfully!');
+            return redirect()->route('webvolunteer.login')->with('success', 'Your volunteer application has been submitted successfully!');
         }
+
+
+    public function volunteerLogin(){
+
+        return view ('frontend.pages.volunteer.volunteer-login');
+        
+    }    
+
+    public function volunteerLoginSubmit(Request $request)
+    {
+        $request->validate([
+            'email'    => 'required|email',
+            'password' => 'required',
+        ]);
+
+       $volunteer = Volunteer::where('email', $request->email)->first();
+
+        if (!$volunteer || !Hash::check($request->password, $volunteer->password)) {
+          return back()->withErrors(['email' => 'Email or Password is incorrect']);
+        }
+
+      
+    // store to session
+    session([
+        'volunteer_id'   => $volunteer->id,
+        'volunteer_name' => $volunteer->volunteer_name,
+        'volunteer_email'=> $volunteer->email,
+    ]);
+
+      return redirect()->route('website')->with('success', 'Welcome, ' . $volunteer->volunteer_name . '!');
+
+    }
+
+    public function volunteerLogout()
+    {
+      session()->forget(['volunteer_id', 'volunteer_name', 'volunteer_email']);
+      return redirect()->route('website')->with('success', 'Logged out successfully!');
+    }
+
+    public function volunteerProfile()
+    {
+       $volunteer = Volunteer::find(session('volunteer_id'));
+       return view('frontend.pages.volunteer.volunteer-profile', compact('volunteer'));
+    }
+
+    public function volunteerApplication()
+     {
+      $volunteer = Volunteer::find(session('volunteer_id'));
+      return view('frontend.pages.volunteer.volunteer-application', compact('volunteer'));
+    }
+
+    public function volunteerTasks()
+     {
+      $volunteer = Volunteer::with('crises')->find(session('volunteer_id'));
+      return view('frontend.pages.volunteer.volunteer-task', compact('volunteer'));
+    }
+
+    
 
     public function volunteerList(){
 

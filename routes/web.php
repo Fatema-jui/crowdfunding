@@ -18,6 +18,7 @@ use App\Http\Controllers\DonorController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\VolunteerController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\Frontend\WebjuiController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SslCommerzPaymentController;
 
@@ -40,6 +41,13 @@ Route::get('/crowdfunding/expense-page/{id}',[WebCrisisController::class,'expens
 Route::get('/crowdfunding/volunteerlist',[WebVolunteerController::class,'volunteerList'])->name('volunteer.list');
 Route::get('/crowdfunding/volunteerform',[WebVolunteerController::class,'volunteerForm'])->name('webvolunteer.form');
 Route::post('/crowdfunding/volunteersubmit',[WebVolunteerController::class,'volunteerSubmit'])->name('webvolunteer.submit');
+Route::get('/crowdfunding/volunteerlogin',[WebVolunteerController::class,'volunteerLogin'])->name('webvolunteer.login');
+Route::post('/crowdfunding/volunteerlogin-submit',[WebVolunteerController::class,'volunteerLoginSubmit'])->name('webvolunteer.login.submit');
+Route::get('/crowdfunding/volunteer-logout', [WebVolunteerController::class, 'volunteerLogout'])->name('webvolunteer.logout');
+Route::get('/crowdfunding/volunteer-profile',    [WebVolunteerController::class, 'volunteerProfile'])->name('webvolunteer.profile');
+Route::get('/crowdfunding/volunteer-application',[WebVolunteerController::class, 'volunteerApplication'])->name('webvolunteer.application');
+Route::get('/crowdfunding/volunteer-tasks',      [WebVolunteerController::class, 'volunteerTasks'])->name('webvolunteer.tasks');
+
 
 
 

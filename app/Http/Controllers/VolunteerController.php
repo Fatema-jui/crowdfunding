@@ -21,9 +21,12 @@ class VolunteerController extends Controller
        Volunteer::create([
         'volunteer_name'=>$request->volunteer_name,
         'email'=>$request->email,
+        'password'=>bcrypt($request->password),
         'phone'=>$request->phone,
         'address'=>$request->address,
         'age'=>$request->age,
+        'NID'=>$request->NID,
+        'birth_date'=>$request->birth_date,
         'gender'=>$request->gender,
         'message'=>$request->message,
         'status'=>$request->status 

@@ -17,6 +17,8 @@
                 <th>Phone</th>
                 <th>Address</th>
                 <th>Age</th>
+                <th>NID</th>
+                <th>Birth Date</th>
                 <th>Gender</th>
                 <th>Message</th>
                 <th>Status</th>
@@ -32,6 +34,8 @@
                 <td>{{ $volunteer->phone }}</td>
                 <td>{{ $volunteer->address }}</td>
                 <td>{{ $volunteer->age }}</td>
+                <td>{{ $volunteer->NID }}</td>
+                <td>{{ $volunteer->birth_date }}</td>
                 <td>{{ $volunteer->gender }}</td>
                 <td>{{ $volunteer->message }}</td>
 

@@ -39,6 +39,16 @@
                     </div>
 
                     <div class="col-md-6">
+                        <label for="password" class="form-label">Password:</label>
+                        <input name="password" type="password" class="form-control" id="password" placeholder="••••••••" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="password-confirmation" class="form-label">Confirm Password:</label>
+                        <input name="password_confirmation" type="password" class="form-control" id="password-confirmation" placeholder="••••••••" required>
+                    </div>
+
+                    <div class="col-md-6">
                         <label for="phone" class="form-label">Phone Number:</label>
                         <input name="phone" type="text" class="form-control" id="phone" placeholder="Enter your phone number..">
                     </div>
@@ -51,6 +61,16 @@
                     <div class="col-md-6">
                         <label for="age" class="form-label">Age:</label>
                         <input name="age" type="number" class="form-control" id="age" placeholder="Enter your age..">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="NID" class="form-label">National ID:</label>
+                        <input name="NID" type="text" class="form-control" id="NID" placeholder="Enter your National ID..">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="birth_date" class="form-label">Birth Date:</label>
+                        <input name="birth_date" type="date" class="form-control" id="birth_date">
                     </div>
 
                     <div class="col-md-6">
@@ -68,11 +88,15 @@
                         <textarea name="message" class="form-control" id="message" rows="4"></textarea>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-12  text-center ">
                         <button type="submit" class="btn"
                                 style="background-color: #0f766e; color: #fff;">
                             Submit Application
                         </button>
+                        <p class="text-center mt-3 mb-0 small">
+                            Already have account?
+                            <a href="{{ route('webvolunteer.login') }}" style="color: #0f766e;">Login here</a>
+                        </p> 
                     </div>
 
                 </form>

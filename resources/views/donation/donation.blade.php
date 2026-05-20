@@ -7,8 +7,8 @@
   <table class="table table-striped table-hover">
     <thead>
         <th Scope="col">#</th>
-        <th Scope="col">Crisis_id</th>
-        <th Scope="col">Donar_id</th>
+        <th Scope="col">Crisis Title</th>
+        <th Scope="col">Donar name</th>
         <th Scope="col">Donation Amount</th>
         <th Scope="col">payment Method</th>
         <th Scope="col">Donation Date</th>
@@ -20,8 +20,8 @@
         @foreach($donations as $donation)
         <tr>            
             <td Scope="row">{{$donation->id}}</td>
-            <td>{{$donation->crisis_id}}</td>
-            <td>{{$donation->donor_id}}</td>
+            <td>{{$donation->crisis->crisis_title}}</td>
+            <td>{{$donation->donor?->name}}</td>
             <td>{{$donation->amount}}</td>
             <td>{{$donation->payment_method}}</td>
             <td>{{$donation->donation_date}}</td>
