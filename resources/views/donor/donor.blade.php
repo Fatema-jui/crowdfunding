@@ -25,8 +25,6 @@
                 <td>
                     <div class="btn-group" role="group" style="gap:5px;">
                         <a href="{{ route('donor.view', $donor->id) }}" class="btn btn-primary btn-sm">View</a>
-                        <a href="" class="btn btn-warning btn-sm">Edit</a> 
-                        <a href="{{ route('donor.delete', $donor->id) }}" class="btn btn-danger btn-sm">Delete</a>
                     </div>
                 </td>
             </tr>

@@ -21,6 +21,7 @@
                                     <th>Amount</th>
                                     <th>Date</th>
                                     <th>Status</th>
+                                    <th>Re Donation</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -34,10 +35,21 @@
                                         @if($donation->status == 'completed')
                                             <span class="badge bg-success">Completed</span>
                                         @elseif($donation->status == 'pending')
-                                            <span class="badge bg-warning text-dark">Pending</span>
+                                            <span class="badge bg-warning ">Pending</span>
                                         @else
                                             <span class="badge bg-danger">Failed</span>
                                         @endif
+                                    </td>
+                                    <td>
+                                    @if($donation->status == 'completed')
+                                        <a href="{{ route('crisis.details', $donation->crisis_id) }}" 
+                                           class="btn btn-sm btn-primary"
+                                          style="font-size: 11px; padding: 2px 8px;">
+                                        Donate Again
+                                       </a>
+                                    @else
+                                       <span class="text-muted">N/A</span>
+                                    @endif
                                     </td>
                                 </tr>
                                 @endforeach

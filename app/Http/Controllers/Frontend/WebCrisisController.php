@@ -54,7 +54,7 @@ class WebCrisisController extends Controller
         $crisis->percent = $goal > 0 ? min(100, ($raised / $goal) * 100) : 0;
         $crisis->isFull  = $raised >= $goal && $goal > 0;
         
-        $crisis->button_disabled = $crisis->isFull || Auth::guest() ? 'disabled' : '';
+        $crisis->button_disabled = ($crisis->isFull || Auth::guest())? 'disabled' : '';
         $crisis->target_reached = $crisis->isFull ? 'Target Reached!' : 'Confirm Donation';
 
         return view('frontend.pages.details', compact('crisis'));

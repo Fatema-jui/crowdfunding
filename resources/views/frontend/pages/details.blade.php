@@ -81,7 +81,7 @@
                     <button type="submit"
                       class="btn w-100 py-2 fw-semibold"
                       style="background-color: {{ $crisis->isFull ? '#6b7280' : '#0f766e' }}; color: #fff;"
-                      {{ $crisis->button_disabled  }}>
+                      {{ !!$crisis->button_disabled  !!}}>
                       {{ $crisis->target_reached }}
                     </button>
 

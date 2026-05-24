@@ -29,7 +29,7 @@
     </div>
 </div>
 
-{{-- ── STATS ───────────────────────────────────── --}}
+{{--  STATS  --}}
 <div class="container my-4">
     <div class="row g-3">
 
@@ -71,7 +71,7 @@
     </div>
 </div>
 
-{{-- ── CATEGORY CARDS ──────────────────────────── --}}
+{{-- CATEGORY CARDS --}}
 <div class="container my-4">
     <h5 class="mb-3">Browse by Category</h5>
     <div class="row row-cols-2 row-cols-md-4 g-3">
@@ -101,7 +101,7 @@
     </div>
 </div>
 
-{{-- ── CRISIS CARDS ─────────────────────────────── --}}
+{{-- CRISIS CARDS --}}
 <div class="container mb-5">
 
     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -163,7 +163,7 @@
     </div>
 </div>
 
-{{-- ── CTA BANNER ───────────────────────────────── --}}
+{{--  CTA BANNER  --}}
 <div class="bg-light py-4">
     <div class="container">
         <div class="d-flex justify-content-between align-items-center

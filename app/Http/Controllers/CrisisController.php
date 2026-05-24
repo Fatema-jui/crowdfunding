@@ -63,7 +63,7 @@ class CrisisController extends Controller
     public function volunteerAssignStore(Request $request, $id){
 
     $crisis = Crisis::findOrFail($id);
-    $crisis->volunteers()->sync($request->volunteer_ids ?? []);
+    $crisis->volunteers()->syncWithoutDetaching($request->volunteer_ids ?? []);
     return redirect()->back();
      
     }

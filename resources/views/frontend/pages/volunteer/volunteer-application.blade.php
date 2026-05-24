@@ -12,13 +12,17 @@
                 </div>
 
                 @if($volunteer->status == 'approved')
+
                     <div class="alert alert-success">
                         Your application has been Approved! You are now an active volunteer.
                     </div>
+
                 @elseif($volunteer->status == 'rejected')
+                
                     <div class="alert alert-danger">
                          Your application has been Rejected! Please contact us for details.
                     </div>
+
                 @else
                     <div class="alert alert-warning">
                          Your application is Pending! review. We will notify you soon.

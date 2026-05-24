@@ -14,43 +14,56 @@
 
             {{-- Nav Links --}}
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-3">
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('website') }}">Home</a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('crisis.list') }}">Our Crisis</a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('volunteer.list') }}">Volunteer</a>
                 </li>
+                
             </ul>
 
             {{-- Right Side Buttons --}}
             <div class="d-flex gap-2 align-items-center">
 
-                {{-- Case 1: Volunteer Login --}}
+                {{--  Volunteer Login --}}
+                
                 @if(session('volunteer_id'))
 
                     <div class="dropdown">
+
                         <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
                             {{ session('volunteer_name') }}
                         </button>
+                        
                         <ul class="dropdown-menu dropdown-menu-end">
+                            
                             <li style="border-bottom: 1px solid #d1d5db;">
                                 <a class="dropdown-item" href="{{ route('webvolunteer.profile') }}">My Profile</a>
                             </li>
+
                             <li style="border-bottom: 1px solid #d1d5db;">
                                 <a class="dropdown-item" href="{{ route('webvolunteer.application') }}">My Application</a>
                             </li>
+
                             <li>
                                 <a class="dropdown-item" href="{{ route('webvolunteer.tasks') }}">Assigned Task</a>
                             </li>
+
                         </ul>
+
                     </div>
+
                     <a href="{{ route('webvolunteer.logout') }}" class="btn btn-outline-light btn-sm">Logout</a>
 
                
-                 {{-- Case 2: Donor/User Login --}}
+                 {{-- Donor/User Login --}}
                 
                 @elseif(auth()->check())
 
@@ -63,7 +76,7 @@
                         <ul class="dropdown-menu dropdown-menu-end">
 
                             <li style="border-bottom: 1px solid #d1d5db;">
-                                <a class="dropdown-item" href="{{ route('donor.profile') }}">My Profile</a>
+                                <a class="dropdown-item" style="min-width: 150px;" href="{{ route('donor.profile') }}">My Profile</a>
                             </li>
 
                             <li >
@@ -79,9 +92,25 @@
                         @csrf
                     </form>
 
-                {{-- Case 3: Not Logged In --}}
+                {{--  Not Logged In --}}
                 @else
-                    <a href="{{ route('show.login') }}" class="btn btn-outline-light btn-sm">Login</a>
+
+                <div class="dropdown">
+
+                        <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            Login
+                        </button>
+
+                        <ul class="dropdown-menu dropdown-menu-end">
+
+                            <li style="border-bottom: 1px solid #d1d5db;">
+                                <a class="dropdown-item" href="{{ route('show.login') }}">As a Donor/Admin</a>
+                                 
+                            </li>
+
+                            <li><a class="dropdown-item" href="{{ route('webvolunteer.login') }}">As a Volunteer</a></li>
+                        </ul>
+                    </div>
 
                     <a href="{{ route('show.register') }}" class="btn btn-outline-light btn-sm">Register</a>
                 @endif

@@ -52,19 +52,23 @@ class WebVolunteerController extends Controller
     public function volunteerLoginSubmit(Request $request)
     {
         $request->validate([
+
             'email'    => 'required|email',
             'password' => 'required',
+
         ]);
 
        $volunteer = Volunteer::where('email', $request->email)->first();
 
         if (!$volunteer || !Hash::check($request->password, $volunteer->password)) {
+
           return back()->withErrors(['email' => 'Email or Password is incorrect']);
         }
 
       
     // store to session
     session([
+
         'volunteer_id'   => $volunteer->id,
         'volunteer_name' => $volunteer->volunteer_name,
         'volunteer_email'=> $volunteer->email,
@@ -74,28 +78,73 @@ class WebVolunteerController extends Controller
 
     }
 
-    public function volunteerLogout()
+    public function volunteerLogout(Request $request)
     {
-      session()->forget(['volunteer_id', 'volunteer_name', 'volunteer_email']);
+      $request->session()->forget(['volunteer_id', 'volunteer_name', 'volunteer_email']);
+
       return redirect()->route('website')->with('success', 'Logged out successfully!');
     }
 
-    public function volunteerProfile()
-    {
+
+    public function volunteerProfile(){
+        
        $volunteer = Volunteer::find(session('volunteer_id'));
        return view('frontend.pages.volunteer.volunteer-profile', compact('volunteer'));
     }
 
-    public function volunteerApplication()
-     {
-      $volunteer = Volunteer::find(session('volunteer_id'));
-      return view('frontend.pages.volunteer.volunteer-application', compact('volunteer'));
+    public function volunteerProfileUpdate(Request $request){
+    
+    $request->validate([
+        'volunteer_name' => 'required|string|max:255',
+        'phone'          => 'required|string|max:20',
+    ]);
+
+    $volunteer = Volunteer::find(session('volunteer_id'));
+    $volunteer->volunteer_name = $request->volunteer_name;
+    $volunteer->phone          = $request->phone;
+    $volunteer->address        = $request->address;
+    $volunteer->age            = $request->age;
+    $volunteer->gender         = $request->gender;
+    $volunteer->NID            = $request->NID;
+    $volunteer->birth_date     = $request->birth_date;
+
+    if ($request->filled('password')) {
+        $request->validate([
+            'password' => 'min:6|confirmed',
+        ]);
+        $volunteer->password = bcrypt($request->password);
     }
 
-    public function volunteerTasks()
-     {
+    $volunteer->save();
+
+    return redirect()->route('webvolunteer.profile')->with('success', 'Profile updated successfully!');
+}
+
+
+    public function volunteerApplication(){
+
+      $volunteer = Volunteer::find(session('volunteer_id'));
+      return view('frontend.pages.volunteer.volunteer-application', compact('volunteer'));
+    
+      }
+
+    public function volunteerTasks(){
+
       $volunteer = Volunteer::with('crises')->find(session('volunteer_id'));
+        //dd($volunteer->id, $volunteer->crises); 
+
       return view('frontend.pages.volunteer.volunteer-task', compact('volunteer'));
+    }
+
+    public function taskComplete(Request $request, $crisis_id){
+
+    $volunteer = Volunteer::find(session('volunteer_id'));
+    
+    $volunteer->crises()->updateExistingPivot($crisis_id, [
+        'status' => 'completed'
+    ]);
+
+    return redirect()->route('webvolunteer.tasks')->with('success', 'Assign Task  as completed!');
     }
 
     
@@ -105,12 +154,14 @@ class WebVolunteerController extends Controller
     $volunteers = Volunteer::where('status', 'approved')->latest()->get();
     
     $totalApproved = Volunteer::where('status', 'approved')->count();
+
     $activeAreas = Volunteer::where('status', 'approved')
                     ->whereNotNull('address')
                     ->distinct('address')
                     ->count('address');
 
     return view('frontend.pages.volunteer.volunteerlist', 
+
         compact('volunteers', 'totalApproved', 'activeAreas'));
     }
 

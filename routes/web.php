@@ -51,8 +51,10 @@ Route::post('/crowdfunding/volunteerlogin-submit',[WebVolunteerController::class
 Route::get('/crowdfunding/volunteer-logout',[WebVolunteerController::class, 'volunteerLogout'])->name('webvolunteer.logout');
 
 Route::get('/crowdfunding/volunteer-profile',[WebVolunteerController::class, 'volunteerProfile'])->name('webvolunteer.profile');
+Route::post('/crowdfunding/volunteer-profile-update',[WebVolunteerController::class, 'volunteerProfileUpdate'])->name('webvolunteer.profile.update');
 Route::get('/crowdfunding/volunteer-application',[WebVolunteerController::class, 'volunteerApplication'])->name('webvolunteer.application');
 Route::get('/crowdfunding/volunteer-tasks',[WebVolunteerController::class, 'volunteerTasks'])->name('webvolunteer.tasks');
+Route::post('/crowdfunding/task-complete/{crisis_id}', [WebVolunteerController::class, 'taskComplete'])->name('webvolunteer.task.complete');
 
 
 

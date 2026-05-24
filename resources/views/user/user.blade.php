@@ -35,7 +35,7 @@
                 <td>  
                     <a href="{{ route('user.view', $user->id) }}" class="btn btn-primary btn-sm">View</a>
                     <a href="{{ route('user.edit', $user->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                    @if($user->role != 'admin') {{-- Admin users cannot be deleted --}}
+                    @if($user->role != 'admin') 
                         <a href="{{ route('user.delete', $user->id) }}" class="btn btn-danger btn-sm" >Delete</a>
                     @endif
                 </td>

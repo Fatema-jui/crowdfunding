@@ -3,13 +3,17 @@
 
 <div class="container py-4">
     <div class="row justify-content-center">
-        <div class="col-md-7">
+        <div class="col-md-8">
             <div class="card shadow-sm p-4">
 
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h5 class="fw-bold mb-0">Assigned Tasks</h5>
                     <a href="{{ route('website') }}" class="btn btn-secondary btn-sm">← Back to Home</a>
                 </div>
+
+                @if(session('success'))
+                    <div class="alert alert-success">{{ session('success') }}</div>
+                @endif
 
                 @if($volunteer->crises && $volunteer->crises->count() > 0)
                     <div class="table-responsive">
@@ -18,8 +22,9 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Crisis Name</th>
+                                    <th>Description</th>
                                     <th>Location</th>
-                                    <th>Status</th>
+                                    <th>Task Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -27,12 +32,21 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $crisis->crisis_title }}</td>
+                                    <td>{{ $crisis->description ?? 'N/A' }}</td>
                                     <td>{{ $crisis->location ?? 'N/A' }}</td>
                                     <td>
-                                        @if($crisis->status == 'active')
-                                            <span class="badge bg-success">Assigned</span>
-                                        @else($crisis->status == 'inactive')
-                                            <span class="badge bg-danger">Rejected</span>   
+                                        @if($crisis->pivot->status == 'completed')
+                                            <span class="badge bg-success">Completed</span>
+                                        @else
+                                            <div class="d-flex gap-2 align-items-center">
+                                                <span class="badge bg-success text-light">Assigned</span>
+                                                <form action="{{ route('webvolunteer.task.complete', $crisis->id) }}" method="POST">
+                                                @csrf
+                                                    <button type="submit" class="btn btn-sm btn-danger">
+                                                         Complete
+                                                    </button>
+                                                </form>
+                                            </div>
                                         @endif
                                     </td>
                                 </tr>

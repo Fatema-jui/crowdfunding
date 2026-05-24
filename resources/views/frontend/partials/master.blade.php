@@ -34,10 +34,16 @@
 
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{{url('/frontend/css/style.css')}}">
-        
-        
 
-  </head>
+    <style>
+    .dropdown-item:active {
+        background-color: transparent !important;
+        color: #212529 !important;
+    }
+
+</style>    
+
+</head>
 
   
   <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" class="overflow-hidden" >

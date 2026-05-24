@@ -23,7 +23,7 @@ class DonorController extends Controller
 
     public function donorform()
     {
-    return view ('donor.donorform');
+        return view ('donor.donorform');
     }
 
     public function donorsubmit(Request $request)
@@ -36,7 +36,7 @@ class DonorController extends Controller
         'role'=>'donor',
     
     ]);
-    return redirect()->route('donor');
+       return redirect()->route('donor');
   }
 
     public function donorview($id)

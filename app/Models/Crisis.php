@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
+
 class Crisis extends Model
 {
     
@@ -14,12 +16,17 @@ class Crisis extends Model
         return $this->belongsTo(Category::class, 'category_id');
     }
 
-    public function donations()
-    {
+    public function donations(){
+
         return $this->hasMany(Donation::class, 'crisis_id');
     }
-    public function volunteers()
-    {
-    return $this->belongsToMany(Volunteer::class, 'crisis_volunteer', 'crisis_id', 'volunteer_id');
+
+    public function volunteers(){
+        
+    return $this->belongsToMany(Volunteer::class, 'crisis_volunteer', 'crisis_id', 'volunteer_id')
+        ->withPivot('status')
+        ->withTimestamps();
     }
+               
+
 }

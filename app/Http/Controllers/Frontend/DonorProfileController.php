@@ -12,6 +12,7 @@ use App\Models\Donation;
 class DonorProfileController extends Controller
 {
     public function donorProfile(){
+
         $user= Auth::user();
 
         return view ('frontend.pages.donor-profile.donor-profile', compact('user'));
@@ -29,13 +30,15 @@ class DonorProfileController extends Controller
        $user->phone = $request->phone;
 
     if ($request->filled('password')) {
+
         $request->validate([
             'password' => 'min:6|confirmed',
         ]);
+        
         $user->password = Hash::make($request->password);
     }
 
-    $user->save();
+       $user->save();
 
       return redirect()->route('donor.profile')->with('success', 'Profile updated successfully!');
     }
@@ -43,6 +46,7 @@ class DonorProfileController extends Controller
     public function donorDonationsList()
     {
         $user = Auth::user();
+
         $donations = Donation::with('crisis')->where('donor_id', $user->id)->get();
 
         return view('frontend.pages.donor-profile.my-donation', compact('donations'));

@@ -7,8 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Volunteer extends Model
 {
     protected $guarded=[];
-    public function crises()
-{
-    return $this->belongsToMany(Crisis::class, 'crisis_volunteer');
-}
+
+    public function crises(){
+
+    return $this->belongsToMany(Crisis::class, 'crisis_volunteer')
+        ->withPivot('status')
+        ->withTimestamps();
+    }
 }

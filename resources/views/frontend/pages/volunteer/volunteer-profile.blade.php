@@ -11,62 +11,75 @@
                     <a href="{{ route('website') }}" class="btn btn-secondary btn-sm">← Back to Home</a>
                 </div>
 
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover table-sm">
-                        <thead>
-                            <tr>
-                                <th scope="col">Field</th>
-                                <th scope="col">Details</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Name</td>
-                                <td>{{ $volunteer->volunteer_name }}</td>
-                            </tr>
-                            <tr>
-                                <td>Email</td>
-                                <td>{{ $volunteer->email }}</td>
-                            </tr>
-                            <tr>
-                                <td>Phone</td>
-                                <td>{{ $volunteer->phone }}</td>
-                            </tr>
-                            <tr>
-                                <td>Address</td>
-                                <td>{{ $volunteer->address ?? 'N/A' }}</td>
-                            </tr>
-                            <tr>
-                                <td>Age</td>
-                                <td>{{ $volunteer->age ?? 'N/A' }}</td>
-                            </tr>
-                            <tr>
-                                <td>Gender</td>
-                                <td>{{ ucfirst($volunteer->gender ?? 'N/A') }}</td>
-                            </tr>
-                            <tr>
-                                <td>NID</td>
-                                <td>{{ $volunteer->NID ?? 'N/A' }}</td>
-                            </tr>
-                            <tr>
-                                <td>Birth Date</td>
-                                <td>{{ $volunteer->birth_date ?? 'N/A' }}</td>
-                            </tr>
-                            <tr>
-                                <td>Status</td>
-                                <td>
-                                    @if($volunteer->status == 'approved')
-                                        <span class="badge bg-success">Approved</span>
-                                    @elseif($volunteer->status == 'rejected')
-                                        <span class="badge bg-danger">Rejected</span>
-                                    @else
-                                        <span class="badge bg-warning text-dark">Pending</span>
-                                    @endif
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                @if(session('success'))
+                    <div class="alert alert-success">{{ session('success') }}</div>
+                @endif
+
+                <form action="{{ route('webvolunteer.profile.update') }}" method="POST" class="row g-3">
+                @csrf
+
+                    <div class="col-md-6">
+                        <label class="form-label">Full Name:</label>
+                        <input name="volunteer_name" type="text" class="form-control" value="{{ $volunteer->volunteer_name }}" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Email:</label>
+                        <input type="email" class="form-control" value="{{ $volunteer->email }}" disabled>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Phone:</label>
+                        <input name="phone" type="text" class="form-control" value="{{ $volunteer->phone }}">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Address:</label>
+                        <input name="address" type="text" class="form-control" value="{{ $volunteer->address }}">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Age:</label>
+                        <input name="age" type="number" class="form-control" value="{{ $volunteer->age }}">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Gender:</label>
+                        <select name="gender" class="form-control">
+                            <option value="">-- Select --</option>
+                            <option value="male"   {{ $volunteer->gender == 'male'   ? 'selected' : '' }}>Male</option>
+                            <option value="female" {{ $volunteer->gender == 'female' ? 'selected' : '' }}>Female</option>
+                            <option value="other"  {{ $volunteer->gender == 'other'  ? 'selected' : '' }}>Other</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">NID:</label>
+                        <input name="NID" type="text" class="form-control" value="{{ $volunteer->NID }}">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Birth Date:</label>
+                        <input name="birth_date" type="date" class="form-control" value="{{ $volunteer->birth_date }}">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">New Password:</label>
+                        <input name="password" type="password" class="form-control" placeholder="••••••••">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Confirm Password:</label>
+                        <input name="password_confirmation" type="password" class="form-control" placeholder="••••••••">
+                    </div>
+
+                    <div class="col-12 text-center">
+                        <button type="submit" class="btn w-100" style="background-color: #0f766e; color: #fff;">
+                            Update Profile
+                        </button>
+                    </div>
+
+                </form>
 
             </div>
         </div>

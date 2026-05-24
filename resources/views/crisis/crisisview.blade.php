@@ -58,9 +58,9 @@
                 </tbody>
             </table>
         </div>
-    </div> 
+    </div>
 
-    
+    {{-- Assigned Volunteers Card --}}
     <div class="card shadow-sm border-0 mt-4" style="max-width:600px; padding-bottom: 60px;">
         <div class="card-header bg-primary text-white">
             <h5 class="mb-0">Assigned Volunteers</h5>
@@ -71,6 +71,7 @@
                     <tr>
                         <th>#</th>
                         <th>Volunteer Name</th>
+                        <th>Task Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -80,15 +81,26 @@
                             <td>{{ $index + 1 }}</td>
                             <td>{{ $volunteer->volunteer_name }}</td>
                             <td>
-                                <a href="{{ route('crisis.volunteer.delete', ['crisis_id' => $crisis->id, 'volunteer_id' => $volunteer->id]) }}" 
-                                   class="btn btn-danger btn-sm">Delete</a>
+                                @if($volunteer->pivot->status == 'completed')
+                                    <span class="badge bg-success">Completed</span>
+                                @else
+                                    <span class="badge bg-success text-light">Assigned</span>
+                                @endif
+                            </td>
+                            <td>
+                                @if($volunteer->pivot->status == 'completed')
+                                    <span class="text-muted">-</span>
+                                @else
+                                    <a href="{{ route('crisis.volunteer.delete', ['crisis_id' => $crisis->id, 'volunteer_id' => $volunteer->id]) }}" 
+                                       class="btn btn-danger btn-sm">Delete</a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
-    </div> 
+    </div>
 
 </div>
 
