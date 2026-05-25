@@ -30,8 +30,8 @@
 
     {{-- Table Card --}}
     <div class="card border-0 shadow-sm">
-        <div class="card-header bg-white border-bottom py-3">
-            <h5 class="fw-bold mb-0">Volunteer List</h5>
+        <div class="card-header bg-white  py-3">
+            <h5 class="fw-bold mb-0 ">Volunteer List</h5>
         </div>
         <div class="card-body p-0">
             <div class="table-responsive">

@@ -4,7 +4,7 @@
 <div class="container py-5">
     <div class="row g-4">
 
-        {{-- ── LEFT: Crisis Info ──────────────────── --}}
+        {{--  Crisis Info --}}
         <div class="col-lg-7">
 
             {{-- Image --}}
@@ -24,7 +24,7 @@
                 {{ $crisis->category->category_name ?? 'General' }}
             </span>
 
-            <h3 class="fw-bold mt-2">{{ $crisis->crisis_title ?? 'Untitled Crisis' }}</h3>
+            <h3 class="fw-bold  mt-2">{{ $crisis->crisis_title ?? 'Untitled Crisis' }}</h3>
             <p class="text-muted mt-3">{{ $crisis->description ?? 'No description available.' }}</p>
 
             <div class="card p-3 mt-4">
@@ -35,7 +35,7 @@
                 <div class="progress mb-2" style="height: 10px;">
                     <div class="progress-bar bg-success" style="width: {{ $crisis->percent }}%;"></div>
                 </div>
-                <small class="text-muted">{{ $crisis->donations_count ?? 0 }} donors</small>
+                <small class="text-muted text-start">{{ $crisis->donations_count ?? 0 }} donors</small>
                 @if($crisis->deadline_date)
                     <br><small class="text-muted">Deadline: {{ \Carbon\Carbon::parse($crisis->deadline_date)->format('M d, Y') }}</small>
                 @endif
@@ -43,11 +43,11 @@
 
         </div>
 
-        {{-- ── RIGHT: Donate Form ──────────────────── --}}
+        {{--  Donate Form  --}}
         <div class="col-lg-5">
             <div class="card shadow-sm p-4" style="position: sticky; top: 80px;">
-
-                <h5 class="fw-bold mb-4"> Donate Now</h5>
+               
+                <h5 class="fw-bold  mb-4"> Donate Now</h5>
 
                 @guest
                     <div class="alert alert-warning small">
@@ -65,10 +65,10 @@
 
                     <p class="small text-muted mb-2">Choose an amount:</p>
                     <div class="d-flex gap-2 mb-3">
-                        @foreach([100, 500, 1000, 5000] as $amt)
+                        @foreach([100, 500, 1000, 5000] as $amount)
                             <button type="button" class="btn btn-outline-primary btn-sm"
-                                    onclick="document.getElementById('amount').value='{{ $amt }}'">
-                                BDT{{ $amt }}
+                                    onclick="document.getElementById('amount').value='{{ $amount }}'">
+                                BDT{{ $amount }}
                             </button>
                         @endforeach
                     </div>
@@ -78,12 +78,10 @@
                         <input type="number" name="amount" id="amount" class="form-control" placeholder="Amount" min="1" required>
                     </div>
 
-                    <button type="submit"
-                      class="btn w-100 py-2 fw-semibold"
-                      style="background-color: {{ $crisis->isFull ? '#6b7280' : '#0f766e' }}; color: #fff;"
-                      {{ !!$crisis->button_disabled  !!}}>
-                      {{ $crisis->target_reached }}
-                    </button>
+                        <button type="submit" class="btn w-100 py-2 fw-semibold text-white"
+                          style="background-color: {{ $crisis->isFull ? '#6b7280' : '#0f766e' }};" {{ $crisis->button_disabled }}>
+                           {{ $crisis->target_reached }}
+                        </button>
 
                 </form>
             </div>

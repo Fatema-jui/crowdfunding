@@ -7,7 +7,7 @@
 
             <div class="card shadow-sm p-4">
 
-                {{-- Header --}}
+                
                 <div class="mb-4">
                     <a href="{{ route('website') }}" class="btn btn-outline-secondary btn-sm mb-3">
                         ← Back to Home
@@ -85,12 +85,11 @@
 
                     <div class="col-12">
                         <label for="message" class="form-label">Why do you want to volunteer?</label>
-                        <textarea name="message" class="form-control" id="message" rows="4"></textarea>
+                        <textarea name="message"  type = "text" class="form-control" id="message" rows="4"></textarea>
                     </div>
 
                     <div class="col-12  text-center ">
-                        <button type="submit" class="btn"
-                                style="background-color: #0f766e; color: #fff;">
+                        <button type="submit" class="btn text-white" style="background-color: #0f766e; ">
                             Submit Application
                         </button>
                         <p class="text-center mt-3 mb-0 small">

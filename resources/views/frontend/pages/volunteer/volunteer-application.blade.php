@@ -33,7 +33,7 @@
                     <table class="table table-striped table-hover table-sm">
                         <thead>
                             <tr>
-                                <th scope="col">Field</th>
+                                <th scope="col" >Field</th>
                                 <th scope="col">Details</th>
                             </tr>
                         </thead>

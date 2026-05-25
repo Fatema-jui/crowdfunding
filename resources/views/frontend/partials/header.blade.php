@@ -76,7 +76,7 @@
                         <ul class="dropdown-menu dropdown-menu-end">
 
                             <li style="border-bottom: 1px solid #d1d5db;">
-                                <a class="dropdown-item" style="min-width: 150px;" href="{{ route('donor.profile') }}">My Profile</a>
+                                <a class="dropdown-item"  href="{{ route('donor.profile') }}">My Profile</a>
                             </li>
 
                             <li >

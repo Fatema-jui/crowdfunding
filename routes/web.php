@@ -19,7 +19,6 @@ use App\Http\Controllers\DonorController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\VolunteerController;
 use App\Http\Controllers\ExpenseController;
-use App\Http\Controllers\Frontend\WebjuiController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SslCommerzPaymentController;
 

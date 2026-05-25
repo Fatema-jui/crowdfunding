@@ -24,6 +24,22 @@ class SslCommerzPaymentController extends Controller
 
     public function index(Request $request)
     {
+        $crisis = Crisis::where('id', $request->crisis_id)->first();
+
+        if (!$crisis) {
+            return back()->with('error', 'Crisis not found.');
+        }
+
+        $due = $crisis->target_amount - $crisis->raised_amount;
+
+        if ($due <= 0) {
+            return back()->with('error', 'Target amount already reached.');
+        }
+
+        if ($request->amount > $due) {
+            return back()->with('error', 'Maximum donation amount is ' . $due . ' BDT.');
+        }
+
         $donarInfo = User::where('id', auth()->user()->id)->first();
 
         $uniqueTranId = 'TRX-3940348838-' . uniqid() . '-' . $request->crisis_id;
@@ -90,52 +106,28 @@ class SslCommerzPaymentController extends Controller
 
         $sslc = new SslCommerzNotification();
 
-        $order_details = Donation::where('transaction_id', $tran_id)
+        $donation = Donation::where('transaction_id', $tran_id)
             ->select('transaction_id', 'status', 'amount', 'crisis_id', 'donor_id')
             ->first();
 
-        if (!$order_details) {
+        if (!$donation) {
             return redirect()->route('crisis.list')
                 ->with('error', 'Transaction not found.');
         }
 
-        if ($order_details->status == 'pending') {
+        if ($donation->status == 'pending') {
 
             $validation = $sslc->orderValidate($request->all(), $tran_id, $amount, $currency);
 
             if ($validation) {
 
-                // ---- NEW CODE START ----
-                // Crisis এর target_amount এবং raised_amount বের করো
-                $crisis = Crisis::where('id', $order_details->crisis_id)->first();
-                
-                // Target পূরণ হতে কত টাকা বাকি আছে
-                $remaining = $crisis->target_amount - $crisis->raised_amount;
-
-                if ($remaining <= 0) {
-                    // Target আগেই পূরণ হয়ে গেছে, কোনো টাকা নেবে না
-                    $acceptedAmount = 0;
-                } 
-                elseif ($order_details->amount > $remaining) {
-                    // Donor বেশি দিলে শুধু বাকি টাকাটুকু নেবে
-                    $acceptedAmount = $remaining;
-                } 
-                else {
-                    // স্বাভাবিক donation, পুরো টাকা নেবে
-                    $acceptedAmount = $order_details->amount;
-                }
-                // ---- NEW CODE END ----
-
                 Donation::where('transaction_id', $tran_id)
-                    ->update([
-                        'status' => 'completed',
-                        'amount' => $acceptedAmount  // NEW: accepted amount save হবে
-                    ]);
+                    ->update(['status' => 'completed']);
 
-                Crisis::where('id', $order_details->crisis_id)
-                    ->increment('raised_amount', $acceptedAmount);  // NEW: accepted amount দিয়ে increment
+                Crisis::where('id', $donation->crisis_id)
+                    ->increment('raised_amount', $donation->amount);
 
-                $donor = User::find($order_details->donor_id);
+                $donor = User::find($donation->donor_id);
                 if ($donor) {
                     Auth::login($donor);
                 }
@@ -147,12 +139,9 @@ class SslCommerzPaymentController extends Controller
             return redirect()->route('crisis.list')
                 ->with('error', 'Payment validation failed.');
 
-        }
-         elseif ($order_details->status == 'completed') {
+        } elseif ($donation->status == 'completed') {
             return redirect()->route('payment.success');
-        } 
-
-        else {
+        } else {
             return redirect()->route('crisis.list')
                 ->with('error', 'Invalid transaction.');
         }
@@ -162,28 +151,25 @@ class SslCommerzPaymentController extends Controller
     {
         $tran_id = $request->input('tran_id');
 
-        $order_details = Donation::where('transaction_id', $tran_id)
+        $donation = Donation::where('transaction_id', $tran_id)
             ->select('transaction_id', 'status', 'amount')
             ->first();
 
-        if (!$order_details) {
+        if (!$donation) {
             return redirect()->route('crisis.list')
                 ->with('error', 'Transaction not found.');
         }
 
-        if ($order_details->status == 'pending') {
+        if ($donation->status == 'pending') {
             Donation::where('transaction_id', $tran_id)
                 ->update(['status' => 'failed']);
 
             return redirect()->route('crisis.list')
                 ->with('error', 'Payment failed. Please try again.');
 
-        } 
-        elseif ($order_details->status == 'completed') {
+        } elseif ($donation->status == 'completed') {
             return redirect()->route('payment.success');
-        } 
-        else 
-            {
+        } else {
             return redirect()->route('crisis.list')
                 ->with('error', 'Invalid transaction.');
         }
@@ -193,27 +179,25 @@ class SslCommerzPaymentController extends Controller
     {
         $tran_id = $request->input('tran_id');
 
-        $order_details = Donation::where('transaction_id', $tran_id)
+        $donation = Donation::where('transaction_id', $tran_id)
             ->select('transaction_id', 'status', 'amount')
             ->first();
 
-        if (!$order_details) {
+        if (!$donation) {
             return redirect()->route('crisis.list')
                 ->with('error', 'Transaction not found.');
         }
 
-        if ($order_details->status == 'pending') {
+        if ($donation->status == 'pending') {
             Donation::where('transaction_id', $tran_id)
                 ->update(['status' => 'cancelled']);
 
             return redirect()->route('crisis.list')
-                ->with('error', 'Payment has been cancelled.');
+                ->with('error', 'Payment cancelled.');
 
-        } 
-        elseif ($order_details->status == 'completed') {
+        } elseif ($donation->status == 'completed') {
             return redirect()->route('payment.success');
-        } 
-        else {
+        } else {
             return redirect()->route('crisis.list')
                 ->with('error', 'Invalid transaction.');
         }
@@ -225,20 +209,20 @@ class SslCommerzPaymentController extends Controller
 
             $tran_id = $request->input('tran_id');
 
-            $order_details = Donation::where('transaction_id', $tran_id)
+            $donation = Donation::where('transaction_id', $tran_id)
                 ->select('transaction_id', 'status', 'amount')
                 ->first();
 
-            if (!$order_details) {
+            if (!$donation) {
                 echo "Invalid Transaction";
                 return;
             }
 
-            if ($order_details->status == 'pending') {
+            if ($donation->status == 'pending') {
 
                 $sslc       = new SslCommerzNotification();
                 $validation = $sslc->orderValidate(
-                    $request->all(), $tran_id, $order_details->amount, 'BDT'
+                    $request->all(), $tran_id, $donation->amount, 'BDT'
                 );
 
                 if ($validation == true) {
@@ -250,16 +234,13 @@ class SslCommerzPaymentController extends Controller
                     echo "Validation Failed";
                 }
 
-            } 
-            elseif ($order_details->status == 'completed') {
+            } elseif ($donation->status == 'completed') {
                 echo "Transaction is already successfully Completed";
-            } 
-            else {
+            } else {
                 echo "Invalid Transaction";
             }
 
-        } 
-        else {
+        } else {
             echo "Invalid Data";
         }
     }

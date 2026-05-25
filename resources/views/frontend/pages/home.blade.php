@@ -1,7 +1,7 @@
 @extends('frontend.partials.master')
 @section('content')
 
-{{-- ── HERO ─────────────────────────────────────── --}}
+{{--  HERO --}}
 <div class="w-100 rounded shadow mb-4 position-relative overflow-hidden"
      style="height: 728px; background: url('{{ asset('images/hero.jpg') }}') center/cover no-repeat;">
     
@@ -163,7 +163,7 @@
     </div>
 </div>
 
-{{--  CTA BANNER  --}}
+
 <div class="bg-light py-4">
     <div class="container">
         <div class="d-flex justify-content-between align-items-center

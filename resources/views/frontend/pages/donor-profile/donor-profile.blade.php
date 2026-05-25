@@ -37,8 +37,8 @@
                         <label class="form-label">Confirm Password:</label>
                         <input name="password_confirmation" type="password" class="form-control" placeholder="••••••••">
                     </div>
-                    <div class="col-12 text-center">
-                        <button type="submit" class="btn w-100" style="background-color: #0f766e; color: #fff;">
+                    <div class="col-12 text-center ">
+                        <button type="submit" class="btn w-50 text-white" style="background-color: #0f766e;">
                             Update Profile
                         </button>
                     </div>

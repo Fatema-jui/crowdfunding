@@ -59,7 +59,7 @@
                                      style="height: 80px; width: 100%; object-fit: cover;"
                                      alt="{{ $crisis->crisis_title }}">
                             @else
-                                <div class="bg-secondary rounded d-flex align-items-centerjustify-content-center" style="height: 80px;">
+                                <div class="bg-secondary rounded d-flex align-items-center justify-content-center" style="height: 80px;">
                                     <small class="text-white">No Image</small>
                                 </div>
                             @endif
@@ -91,8 +91,8 @@
                                 <small class="text-muted"
                                        style="white-space: nowrap; font-size: 11px;">
                                     {{ number_format($crisis->percent, 0) }}% complete •
-                                    BDT{{ number_format($crisis->raised) }} raised of
-                                    BDT{{ number_format($crisis->goal) }}
+                                    BDT{{ number_format($crisis->raised, 2) }} raised of
+                                    BDT{{ number_format($crisis->goal, 2) }}
                                 </small>
                             </div>
 
@@ -104,11 +104,11 @@
 
                         {{-- Button --}}
                         <div class="col-md-2 text-end d-flex flex-column gap-2">
-                           <a href="{{ route('crisis.details', $crisis->id) }}"class="btn btn-sm fw-semibold"style="background-color: #0f766e; color: #fff;">
+                           <a href="{{ route('crisis.details', $crisis->id) }}"class="btn btn-sm fw-semibold" style="background-color: #0f766e; color: #fff;">
                               Details →
                             </a>
 
-                            <a href="{{ route('crisis.expense', $crisis->id) }}"class="btn btn-sm fw-semibold"style="background-color: #0f766e; color: #fff;">
+                            <a href="{{ route('crisis.expense', $crisis->id) }}"class="btn btn-sm fw-semibold" style="background-color: #0f766e; color: #fff;">
                               Expense →
                             </a>
                         </div>

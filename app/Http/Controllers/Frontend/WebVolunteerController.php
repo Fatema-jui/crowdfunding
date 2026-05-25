@@ -53,8 +53,8 @@ class WebVolunteerController extends Controller
     {
         $request->validate([
 
-            'email'    => 'required|email',
-            'password' => 'required',
+            'email'    => 'required|email|max:255',
+            'password' => 'required|string|min:6',
 
         ]);
 
@@ -74,7 +74,7 @@ class WebVolunteerController extends Controller
         'volunteer_email'=> $volunteer->email,
     ]);
 
-      return redirect()->route('website')->with('success', 'Welcome, ' . $volunteer->volunteer_name . '!');
+      return redirect()->route('website');
 
     }
 
@@ -117,13 +117,14 @@ class WebVolunteerController extends Controller
 
     $volunteer->save();
 
-    return redirect()->route('webvolunteer.profile')->with('success', 'Profile updated successfully!');
+    return redirect()->route('webvolunteer.profile')->with('success', 'Profile updated successfully');
 }
 
 
     public function volunteerApplication(){
 
       $volunteer = Volunteer::find(session('volunteer_id'));
+      
       return view('frontend.pages.volunteer.volunteer-application', compact('volunteer'));
     
       }

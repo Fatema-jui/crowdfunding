@@ -8,7 +8,9 @@
 
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h5 class="fw-bold mb-0">Volunteer Profile</h5>
+
                     <a href="{{ route('website') }}" class="btn btn-secondary btn-sm">← Back to Home</a>
+
                 </div>
 
                 @if(session('success'))
@@ -25,7 +27,7 @@
 
                     <div class="col-md-6">
                         <label class="form-label">Email:</label>
-                        <input type="email" class="form-control" value="{{ $volunteer->email }}" disabled>
+                        <input type="email" class="form-control" value="{{ $volunteer->email }}" Disabled>
                     </div>
 
                     <div class="col-md-6">
@@ -72,9 +74,10 @@
                         <label class="form-label">Confirm Password:</label>
                         <input name="password_confirmation" type="password" class="form-control" placeholder="••••••••">
                     </div>
+                    
 
                     <div class="col-12 text-center">
-                        <button type="submit" class="btn w-100" style="background-color: #0f766e; color: #fff;">
+                        <button type="submit" class="btn w-50 text-white" style="background-color: #0f766e; ">
                             Update Profile
                         </button>
                     </div>
