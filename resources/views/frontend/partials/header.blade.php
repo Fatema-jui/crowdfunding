@@ -16,15 +16,15 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-3">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('website') }}">Home</a>
+                    <a class="nav-link text-white" href="{{ route('website') }}">Home</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('crisis.list') }}">Our Crisis</a>
+                    <a class="nav-link text-white" href="{{ route('crisis.list') }}">Our Crisis</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('volunteer.list') }}">Volunteer</a>
+                    <a class="nav-link text-white" href="{{ route('volunteer.list') }}">Volunteer</a>
                 </li>
                 
             </ul>

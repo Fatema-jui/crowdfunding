@@ -5,12 +5,12 @@
 <div class="w-100 rounded shadow mb-4 position-relative overflow-hidden"
      style="height: 728px; background: url('{{ asset('images/hero.jpg') }}') center/cover no-repeat;">
     
-    <div class="position-absolute top-0 start-0 w-100 h-100"
+    <div class="position-absolute  top-0 start-0 w-100 h-100"
          style="background: rgba(0,0,0,0.45);"></div>
     
     <div class="position-absolute top-0 start-0 w-100 h-100 
-                d-flex flex-column justify-content-center align-items-center text-white px-4">
-        <h1 class="display-5 fw-bold text-center mb-3" style="max-width: 680px; color: #ffffff;">
+                d-flex flex-column  justify-content-center align-items-center text-white px-4">
+        <h1 class="display-5 fw-bold text-center  mb-3" style="max-width: 680px; color: #ffffff;">
             Help People in Need. <br>
             Support &amp; Make a Difference.
         </h1>

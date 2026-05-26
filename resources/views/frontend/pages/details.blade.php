@@ -49,6 +49,12 @@
                
                 <h5 class="fw-bold  mb-4"> Donate Now</h5>
 
+                @if(session('error'))
+                   <div class="alert alert-danger small">
+                     {{ session('error') }}
+                    </div>
+                @endif
+
                 @guest
                     <div class="alert alert-warning small">
                         Please 

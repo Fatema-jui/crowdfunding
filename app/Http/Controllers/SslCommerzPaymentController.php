@@ -180,7 +180,7 @@ class SslCommerzPaymentController extends Controller
         $tran_id = $request->input('tran_id');
 
         $donation = Donation::where('transaction_id', $tran_id)
-            ->select('transaction_id', 'status', 'amount')
+            ->select('transaction_id', 'status', 'amount', 'donor_id')
             ->first();
 
         if (!$donation) {
@@ -191,6 +191,11 @@ class SslCommerzPaymentController extends Controller
         if ($donation->status == 'pending') {
             Donation::where('transaction_id', $tran_id)
                 ->update(['status' => 'cancelled']);
+
+                $donor = User::find($donation->donor_id);
+                if ($donor) {
+                    Auth::login($donor);
+                }
 
             return redirect()->route('crisis.list')
                 ->with('error', 'Payment cancelled.');
