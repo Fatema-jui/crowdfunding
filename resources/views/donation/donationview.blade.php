@@ -39,8 +39,10 @@
                                 <span class="badge bg-success">Completed</span>
                             @elseif($donation->status == 'pending')
                                 <span class="badge bg-warning text-dark">Pending</span>
-                            @else
+                            @elseif($donation->status  == 'failed')
                                 <span class="badge bg-danger">Failed</span>
+                            @else
+                                <span class="badge bg-danger">Cancelled</span>
                             @endif
                         </td>
                     </tr>

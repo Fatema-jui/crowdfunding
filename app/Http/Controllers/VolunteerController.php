@@ -18,7 +18,18 @@ class VolunteerController extends Controller
     }
 
     public function volunteersubmit(Request $request){
-       Volunteer::create([
+     $request->validate([
+
+            'volunteer_name' => 'required|string|max:255',
+            'email'=>'required|email|max:255',
+            'password'=>'required|string|min:6|confirmed',
+            'NID'=>'nullable|string|max:20',
+            'birth_date'=>'nullable|date',
+            'phone' =>'required|string|max:20',
+            'message' =>'nullable|string',
+        ]);
+
+    Volunteer::create([
         'volunteer_name'=>$request->volunteer_name,
         'email'=>$request->email,
         'password'=>bcrypt($request->password),
@@ -37,7 +48,7 @@ class VolunteerController extends Controller
     }  
 
     
-    public function approve($id){
+    public function approve( int $id){
         $volunteer = Volunteer::findOrFail($id);
         $volunteer->status = 'approved';
         $volunteer->save();
@@ -45,7 +56,7 @@ class VolunteerController extends Controller
         return redirect()->back()->with('success', 'Volunteer approved successfully.');
     }
     
-    public function reject($id){
+    public function reject(int $id){
         $volunteer = Volunteer::findOrFail($id);
         $volunteer->status = 'rejected';
         $volunteer->save();

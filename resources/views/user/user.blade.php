@@ -5,7 +5,7 @@
 <a href="{{ route('user.form')}}" class="btn btn-primary">Add users</a>
 
 <div class="table-responsive">
-    <table class="table table-striped table-hover">
+    <table class="table table-striped table-hover  ">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -13,7 +13,7 @@
                 <th scope="col">Email</th>
                 <th scope="col">Phone</th>
                 <th scope="col">Role</th>
-                <th scope="col">Action</th>  {{-- একটাই Action কলাম --}}
+                <th scope="col" style="width: 15%">Action</th> 
             </tr>
         </thead>
         <tbody>
@@ -28,16 +28,16 @@
                         <span class="badge bg-success">Donor</span>
                     @elseif($user->role == 'admin')
                         <span class="badge bg-danger">Admin</span>
-                    @else
-                        <span class="badge bg-secondary">User</span>
                     @endif
                 </td>
                 <td>  
-                    <a href="{{ route('user.view', $user->id) }}" class="btn btn-primary btn-sm">View</a>
-                    <a href="{{ route('user.edit', $user->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                    @if($user->role != 'admin') 
-                        <a href="{{ route('user.delete', $user->id) }}" class="btn btn-danger btn-sm" >Delete</a>
-                    @endif
+                    <div class="d-flex flex-nowrap" style="gap:5px;">
+                         <a href="{{ route('user.view', $user->id) }}" class="btn btn-primary btn-sm">View</a>
+                         <a href="{{ route('user.edit', $user->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        @if($user->role != 'admin') 
+                          <a href="{{ route('user.delete', $user->id) }}" class="btn btn-danger btn-sm" >Delete</a>
+                        @endif
+                    </div>
                 </td>
             </tr>
             @endforeach

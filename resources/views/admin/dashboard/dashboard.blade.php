@@ -5,7 +5,7 @@
 
     <h2 class="mb-4">Admin Dashboard</h2>
 
-    <div class="row row-cols-md-6 g-3">
+    <div class="row row-cols-md-3 g-2">
 
         {{--  Category --}}
         <div class="col">
@@ -13,7 +13,7 @@
                 <div class="card-body">
                     <h6>Total Categories</h6>
                     <h2>{{ $totalCategory ?? 0 }}</h2>
-                    <a href="{{ route('crisis.category') }}" class="text-white">View Details →</a>
+                    <a href="{{ route('crisis.category') }}" class="text-white " >View Details →</a>
                 </div>
             </div>
         </div>
@@ -34,8 +34,8 @@
             <div class="card text-white bg-primary h-100">
                 <div class="card-body">
                     <h6>Total Donor</h6>
-                    <h2>{{ $totalUser ?? 0 }}</h2>
-                    <a href="{{ route('user') }}" class="text-white">View Details →</a>
+                    <h2>{{ $totalDonor ?? 0 }}</h2>
+                    <a href="{{ route('donor') }}" class="text-white">View Details →</a>
                 </div>
             </div>
         </div>
@@ -56,7 +56,7 @@
             <div class="card text-white bg-orange h-100" style="background-color: #fd7e14;">
                 <div class="card-body">
                     <h6>Total Volunteer</h6>
-                    <h2>{{ $totalVolunteer }}</h2>
+                    <h2>{{ $totalVolunteer ?? 0 }}</h2>
                     <a href="{{ route('volunteer') }}" class="text-white">View Details →</a>
                 </div>
             </div>

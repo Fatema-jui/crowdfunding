@@ -11,15 +11,14 @@ class DonorController extends Controller
 
     public function donorindex(Request $request)
     {
-        $donors = User::where('role', 'donor')
+        $donors = User::where('role', 'Donor')
             ->whereHas('donations')
             ->get();
 
-        $total = User::where('role', 'donor')
-            ->whereHas('donations')
-            ->count();
-        return view('donor.donor', compact('donors', 'total'));
+        
+        return view('donor.donor', compact('donors'));
     }
+
 
     public function donorform()
     {
@@ -43,19 +42,6 @@ class DonorController extends Controller
     {
     $donor = User::findOrFail($id); 
     return view('donor.donorview', compact('donor'));
-    }
-
-   public function donoredit($id)
-    {
-    $donor = User::findOrFail($id); 
-    return view('donor.donoredit', compact('donor'));
-    }
-   
-   
-   public function donordelete($id)
-    {
-    User::findOrFail($id)->delete();
-    return redirect()->back();
     }
 
 }

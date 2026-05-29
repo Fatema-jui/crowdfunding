@@ -14,6 +14,7 @@
     <input type="text" name="category_name" value="{{ $category->category_name }}" class="form-control">
     <br>
     <input type="text" name="description" value="{{ $category->description }}" class="form-control"><br>
+    <input type="file" name="image" value="{{ $category->image }}" class="form-control"><br>
      
     <select name="status" class="form-control">
         <option value="active" {{ $category->status == 'active' ? 'selected' : '' }}>Active</option>

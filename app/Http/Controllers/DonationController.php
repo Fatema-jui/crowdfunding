@@ -24,6 +24,16 @@ class DonationController extends Controller
     }
 
     public function donationsubmit(Request $request){
+
+     $request->validate([
+        'crisis_id'      => 'required',
+        'user_id'        => 'required',
+        'amount'         => 'required|numeric|min:1',
+        'payment_method' => 'required',
+        'donation_date'  => 'required|date',
+        'transaction_id' => 'required|unique:donations,transaction_id',
+        'status'         => 'required',
+    ]);
     
         Donation::create([
             'crisis_id'=>$request->crisis_id,
@@ -38,16 +48,15 @@ class DonationController extends Controller
         return redirect()->route('donation');
     }
 
-    public function donationview($id)
-    {  
+    public function donationview( int $id){  
         
-    $donation = Donation::with(['donor', 'crisis'])->find($id);
+    $donation = Donation::with(['donor', 'crisis'])->findorFail($id);
     return view('donation.donationview', compact('donation'));
     }
     
 
-    public function donationdelete($id){
-        $donation=Donation::find($id);
+    public function donationdelete( int $id){
+        $donation=Donation::findorFail($id);
         $donation->delete();
         return redirect()->route('donation');
     }

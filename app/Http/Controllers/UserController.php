@@ -33,28 +33,28 @@ class UserController extends Controller
       
     }
 
-    public function userview($id){
+    public function userview( int $id){
         $user=User::findOrFail($id);
         return view('user.userview',compact('user'));
     }
 
-    public function useredit($id){
+    public function useredit( int  $id){
         $user=User::findOrFail($id);
         return view('user.useredit',compact('user'));
     }
 
-    public function userupdate(Request $request,$id){
+    public function userupdate(Request $request,int $id){
         $user=User::findOrFail($id);
         $user->update([
-            'name'     => $request->name,
-            'email'    => $request->email,
-            'phone'    => $request->phone,  
-            'role'     => $request->role ?? 'user', 
+            $user->name   => $request->name,
+            $user->email  => $request->email,
+            $user->phone  => $request->phone,  
+            $user->role   => $request->role ?? 'user', 
         ]);
         return redirect()->route('user');
     }
 
-    public function userdelete($id){
+    public function userdelete( int $id){
        $users = User::findOrFail($id);
        
        $users->delete();

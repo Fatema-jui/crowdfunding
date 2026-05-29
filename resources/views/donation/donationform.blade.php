@@ -34,12 +34,9 @@
 
 <div class="form-group">
     <label for="payment_method" class="form-label">Payment Method:</label>
-    <select name="payment_method" class="form-control" id="payment_method">
+    <select name="payment_method"  class="form-control" id="payment_method">
         <option value="">--Select Payment Method--</option>
-        <option value="bkash">Bkash</option>
-        <option value="nagad">Nagad</option>
-        <option value="rocket">Rocket</option>
-        <option value="card">Card</option>
+        <option value="online">Online</option>  
     </select>
 </div><br>
 
@@ -59,6 +56,7 @@
         <option value="">--Select Status--</option>
         <option value="pending">Pending</option>
         <option value="completed">Completed</option>
+        <option value="canceled">Cancelled</option>
         <option value="failed">Failed</option>
     </select>
 </div><br>

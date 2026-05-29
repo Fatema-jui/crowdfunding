@@ -45,40 +45,59 @@ class CrisisController extends Controller
     }
 
 
-    public function crisisview($id){
+    public function crisisview( int $id){
         $crisis = Crisis::with('volunteers')->find($id);
         return view('crisis.crisisview', compact('crisis'));
     }
 
 
     
-    public function volunteerAssign($id){
-
-    $crisis = Crisis::with('volunteers')->findOrFail($id);
-    $volunteers = Volunteer::where('status', 'approved')->get();
-    return view('crisis.volunteer_assign', compact('crisis', 'volunteers'));
-   }
-
-    
-    public function volunteerAssignStore(Request $request, $id){
+    public function volunteerAssign( int $id){
 
     $crisis = Crisis::findOrFail($id);
-    $crisis->volunteers()->syncWithoutDetaching($request->volunteer_ids ?? []);
-    return redirect()->back();
+
+    
+    $allVolunteers = Volunteer::all();
+
+    
+     $availableVolunteers = $allVolunteers->filter(function($volunteer) use ($id) {
+        
+        $isBusy = $volunteer->crises()
+                            ->wherepivot('crisis_id', '!=', $id) 
+                            ->wherePivot('status', '!=', 'completed')
+                            ->exists();
+        return !$isBusy; 
+    });
+
+    return view('crisis.volunteer_assign', compact('crisis', 'availableVolunteers'));
+    }
+
+    
+    public function volunteerAssignStore(Request $request,int $id){
+
+      $crisis = Crisis::findOrFail($id);
+      $crisis->volunteers()->syncWithoutDetaching($request->volunteer_ids ?? []);
+
+       return redirect()->route('crisis.view',['id'=>$id]);
      
     }
 
 
-    public function edit($id)
+    public function edit(int $id)
     {
         $crisis = Crisis::findOrFail($id);
         return view('crisis.edit', compact('crisis'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     
     {
         //dd($request->all());
+
+        $request->validate([
+        'crisis_title' => 'required',
+        'status' => 'required',
+    ]);
         $crisis = Crisis::findOrFail($id);
 
         $fileName = $crisis->image; 
@@ -106,7 +125,7 @@ class CrisisController extends Controller
 
 
 
-    public function crisisdelete($id){
+    public function crisisdelete( int $id){
         $crisis = Crisis::find($id);
         $crisis->delete();
         return redirect()->route('crisis');
@@ -114,7 +133,7 @@ class CrisisController extends Controller
 
 
 
-    public function volunteerDelete($crisis_id, $volunteer_id)
+    public function volunteerDelete(int $crisis_id, int $volunteer_id)
     {
         $crisis = Crisis::findOrFail($crisis_id);
         $crisis->volunteers()->detach($volunteer_id);

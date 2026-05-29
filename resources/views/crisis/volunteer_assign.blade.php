@@ -1,7 +1,7 @@
 @extends('partials.master')
 @section('content')
 
-<div class="container" style="padding: 20px 30px;">
+<div class="container"  style="padding: 20px 30px;">
     <h3 class="mb-3 text-primary">Volunteer Assignment</h3>
 
     <div class="card shadow-sm border-0" style="max-width:600px;">
@@ -60,10 +60,10 @@
                         <td colspan="2">
                             <form action="{{ route('volunteer.assign.store', $crisis->id) }}" method="POST">
                                 @csrf
-                                <div class="p-2">
-                                    <label class="fw-bold mb-2">Assign Volunteers:</label>
+                                <div class="p-1">
+                                    <label class="fw-bold mb-1">Assign Volunteers:</label>
                                     <select name="volunteer_ids[]" class="form-control" multiple style="height: 150px;">
-                                        @foreach($volunteers as $volunteer)
+                                        @foreach($availableVolunteers as $volunteer)
                                             <option value="{{ $volunteer->id }}"
                                                 {{ $crisis->volunteers->contains($volunteer->id) ? 'selected' : '' }}>
                                                 {{ $volunteer->volunteer_name }}

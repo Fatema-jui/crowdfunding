@@ -26,7 +26,7 @@ class CrisisCategoryController extends Controller
             $file->storeAs('/category', $fileName);
 
         }
-      Category::create([
+        Category::create([
          'category_name'=>$request->category_name,
          'description'=>$request->description,
          'image'=>$fileName,
@@ -35,15 +35,16 @@ class CrisisCategoryController extends Controller
       return redirect()->route('crisis.category');
    }
 
-   public function categoryview($id){
+
+   public function categoryview( int $id){
 
     $category= Category::find($id);
 
     return view('crisiscategory.categoryview',compact('category'));
 
    }
-  // Show edit form
-    public function edit($id) {
+
+    public function edit( int $id) {
 
         $category = Category::findOrFail($id);
 
@@ -51,7 +52,7 @@ class CrisisCategoryController extends Controller
         
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     { 
     $request->validate([
         'category_name' => 'required',
@@ -64,12 +65,12 @@ class CrisisCategoryController extends Controller
     $category->image = $request->image;
     $category->status = $request->status;
     $category->save();
-     return redirect()->route('crisis.category')->with('success', 'Category updated!');
+     return redirect()->route('crisis.category');
      
 }
 
 
-   public function categorydelete($id){
+   public function categorydelete(int $id){
 
     $category=Category::find($id);
     $category->delete();

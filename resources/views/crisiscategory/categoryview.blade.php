@@ -18,6 +18,10 @@
                         <th>Description</th>
                         <td>{{ $category->description }}</td>
                     </tr>
+                    <tr>
+                        <th>Image</th>
+                        <td>{{$category->image}}</td>
+                    </tr>
 
                     <tr>
                         <th>Status</th>

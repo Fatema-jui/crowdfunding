@@ -15,7 +15,7 @@
                 <input type="date" name="to_date" class="form-control" value="{{ $to_date ?? '' }}" required>
             </div>
             <div class="col-md-2">
-                <button type="submit" class="btn btn-primary w-100">Generate</button>
+                <button type="submit" class="btn btn-primary  w-100">Generate</button>
             </div>
             @isset($expenses)
             <div class="col-md-2">

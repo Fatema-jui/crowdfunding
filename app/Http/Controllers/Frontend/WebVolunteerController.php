@@ -137,7 +137,7 @@ class WebVolunteerController extends Controller
       return view('frontend.pages.volunteer.volunteer-task', compact('volunteer'));
     }
 
-    public function taskComplete(Request $request, $crisis_id){
+    public function taskComplete(Request $request, int $crisis_id){
 
     $volunteer = Volunteer::find(session('volunteer_id'));
     

@@ -9,11 +9,11 @@ class ReportController extends Controller
 {
      public function index()
     {
-        return view('report.index');
+        return view ('report.index');
     }
 
-    public function generate(Request $request)
-    {
+    public function generate(Request $request){
+
         $request->validate([
             'from_date' => 'required|date',
             'to_date'   => 'required|date|after_or_equal:from_date',
@@ -37,8 +37,8 @@ class ReportController extends Controller
     }
 
 
-    public function export(Request $request)
-{
+    public function export(Request $request){
+
     $from_date = $request->from_date;
     $to_date   = $request->to_date;
 
