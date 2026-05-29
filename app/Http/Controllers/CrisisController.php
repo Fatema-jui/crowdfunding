@@ -127,6 +127,7 @@ class CrisisController extends Controller
 
     public function crisisdelete( int $id){
         $crisis = Crisis::find($id);
+        $crisis->expenses()->delete();
         $crisis->delete();
         return redirect()->route('crisis');
     }

@@ -27,6 +27,11 @@ class Crisis extends Model
         ->withPivot('status')
         ->withTimestamps();
     }
+
+    public function expenses(){
+        
+    return $this->hasMany(Expense::class, 'crisis_id');
+    }
                
 
 }
