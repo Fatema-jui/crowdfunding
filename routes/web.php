@@ -7,6 +7,7 @@ use App\Http\Controllers\Frontend\WebsiteController;
 use App\Http\Controllers\Frontend\WebCrisisController;
 use App\Http\Controllers\Frontend\webVolunteerController;
 use App\Http\Controllers\Frontend\DonorProfileController;
+use App\Http\Controllers\Frontend\PaymentController;
 
 
 
@@ -142,14 +143,7 @@ Route::match(['get', 'post'], '/cancel', [SslCommerzPaymentController::class, 'c
 Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
 //SSLCOMMERZ END
 
-Route::get('/payment/success', function () {
+Route::get('/payment/success',[PaymentController::class,'success'])->name('payment.success');
    
-    $tran_id  = session('tran_id');
-
-    $donation = \App\Models\Donation::latest()->first();
-
-    return view('frontend.pages.payment.success', compact('donation'));
-
-})->name('payment.success');
 
 Route::post('/crowdfunding/logout', [AuthController::class, 'logout'])->name('logout');

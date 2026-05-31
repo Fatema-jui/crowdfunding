@@ -24,8 +24,8 @@
             </select><br>
 
             <br>
-
-            <button type="submit" class="btn btn-primary">Update</button>
+            
+            <button type="submit" class="btn btn-primary mb-5">Update</button>
         </form>
 
         </div>

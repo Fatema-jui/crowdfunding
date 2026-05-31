@@ -22,7 +22,7 @@
         <tbody>
             @foreach($categories as $category)
            <tr>
-              <td Scope="row">{{$category->id}}</td>
+              <td>{{$loop->iteration}}</td>
               <td>{{$category->category_name}}</td>
               <td>{{$category->description}}</td>
               <td><img width = "100px" src ="{{url('/category/'.$category->image)}}" alt=" "></td>

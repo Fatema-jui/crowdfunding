@@ -36,12 +36,10 @@ class WebCrisisController extends Controller
             return $crisis;
         });
 
-        
-
         return view('frontend.pages.crisislist', compact('crises', 'categories'));
     }
 
-    public function detailsShow($id)
+    public function detailsShow( int $id)
     {
         $crisis = Crisis::with('category')
                         ->withCount('donations')
@@ -60,7 +58,7 @@ class WebCrisisController extends Controller
         return view('frontend.pages.details', compact('crisis'));
     }
 
-    public function expenseShow($id)
+    public function expenseShow(int $id)
     {
         $crisis = Crisis::findOrFail($id); 
         $expenses = Expense::with('volunteer')->where('crisis_id', $id)->get();

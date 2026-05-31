@@ -2,8 +2,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-2" style="background-color: #0f766e;">
     <div class="container">
 
-        {{-- Logo --}}
-        <a class="navbar-brand fw-bold" href="#">CrisisHelp BD</a>
+        
+        <a class="navbar-brand fw-bold position-absolate start-50 translate-middle-x"  href="#"  >CrisisHelp BD</a>
 
         {{-- Mobile Toggle --}}
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
@@ -13,14 +13,14 @@
         <div class="collapse navbar-collapse" id="mainNav">
 
             {{-- Nav Links --}}
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-3">
+            <ul class="navbar-nav ms-auto  mb-2 mb-lg-0 me-3">
 
-                <li class="nav-item">
+                <li class="nav-item ">
                     <a class="nav-link text-white" href="{{ route('website') }}">Home</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ route('crisis.list') }}">Our Crisis</a>
+                    <a class="nav-link  text-white" href="{{ route('crisis.list') }}">Our Crisis</a>
                 </li>
 
                 <li class="nav-item">
@@ -29,7 +29,7 @@
                 
             </ul>
 
-            {{-- Right Side Buttons --}}
+            
             <div class="d-flex gap-2 align-items-center">
 
                 {{--  Volunteer Login --}}
@@ -53,7 +53,7 @@
                             </li>
 
                             <li>
-                                <a class="dropdown-item" href="{{ route('webvolunteer.tasks') }}">Assigned Task</a>
+                                <a class="dropdown-item " href="{{ route('webvolunteer.tasks') }}">Assigned Task</a>
                             </li>
 
                         </ul>

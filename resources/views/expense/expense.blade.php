@@ -22,9 +22,9 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($expenses as $index => $expense)
+            @foreach($expenses as  $expense)
             <tr>
-                <td>{{ $index + 1 }}</td>
+                <td>{{ $loop->iteration }}</td>
                 <td>{{ $expense->crisis->crisis_title }}</td>
                 <td>{{ $expense->volunteer->volunteer_name }}</td>
                 <td>{{ $expense->purpose }}</td>

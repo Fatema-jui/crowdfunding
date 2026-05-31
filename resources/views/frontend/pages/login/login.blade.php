@@ -55,10 +55,12 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-
-                        <button type="submit" class="btn w-100 fw-semibold py-2" style="background-color: #0f766e; color: #fff;">
+                        <div class="text-center">
+                            <button type="submit " class="btn w-100 fw-semibold py-2" style="background-color: #0f766e; color: #fff;">
                             Login
                         </button>
+
+                        </div>
 
                         <p class="text-center mt-3 mb-0 small">
                             Don't have account?

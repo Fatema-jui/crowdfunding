@@ -3,7 +3,7 @@
 
 <div class="container my-4">
 
-    {{-- Header Card --}}
+    
     <div class="card border-0 shadow-sm mb-4"
          style="background-color: #198754;">
         <div class="card-body py-4 px-4">
@@ -12,12 +12,12 @@
         </div>
     </div>
 
-    {{-- Stats Cards --}}
+
     <div class="row g-3 mb-4">
         <div class="col-md-6">
             <div class="card border-0 shadow-sm p-3">
-                <small class="text-muted text-uppercase fw-semibold">Total Approved</small>
-                <h2 class="fw-bold mt-1">{{ $totalApproved }}</h2>
+                <small class="text-muted text-uppercase  fw-semibold">Total Approved</small>
+                <h2 class="fw-bold  mt-1">{{ $totalApproved }}</h2>
             </div>
         </div>
         <div class="col-md-6">

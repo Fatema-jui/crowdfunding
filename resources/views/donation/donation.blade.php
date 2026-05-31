@@ -19,8 +19,8 @@
     <tbody>
         @foreach($donations as $donation)
         <tr>            
-            <td Scope="row">{{$donation->id}}</td>
-            <td>{{$donation->crisis->crisis_title}}</td>
+            <td>{{$loop->iteration}}</td>
+            <td>{{$donation->crisis?->crisis_title}}</td>
             <td>{{$donation->donor?->name}}</td>
             <td>{{$donation->amount}}</td>
             <td>{{$donation->payment_method}}</td>

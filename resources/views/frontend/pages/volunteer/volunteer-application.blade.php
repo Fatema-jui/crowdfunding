@@ -42,6 +42,7 @@
                                 <td>Applied As</td>
                                 <td>{{ $volunteer->volunteer_name }}</td>
                             </tr>
+                            
                             <tr>
                                 <td>Email</td>
                                 <td>{{ $volunteer->email }}</td>

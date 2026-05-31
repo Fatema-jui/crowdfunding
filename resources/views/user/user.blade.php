@@ -13,7 +13,7 @@
                 <th scope="col">Email</th>
                 <th scope="col">Phone</th>
                 <th scope="col">Role</th>
-                <th scope="col" style="width: 15%">Action</th> 
+                <th scope="col" style="width: 15%" >Action</th> 
             </tr>
         </thead>
         <tbody>

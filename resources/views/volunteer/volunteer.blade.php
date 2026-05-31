@@ -20,9 +20,9 @@
                 <th>NID</th>
                 <th>Birth Date</th>
                 <th>Gender</th>
-                <th>Message</th>
+                <th style="width:150%">Message</th>
                 <th>Status</th>
-                <th>Action</th>
+                <th stylle="width:15%">Action</th>
             </tr>
         </thead>
         <tbody>

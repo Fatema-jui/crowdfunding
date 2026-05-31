@@ -82,7 +82,7 @@ class WebVolunteerController extends Controller
     {
       $request->session()->forget(['volunteer_id', 'volunteer_name', 'volunteer_email']);
 
-      return redirect()->route('website')->with('success', 'Logged out successfully!');
+      return redirect()->route('website');
     }
 
 

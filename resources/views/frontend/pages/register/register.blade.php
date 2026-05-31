@@ -90,11 +90,11 @@
                                    class="form-control"
                                    placeholder="Confirm Your Password">
                         </div>
-
-                        <button type="submit" class="btn w-100 fw-semibold py-2" style="background-color: #0f766e; color: #fff;">
-                            Register
-                        </button>
-
+                         <div class="text-center">
+                            <button type="submit" class="btn w-100 fw-semibold py-2" style="background-color: #0f766e; color: #fff;">
+                              Register
+                           </button>
+                        </div>
                         <p class="text-center mt-3 mb-0 small">
                             Already have account?
                             <a href="{{ route('show.login') }}?redirect={{ request('redirect') }}" style="color: #0f766e;">Login here</a>

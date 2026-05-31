@@ -21,7 +21,7 @@
 <tbody>
     @foreach($crises as $crisis)
     <tr>
-        <td Scope="row">{{$crisis->id}}</td>
+        <td>{{$loop->iteration}}</td>
         <td>{{$crisis->crisis_title}}</td>
         <td>{{$crisis->description}}</td>
          <td>

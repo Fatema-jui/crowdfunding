@@ -1,27 +1,32 @@
 @extends('frontend.partials.master')
 @section('content')
 
-{{--  HERO --}}
-<div class="w-100 rounded shadow mb-4 position-relative overflow-hidden"
-     style="height: 728px; background: url('{{ asset('images/hero.jpg') }}') center/cover no-repeat;">
+<div class="w-100 rounded shadow mb-4 d-flex flex-column justify-content-center align-items-center"
+     style="height: 728px; background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('{{ asset('images/hero.jpg') }}') center/cover no-repeat;">
+
     
-    <div class="position-absolute  top-0 start-0 w-100 h-100"
-         style="background: rgba(0,0,0,0.45);"></div>
-    
-    <div class="position-absolute top-0 start-0 w-100 h-100 
-                d-flex flex-column  justify-content-center align-items-center text-white px-4">
-        <h1 class="display-5 fw-bold text-center  mb-3" style="max-width: 680px; color: #ffffff;">
+    <div class="text-center w-100">
+        <h1 class="display-5 fw-bold  text-white mb-3" >
             Help People in Need. <br>
             Support &amp; Make a Difference.
         </h1>
-        <p class="lead text-center mb-4" style="max-width: 650px; opacity:.92;">
+    </div>
+
+    <div class="text-center w-100">
+        <p class="lead mb-4 text-white" opacity:.92;  color: #ffffff;>
             Join thousands of donors helping communities recover from floods, fires,
             and other emergencies across Bangladesh.
         </p>
-        <div class="d-flex justify-content-center flex-wrap" style="gap:1rem; z-index:1;">
+    </div>
+
+    
+    <div class="d-flex flex-wrap justify-content-center w-100" style="gap:1rem;">
+        <div>
             <a href="{{ route('crisis.list') }}" class="btn btn-light btn-lg px-4 fw-semibold">
                 Donate Now
             </a>
+        </div>
+        <div>
             <a href="{{ route('webvolunteer.form') }}" class="btn btn-outline-light btn-lg px-4">
                 Become a Volunteer
             </a>
@@ -86,7 +91,7 @@
                              alt="{{ $category->category_name }}"
                              style="height: 150px; object-fit: cover;">
                     @else
-                        <div style="height:150px; background:#ccc; 
+                        <div style="height:150px; background:#ccc;
                                     display:flex; align-items:center; justify-content:center;">
                             <span class="text-muted">No Image</span>
                         </div>
@@ -122,7 +127,7 @@
                          style="height: 180px; object-fit: cover;"
                          alt="{{ $crisis->crisis_title }}">
                 @else
-                    <div class="card-img-top bg-secondary d-flex align-items-centerjustify-content-center" style="height: 180px;">
+                    <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" style="height: 180px;">
                         <span class="text-white">No Image</span>
                     </div>
                 @endif
@@ -163,7 +168,7 @@
     </div>
 </div>
 
-
+{{-- BOTTOM CTA --}}
 <div class="bg-light py-4">
     <div class="container">
         <div class="d-flex justify-content-between align-items-center
