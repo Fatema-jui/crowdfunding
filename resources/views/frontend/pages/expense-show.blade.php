@@ -4,10 +4,10 @@
 <div class="container py-5 d-flex justify-content-center">
     <div class="card rounded-4 p-4 shadow" style="max-width: 640px; width: 100%; border: 1px solid #dee2e6;">
 
-        {{-- Back button --}}
+        
         <a href="{{ url()->previous() }}" class="btn btn-outline-secondary mb-4" style="width: fit-content;">← Back</a>
 
-        {{-- Header --}}
+        
         <p class="fw-bold mb-1" style="font-size: 18px;">Expense Details</p>
         <h6 class="fw-semibold mb-4">{{ $crisis->crisis_title }}</h6>
 
@@ -58,7 +58,7 @@
                 <tr style="border-top: 2px solid #dee2e6;">
                     <td class="pt-3 fw-bold">Total</td>
                     <td></td>
-                    <td class="pt-3 fw-bold">BDT  {{ number_format($total) }}</td>
+                    <td class="pt-3 fw-bold">BDT  {{ number_format($totalSpent) }}</td>
                     <td></td>
                 </tr>
             </tbody>

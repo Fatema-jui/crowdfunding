@@ -14,7 +14,7 @@ class AuthController extends Controller
         return view ('frontend.pages.register.register');
     }
 
-    // ── REGISTER SUBMIT 
+    //  REGISTER SUBMIT 
     public function submitRegister(Request $request)
     {
         $request->validate([
@@ -51,7 +51,7 @@ class AuthController extends Controller
         return view ('frontend.pages.login.login');
     }
 
-    // ── LOGIN SUBMIT 
+    //  LOGIN SUBMIT 
     public function loginSubmit(Request $request)
     {
         $request->validate([

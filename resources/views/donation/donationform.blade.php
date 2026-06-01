@@ -60,8 +60,9 @@
         <option value="failed">Failed</option>
     </select>
 </div><br>
-
-<button type="submit" class="btn btn-primary">Submit</button>
+<div class="pb-1">
+    <button type="submit" class="btn btn-primary">Submit</button>
+</div>
 
 </form>
 

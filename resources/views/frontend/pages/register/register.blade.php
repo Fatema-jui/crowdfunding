@@ -7,7 +7,7 @@
             <div class="card shadow-sm">
                 <div class="card-body p-4">
 
-                    {{-- Header --}}
+                    
                     <div class="text-center mb-4">
                         <h4 class="btn w-100 fw-semibold py-2"style="background-color: #0f766e; color: #fff;">Create Account</h4>
                         <p class="text-muted small">Join CrisisHelp BD today</p>

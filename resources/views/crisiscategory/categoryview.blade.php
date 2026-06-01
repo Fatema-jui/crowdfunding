@@ -1,7 +1,7 @@
 @extends('.partials.master')
 @section('content')
 
-<div class="container mt-4">
+<div class="container  mt-4">
     <h3 class="mb-3 text-primary">Category View</h3>
 
     <div class="card shadow-sm border-0" style="max-width:600px;">

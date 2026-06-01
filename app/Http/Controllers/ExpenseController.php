@@ -49,7 +49,7 @@ class ExpenseController extends Controller
         return redirect()->route('expense')->with('success', 'Expense added successfully.');
     }
 
-    public function approve($id){
+    public function approve(int $id){
         $expense = Expense::findOrFail($id);
         $expense->status = 'approved';
         $expense->save();
@@ -57,7 +57,7 @@ class ExpenseController extends Controller
         return redirect()->back()->with('success', 'Expense approved successfully.');
     }
 
-    public function reject($id){
+    public function reject(int $id){
         $expense = Expense::findOrFail($id);
         $expense->status = 'rejected';
         $expense->save();

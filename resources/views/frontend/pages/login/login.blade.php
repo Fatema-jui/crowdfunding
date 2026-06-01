@@ -8,7 +8,7 @@
             <div class="card shadow-sm">
                 <div class="card-body p-4">
 
-                    {{-- Header --}}
+        
                     <div class="text-center mb-4">
                         <h4 class="fw-bold">Welcome Back</h4>
                         <p class="text-muted small">log in to your account</p>
